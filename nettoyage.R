@@ -1,4 +1,4 @@
-setwd("D:/_MIASHS & Bouygues Immo/MIASHS/Marathon du web/Données") ## Deso j'arrive pas à faire le chemin relatif :(
+setwd("D:/_MIASHS & Bouygues Immo/MIASHS/Marathon du web/GIT/marathon-web-5/data") ## Deso j'arrive pas à faire le chemin relatif :(
 donnees=read.csv2("donnees2.csv")
 codenaf=read.csv2("codenaf.csv")
 
