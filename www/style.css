@@ -1,0 +1,21 @@
+/*-  TEST
+
+table {
+border: medium solid #000000;
+width: 50%;
+}
+td, th {
+border: thin solid #6495ed;
+width: 50%;
+}
+
+h1 {
+  font-family: 'Lobster', cursive;
+  font-weight: 500;
+  line-height: 1.1;
+  color: #ad1d28;
+}
+
+body {
+  background-color: #fff;
+}
