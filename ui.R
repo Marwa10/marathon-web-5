@@ -67,26 +67,45 @@ material_page(
             )
         ),
         material_card(
-            #plotOutput("entre"),
+            title = "Stages à l'étranger",
           
           material_row(
             material_column(
               width = 6,
               material_card(
-                title = "Stages à l'étranger",
-                plotOutput("pays")
+                title = "Top 10",
+                plotlyOutput("pays")
               )
             ),
             material_column(
               width = 6,
               material_card(
                 title = "Evolution",
-                plotOutput("tauxetr")
+                plotlyOutput("tauxetr")
               )
             )
-          ),
-          plotOutput("entre")
+          )
           
+        ),
+        material_card(
+          title = "Les entreprises",
+          
+          material_row(
+            material_column(
+              width = 6,
+              material_card(
+                title = "Top 10",
+                plotlyOutput("entre")
+              )
+            ),
+            material_column(
+              width = 6,
+              material_card(
+                title = "Evolution",
+                plotlyOutput("")
+              )
+            )
+          )
         )
       )
     )
