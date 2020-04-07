@@ -1,6 +1,7 @@
 library(shinydashboard)
 library(DT)
 library(shinymaterial)
+library(plotly)
 
 
 
@@ -16,17 +17,66 @@ material_page(
     # Place side-nav tabs within side-nav
     material_side_nav_tabs(
       side_nav_tabs = c(
-        "XXX" = "xx",
-        "YYY" = "yy",
-        "Base de données" = "zz"
+        "Accueil" = "accueil",
+        "Vis1" = "vis1",
+        "Vis2" = "vis2",
+        "Liste des stages" = "liste_stage"
       ),
-      icons = c("insert_chart", "code", "explore")
+      icons = c("code", "insert_chart", "insert_chart", "explore")
     )
   ),
   # Define side-nav tab content
   material_side_nav_tab_content(
-    side_nav_tab_id = "xx",
-    tags$br(),
+    side_nav_tab_id = "accueil",
+    tags$br()
+
+  ),
+  material_side_nav_tab_content(
+    side_nav_tab_id = "vis1",
+    #tags$br(),
+    material_row(
+      material_column(
+        width = 10,
+        material_card(
+          material_checkbox(
+            input_id = "c1",
+            label = "Stage obligatoire",
+            initial_value = TRUE,
+            color = "#209b7f"
+          ),
+          material_checkbox(
+            input_id = "c2",
+            label = "Stage facultatif",
+            initial_value = TRUE,
+            color = "#209b7f"
+          ),
+          material_slider(
+            input_id = "from_year",
+            label = "From Year",
+            min_value = 2014,
+            max_value = 2018,
+            initial_value = 2016,
+            color = "blue"),
+          material_slider(
+            input_id = "to_year",
+              label = "Through Year",
+              min_value = 2014,
+              max_value = 2018,
+              initial_value = 2016,
+              color = "blue"
+            )
+        ),
+        material_card(
+          plotlyOutput("p1")
+          
+        )
+      )
+    )
+  ),
+  
+  
+  material_side_nav_tab_content(
+    side_nav_tab_id = "vis2",
     material_row(
       material_column(
         width = 10,
@@ -76,24 +126,12 @@ material_page(
         )
       )
     )
+    
+    
+    
   ),
   material_side_nav_tab_content(
-    side_nav_tab_id = "yy",
-    #tags$br(),
-    material_row(
-      material_column(
-        width = 10,
-        material_card(
-          title = "Source",
-          tags$a(href = "https://www.fhfa.gov/DataTools/Downloads",
-                 target = "_blank",
-                 "Federal Housing Finance Agency (FHFA)")
-        )
-      )
-    )
-  ),
-  material_side_nav_tab_content(
-    side_nav_tab_id = "zz",
+    side_nav_tab_id = "liste_stage",
     material_row(
       material_column(
         width = 4,
@@ -105,43 +143,3 @@ material_page(
   )
 )
 
-
-
-
-
-# 
-# 
-# header <- dashboardHeader( title = "Marathon du web")
-# 
-# sidebar <- dashboardSidebar(
-#   collapsed = TRUE,
-#   sidebarMenu(
-#    
-#     menuItem("Intro", tabName = "yyy", icon = icon("far fa-address-card")),
-#     menuItem("zzz", tabName = "zzz", icon = icon("far fa-chart-bar")),
-#     menuItem("ttt", tabName = "ttt", icon = icon("th")),
-#     menuItem("xxx", tabName = "xxx", icon = icon("dashboard"))
-#   )
-# )
-# 
-# 
-# 
-# body <- dashboardBody(
-#   tags$head(
-#     tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
-#   ),
-#   
-#   tabItems(
-#     tabItem(tabName = "xxx",
-#             DT::dataTableOutput("plot")),
-#             
-#     tabItem(tabName = "yyy"),
-#     tabItem(tabName = "zzz"),
-#     tabItem(tabName = "ttt")
-#     )
-# )
-# 
-# dashboardPage(header,
-#               sidebar,
-#               body,
-#               skin = "black")
