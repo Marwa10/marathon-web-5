@@ -43,5 +43,5 @@ join_donnees = inner_join(donnees, codenaf, by = c('code' = 'code'),"na_matches"
 
 
 #Extraction du csv propre
-write.csv2(donnees, file = "donnees_ok.csv")
-write.csv2(join_donnees, file = "donnees_codenaf.csv")
+write.csv2(donnees, file = "donnees_OK.csv")
+write.csv2(join_donnees, file = "donnees_NAF.csv")
