@@ -37,7 +37,19 @@ material_page(
     material_row(
       material_column(
         width = 10,
+        
+        offset = 1,
         material_card(
+          material_column(
+            width = 6,
+            material_dropdown(
+              input_id = "compo",
+              label = "Composante", 
+              choices = "....",
+              color = "blue"
+            )
+          ),
+          
           material_checkbox(
             input_id = "c1",
             label = "Stage obligatoire",
@@ -67,6 +79,27 @@ material_page(
             )
         ),
         material_card(
+          title = "Stages effectués par les étudiants",
+          
+          material_row(
+            material_column(
+              width = 12,
+              material_card(
+                title = "Type de convention",
+                plotlyOutput("p1")
+              )
+            ),
+            material_column(
+              width = 12,
+              material_card(
+                title = "Evolution",
+                plotlyOutput("nbstage")
+              )
+            )
+          )
+          
+        ),
+        material_card(
             title = "Stages à l'étranger",
           
           material_row(
@@ -88,21 +121,14 @@ material_page(
           
         ),
         material_card(
-          title = "Les entreprises",
+          title = "Principaux employeurs",
           
           material_row(
             material_column(
-              width = 6,
+              width = 12,
               material_card(
-                title = "Top 10",
+                title = "Top 10 des entreprises qui recrutent le plus de stagiaires",
                 plotlyOutput("entre")
-              )
-            ),
-            material_column(
-              width = 6,
-              material_card(
-                title = "Evolution",
-                plotlyOutput("")
               )
             )
           )
