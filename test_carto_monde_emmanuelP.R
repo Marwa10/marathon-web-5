@@ -1,18 +1,10 @@
-library(sf)
-library(tidyverse)
+# chargement des librairies
+library(dplyr)
 library(leaflet)
 library(rgdal)
-library(raster)
+
 # inspiration
 #https://www.r-graph-gallery.com/183-choropleth-map-with-leaflet.html
-data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
-head(data)
-pays = read.csv2("data/pays2020.csv",sep = ',')
-#pays$Paysetablissement <-pays$libcog
-head(pays)
-data$Paysetablissement
-result <- merge(data,pays,by.x="Paysetablissement", by.y="libcog", all= TRUE)
-head(result)
 # Download the shapefile. (note that I store it in a folder called DATA. You have to change that if needed.)
 #download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" , destfile="data/world_shape_file.zip")
 # You now have it in your current working directory, have a look!
@@ -21,47 +13,79 @@ head(result)
 #system("unzip data/world_shape_file.zip")
 #  -- >
 
+
+# récupération des données de stage
+data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
+# récupération des données pays
+pays = read.csv2("data/pays2020.csv",sep = ',')
+
+# jointure entre les deux datas pour avoir le code ISO
+result <- merge(data,pays,by.x="Paysetablissement", by.y="libcog", all= TRUE)
+
+# regroupement 
 head(result)
 interships_counts_by_country <- result %>%
   group_by(codeiso3) %>%
-  tally
+  summarise(number_internships = n(),
+            nb_heures = sum(as.numeric( Duree_calcul)))
 
-names(interships_counts_by_country)[names(interships_counts_by_country) == 'n'] <- 'number_internships'
 
-head(interships_counts_by_country)
+#names(interships_counts_by_country)[names(interships_counts_by_country) == 'n'] <- 'number_internships'
 
-# Read this shape file with the rgdal library. 
-library(rgdal)
+#head(interships_counts_by_country)
+
+# Lecture des données mondiale. 
 world_spdf <- readOGR( 
   dsn= paste0(getwd(),"/data/world_shape_file/") , 
   layer="TM_WORLD_BORDERS_SIMPL-0.3",
   verbose=FALSE
 )
 
-# Clean the data object
-library(dplyr)
-world_spdf@data$POP2005[ which(world_spdf@data$POP2005 == 0)] = NA
-world_spdf@data$POP2005 <- as.numeric(as.character(world_spdf@data$POP2005)) / 1000000 %>% round(2)
-result_world <-merge(world_spdf,interships_counts_by_country,by.x="ISO3", by.y = "codeiso3", all= TRUE) 
-head(result_world)
-#result_world$ISO2
-#result_world_filtered<- dplyr::filter(result_world,ISO2=='FR')
-#ad(result_world_filtered)
+# jointure entre les données mondiales et les données de stage
+world_spdf <-merge(world_spdf,interships_counts_by_country,by.x="ISO3", by.y = "codeiso3", all= TRUE) 
 
-# Create a color palette for the map:
-mypalette <- colorNumeric( palette="viridis", domain=result_world@data$number_internships, na.color="transparent")
-mypalette(c(45,43))
 
-# Basic choropleth with leaflet?
-m <- leaflet(result_world) %>% 
+
+
+
+
+# creation de la palette:
+mypalette <- colorBin( palette="YlOrBr", domain=world_spdf@data$number_internships, na.color="transparent", bins=mybins)
+
+# Tooltips
+mytext <- paste(
+  "Country: ", world_spdf@data$NAME,"<br/>", 
+  "Area: ", world_spdf@data$AREA, "<br/>", 
+  "Number of internships: ", round(world_spdf@data$number_internships, 2), 
+  sep="") %>%
+  lapply(htmltools::HTML)
+
+# carte Finale
+leaflet(world_spdf) %>% 
   addTiles()  %>% 
   setView( lat=10, lng=0 , zoom=2) %>%
-  addPolygons( fillColor = ~mypalette(number_internships), stroke=FALSE )
+  addPolygons( 
+    fillColor = ~mypalette(number_internships), 
+    stroke=TRUE, 
+    fillOpacity = 0.9, 
+    color="white", 
+    weight=0.3,
+    label = mytext,
+    labelOptions = labelOptions( 
+      style = list("font-weight" = "normal", padding = "3px 8px"), 
+      textsize = "13px", 
+      direction = "auto"
+    )
+  ) %>%
+  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Number internships", position = "bottomleft" )
 
-m
+m  
+
+###### fin du code à  intégrer ##########
 
 
 
+##### début des tests persos #########
 # load ggplot2
 library(ggplot2)
 
@@ -88,6 +112,16 @@ m <- leaflet(result_world)%>% addTiles()  %>% setView( lat=10, lng=0 , zoom=2) %
 m
 
 
+mypalette <- colorNumeric( palette="viridis", domain=world_spdf@data$number_internships, na.color="transparent")
+mypalette(c(45,43))
+
+
+m <- leaflet(world_spdf) %>% 
+  addTiles()  %>% 
+  setView( lat=10, lng=0 , zoom=2) %>%
+  addPolygons( fillColor = ~mypalette(number_internships), stroke=FALSE )
+
+m
 #shp_departement= ".data/departements-20140306-100m.shp"
 #leaflet() %>% 
 #  fitBounds(-20,65,20,40) %>% 
