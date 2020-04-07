@@ -67,7 +67,25 @@ material_page(
             )
         ),
         material_card(
-          plotlyOutput("p1")
+            #plotOutput("entre"),
+          
+          material_row(
+            material_column(
+              width = 6,
+              material_card(
+                title = "Stages à l'étranger",
+                plotOutput("pays")
+              )
+            ),
+            material_column(
+              width = 6,
+              material_card(
+                title = "Evolution",
+                plotOutput("tauxetr")
+              )
+            )
+          ),
+          plotOutput("entre")
           
         )
       )
