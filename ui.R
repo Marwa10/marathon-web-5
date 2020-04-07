@@ -40,6 +40,9 @@ material_page(
         
         offset = 1,
         material_card(
+        
+        # SELECTION COMPOSANTE
+          
           material_column(
             width = 6,
             material_dropdown(
@@ -49,6 +52,20 @@ material_page(
               color = "blue"
             )
           ),
+          
+          # SELECTION FILIERE
+          
+          material_column(
+            width = 6,
+            material_dropdown(
+              input_id = "filiere",
+              label = "Filière", 
+              choices = sort(unique(data$Filiere)),
+              color = "blue"
+            )
+          ),
+          
+          # SELECTION TYPE CONVENTION
           
           material_checkbox(
             input_id = "c1",
@@ -62,13 +79,17 @@ material_page(
             initial_value = TRUE,
             color = "#209b7f"
           ),
+          
+          # SELECTION ANNEE
+          
           material_slider(
             input_id = "from_year",
             label = "From Year",
             min_value = 2014,
             max_value = 2018,
             initial_value = 2016,
-            color = "blue"),
+            color = "blue"
+            ),
           material_slider(
             input_id = "to_year",
               label = "Through Year",
@@ -78,8 +99,12 @@ material_page(
               color = "blue"
             )
         ),
+        
+        
         material_card(
           title = "Stages effectués par les étudiants",
+          
+          # GRAPHIQUE EVO TYPE CONVENTION
           
           material_row(
             material_column(
@@ -89,6 +114,9 @@ material_page(
                 plotlyOutput("p1")
               )
             ),
+            
+            # GRAPHIQUE EVO NB STAGE
+            
             material_column(
               width = 6,
               material_card(
@@ -96,6 +124,9 @@ material_page(
                 plotlyOutput("nbstage")
               )
             ),
+            
+            # GRAPHIQUE PART STAGE FACULTATIFS
+            
             material_column(
               width = 6,
               material_card(
@@ -106,6 +137,9 @@ material_page(
           )
           
         ),
+        
+        # GRAPHIQUE PAYS TOP 10
+        
         material_card(
             title = "Stages à l'étranger",
           
@@ -117,6 +151,9 @@ material_page(
                 plotlyOutput("pays")
               )
             ),
+            
+            # GRAPHIQUE EVO STAGE ETRANGER
+            
             material_column(
               width = 6,
               material_card(
@@ -127,6 +164,9 @@ material_page(
           )
           
         ),
+        
+        # GRAPHIQUE TOP 10 ENTREPRISES
+        
         material_card(
           title = "Principaux employeurs",
           
@@ -144,6 +184,7 @@ material_page(
     )
   ),
   
+
   
   material_side_nav_tab_content(
     side_nav_tab_id = "vis2",

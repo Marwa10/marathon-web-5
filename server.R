@@ -46,17 +46,25 @@ shinyServer(function(input, output) {
     )
   )
   
-  trend_year = data %>% 
-    group_by(Anneeunivconvention,Typeconvention) %>% 
-    summarise(total = n())
-  
- 
+
+# GRAPH TYPE DE CONVENTION  
   
 ## Valeur checkbox, 1 : stage obligatoire
-##                  2 = stage facultatif 
+## Valeur checkbox, 2 = stage facultatif 
   
 
   output$p1 <- renderPlotly({
+    
+    if(input$compo != ""){
+      z<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+          z<-data
+        }
+    
+    trend_year = z %>% 
+      group_by(Anneeunivconvention,Typeconvention) %>% 
+      summarise(total = n())
+    
     if(input$c1 & input$c2){
       g = trend_year
     }else if (input$c1){
@@ -81,10 +89,14 @@ shinyServer(function(input, output) {
   
   output$entre <- renderPlotly({
     
-    naf<- data %>% 
-     # filter(data$Libellecomposante==input$compo)
-    #%>%
-      group_by(Nometablissement)      %>%
+    if(input$compo != ""){
+      y<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+          y<-data
+        }
+    
+    naf<- y %>% 
+      group_by(Nometablissement) %>%
       summarise(total = n()) %>% 
       top_n(10)
     
@@ -102,7 +114,14 @@ shinyServer(function(input, output) {
   # GRAPHIQUE TOP 10 PAYS 
     
   output$pays <- renderPlotly({
-    pays<-subset(data,Paysetablissement!="FRANCE")
+    
+    if(input$compo != ""){
+      w<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+          w<-data
+        }
+    
+    pays<-subset(w,Paysetablissement!="FRANCE")
     pays2<-as.data.frame(table(pays$Paysetablissement))
     t<-as.data.frame(arrange(pays2,desc(pays2$Freq)))
     dp<-t[1:10,]
@@ -125,17 +144,21 @@ shinyServer(function(input, output) {
   # GRAPHIQUE EVOLUTION TAUX STAGE ETRANGER
   
   output$tauxetr <- renderPlotly({
-
-    ta<- data %>% 
+    
+      if(input$compo != ""){
+        t<-data %>% 
+          filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+            t<-data
+          }
+    
+    ta<- t %>% 
       group_by(Anneeunivconvention) %>% 
       summarise(total = n())
-    pays<-subset(data,data$Paysetablissement!="FRANCE")
+    pays<-subset(t,t$Paysetablissement!="FRANCE")
     ta2<- pays %>% 
       group_by(pays$Anneeunivconvention) %>% 
       summarise(total = n())
     ta2
-    #ta2<-as.data.frame(table(pays$Anneeunivconvention))
-    #ta2
     
     tauxetr<-as.data.frame(cbind(ta,ta2[,2]))
     tauxetr
@@ -158,7 +181,13 @@ shinyServer(function(input, output) {
   
   output$nbstage <- renderPlotly({
     
-    ta<- data %>% 
+    if(input$compo != ""){
+    u<-data %>% 
+      filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        u<-data
+      }
+    
+    ta<- u %>% 
       group_by(Anneeunivconvention) %>% 
       summarise(total = n())
     #ta<-as.data.frame(table(Anneeunivconvention))
@@ -178,7 +207,13 @@ shinyServer(function(input, output) {
   
   output$facultatif <- renderPlotly({
     
-    tc<- data %>% 
+      if(input$compo != ""){
+        v<-data %>% 
+          filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+            v<-data
+          }
+    
+    tc<- v %>% 
       group_by(Typeconvention) %>% 
       summarise(total = n())
     tc<-as.data.frame(tc)
