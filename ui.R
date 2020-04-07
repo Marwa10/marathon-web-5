@@ -120,7 +120,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Evolution",
+                title = "Evolution du nombre de stages effectués",
                 plotlyOutput("nbstage")
               )
             ),
@@ -147,7 +147,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Top 10",
+                title = "Top 10 des pays préférés",
                 plotlyOutput("pays")
               )
             ),
@@ -157,7 +157,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Evolution",
+                title = "Evolution des stages à l'étranger",
                 plotlyOutput("tauxetr")
               )
             )
@@ -176,6 +176,19 @@ material_page(
               material_card(
                 title = "Top 10 des entreprises qui recrutent le plus de stagiaires",
                 plotlyOutput("entre")
+              )
+            )
+          )
+        ),
+        material_card(
+          title = "Durée des stages",
+          
+          material_row(
+            material_column(
+              width = 12,
+              material_card(
+                title = "Répartition des stages selon leur durée",
+                plotlyOutput("duree")
               )
             )
           )

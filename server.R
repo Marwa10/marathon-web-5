@@ -107,7 +107,8 @@ shinyServer(function(input, output) {
                ggtitle("") +
                xlab("") + 
                ylab("Nombre de stages") +
-               theme(legend.position="none") )
+               theme(legend.position="none")+ 
+               scale_fill_brewer(palette="Spectral") )
     
   })
   
@@ -131,11 +132,13 @@ shinyServer(function(input, output) {
     p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq,fill=dp$Var1)) + 
       geom_bar(stat="identity")+
       coord_flip()+ 
-      ggtitle("Les pays étrangers préférés") +
+      ggtitle("") +
       xlab("") + 
       ylab("Nombre de stages")+
       labs(fill="Pays")+
-      theme(legend.position="none") 
+      theme(legend.position="none") + 
+      scale_fill_brewer(palette="Spectral")
+
     
     ggplotly(p)
     
@@ -151,26 +154,23 @@ shinyServer(function(input, output) {
             t<-data
           }
     
-    ta<- t %>% 
-      group_by(Anneeunivconvention) %>% 
-      summarise(total = n())
+    #ta<- t %>% 
+      #group_by(t$Anneeunivconvention) %>% 
+      #summarise(total = n())
     pays<-subset(t,t$Paysetablissement!="FRANCE")
     ta2<- pays %>% 
-      group_by(pays$Anneeunivconvention) %>% 
+      group_by(Anneeunivconvention) %>% 
       summarise(total = n())
-    ta2
     
-    tauxetr<-as.data.frame(cbind(ta,ta2[,2]))
-    tauxetr
+    #tauxetr<-as.data.frame(cbind(ta,ta2[,2]))
+    #tauxetr["txetranger"]=tauxetr[,3]/tauxetr[,2]*100
+    #tauxetr
     
-    tauxetr["txetranger"]=tauxetr[,3]/tauxetr[,2]*100
-    
-    p<-ggplot(data=tauxetr, aes(x=tauxetr$Anneeunivconvention, y=tauxetr$txetranger,fill=tauxetr$txetranger)) + 
+    p<-ggplot(data=ta2, aes(x=ta2$Anneeunivconvention, y=ta2$total)) + 
       geom_bar(stat="identity")+ 
-      ggtitle("Part des stages effectués à l'étranger") +
+      ggtitle("") +
       xlab("") + 
-      ylab("Part des stages effectués à l'étranger (%)")+
-      labs(fill="Taux stage étranger")
+      ylab("Nombre de stages effectués à l'étranger")
     
     ggplotly(p)
     
@@ -195,7 +195,7 @@ shinyServer(function(input, output) {
     
     p<-ggplot(data=ta, aes(x=Anneeunivconvention, y=total)) + 
       geom_bar(stat="identity")+ 
-      ggtitle("Evolution du nombre de stages effectués") +
+      ggtitle("") +
       xlab("") + 
       ylab("Nombre de stages")
     
@@ -219,15 +219,40 @@ shinyServer(function(input, output) {
     tc<-as.data.frame(tc)
     tc
     
-    ggplotly(ggplot(data=tc, aes(x=" ",y=tc$total , fill=tc$Typeconvention)) + 
-               geom_bar(width = 1, stat = "identity") + 
-               theme_minimal()+
-               ylab("Nombre de stages")+
-               xlab("")+
-               labs(fill="Type de convention")+
-               theme(legend.position="bottom"))
+    ggplotly(ggplot(data=tc, aes(x=tc$Typeconvention,y=tc$total , fill=tc$Typeconvention)) + 
+               geom_bar(stat="identity") + xlab("")+ylab("Nombre de stages"))
+    #ggplotly(ggplot(data=tc, aes(x=" ",y=tc$total , fill=tc$Typeconvention)) + 
+    #           geom_bar(width = 1, stat = "identity",color="white") + 
+    #           coord_polar("y", start = 0)+
+    #           theme_void()+
+    #           theme(legend.position="bottom"))
+    
+  
+    
+})
+  
+  # GRAPHIQUE DUREE STAGE
+
+  
+  output$duree <- renderPlotly({
+    
+    if(input$compo != ""){
+      i<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+          i<-data
+        }
+    
+    ggplotly(ggplot(data=i, aes(x=i$Duree_heure)) + 
+               geom_histogram()+xlab("Durée en heures"))
+    #ggplotly(ggplot(data=tc, aes(x=" ",y=tc$total , fill=tc$Typeconvention)) + 
+    #           geom_bar(width = 1, stat = "identity",color="white") + 
+    #           coord_polar("y", start = 0)+
+    #           theme_void()+
+    #           theme(legend.position="bottom"))
+    
+    
     
   })
- 
-
+  
+  
 })
