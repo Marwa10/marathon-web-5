@@ -19,7 +19,7 @@ head(data_resume)
 
 d3tree(
   treemap(data_resume,
-          index=c("Filiere_global"install.packages("r2d3"),"codeDepartement"),
+          index=c("Filiere_global","codeDepartement"),
           vSize="total",
           vColor="total",
           type="value",
