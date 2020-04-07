@@ -77,18 +77,27 @@ shinyServer(function(input, output) {
                      color = "Type de convention"))
   }) 
  
-
+  # GRAPHIQUE ENTREPRISES
+  
   output$entre <- renderPlotly({
     
-    naf<-as.data.frame(table(Nometablissement))
-    t<-as.data.frame(arrange(naf,desc(naf$Freq)))
-    dn<-t[1:10,]
-    dn
-    p<-ggplot(data=dn, aes(x=reorder(dn$Nometablissement,dn$Freq), y=dn$Freq,fill=dn$Nometablissement)) + geom_bar(stat="identity")+coord_flip()+ ggtitle("Les entreprises recrutant le plus de stagiaires") +
-      xlab("") + ylab("Nombre de stages")
-    ggplotly(p)
+    naf<- data %>% 
+      group_by(Nometablissement) %>% 
+      summarise(total = n()) %>% 
+      top_n(10)
+    
+    
+    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total,fill= Nometablissement)) +
+               geom_bar(stat="identity")+ 
+               coord_flip()+
+               ggtitle("") +
+               xlab("") + 
+               ylab("Nombre de stages") +
+               theme(legend.position="none") )
     
   })
+  
+  # GRAPHIQUE TOP 10 PAYS 
     
   output$pays <- renderPlotly({
     pays<-subset(data,Paysetablissement!="FRANCE")
@@ -98,31 +107,69 @@ shinyServer(function(input, output) {
     dp<-as.data.frame(dp)
     dp
     
-    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq,fill=dp$Var1)) + geom_bar(stat="identity")+coord_flip()+ ggtitle("Top 10 des pays étrangers préférés") +
-      xlab("") + ylab("Nombre de stages")+labs(fill="Pays")
+    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq,fill=dp$Var1)) + 
+      geom_bar(stat="identity")+
+      coord_flip()+ 
+      ggtitle("Les pays étrangers préférés") +
+      xlab("") + 
+      ylab("Nombre de stages")+
+      labs(fill="Pays")+
+      theme(legend.position="none") 
+    
     ggplotly(p)
     
   })
 
+  # GRAPHIQUE EVOLUTION TAUX STAGE ETRANGER
+  
   output$tauxetr <- renderPlotly({
 
-    ta<-as.data.frame(table(Anneeunivconvention))
-    ta
+    ta<- data %>% 
+      group_by(Anneeunivconvention) %>% 
+      summarise(total = n())
     pays<-subset(data,data$Paysetablissement!="FRANCE")
-    ta2<-as.data.frame(table(pays$Anneeunivconvention))
+    ta2<- pays %>% 
+      group_by(pays$Anneeunivconvention) %>% 
+      summarise(total = n())
     ta2
+    #ta2<-as.data.frame(table(pays$Anneeunivconvention))
+    #ta2
     
     tauxetr<-as.data.frame(cbind(ta,ta2[,2]))
     tauxetr
     
     tauxetr["txetranger"]=tauxetr[,3]/tauxetr[,2]*100
     
-    p<-ggplot(data=tauxetr, aes(x=tauxetr$Anneeunivconvention, y=tauxetr$txetranger,fill=tauxetr$Anneeunivconvention)) + geom_bar(stat="identity")+ ggtitle("Part des stages effectués à l'étranger") +
-      xlab("") + ylab("Part des stages effectués à l'étranger (%)")
+    p<-ggplot(data=tauxetr, aes(x=tauxetr$Anneeunivconvention, y=tauxetr$txetranger,fill=tauxetr$txetranger)) + 
+      geom_bar(stat="identity")+ 
+      ggtitle("Part des stages effectués à l'étranger") +
+      xlab("") + 
+      ylab("Part des stages effectués à l'étranger (%)")+
+      labs(fill="Taux stage étranger")
+    
     ggplotly(p)
     
     
   })
   
+  # GRAPHIQUE EVOLUTION NOMBRE DE STAGES
+  
+  output$nbstage <- renderPlotly({
+    
+    ta<- data %>% 
+      group_by(Anneeunivconvention) %>% 
+      summarise(total = n())
+    #ta<-as.data.frame(table(Anneeunivconvention))
+    #ta<-ta
+    
+    p<-ggplot(data=ta, aes(x=Anneeunivconvention, y=total)) + 
+      geom_bar(stat="identity")+ 
+      ggtitle("Evolution du nombre de stages effectués") +
+      xlab("") + 
+      ylab("Nombre de stages")
+    
+    ggplotly(p)
+    
+  })
 
 })
