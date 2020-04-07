@@ -1,7 +1,14 @@
+# Changelog
+# emp:  mise en 
+
+# todo :  enlever les données de la france ou les minimiser
+
 # chargement des librairies
 library(dplyr)
 library(leaflet)
 library(rgdal)
+
+library(RColorBrewer)
 
 # inspiration
 #https://www.r-graph-gallery.com/183-choropleth-map-with-leaflet.html
@@ -47,7 +54,7 @@ world_spdf <-merge(world_spdf,interships_counts_by_country,by.x="ISO3", by.y = "
 
 
 
-
+mybins <- c(0,10,20,50,100,10000,Inf)
 
 # creation de la palette:
 mypalette <- colorBin( palette="YlOrBr", domain=world_spdf@data$number_internships, na.color="transparent", bins=mybins)
