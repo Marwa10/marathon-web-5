@@ -30,7 +30,7 @@ pays = read.csv2("data/pays2020.csv",sep = ',')
 result <- merge(data,pays,by.x="Paysetablissement", by.y="libcog", all= TRUE)
 
 # regroupement 
-head(result)
+
 interships_counts_by_country <- result %>%
   group_by(codeiso3) %>%
   summarise(number_internships = n(),
@@ -54,7 +54,7 @@ world_spdf <-merge(world_spdf,interships_counts_by_country,by.x="ISO3", by.y = "
 
 
 
-mybins <- c(0,10,20,50,100,10000,Inf)
+mybins <- c(1,10,20,50,100,10000,Inf)
 
 # creation de la palette:
 mypalette <- colorBin( palette="YlOrBr", domain=world_spdf@data$number_internships, na.color="transparent", bins=mybins)
@@ -68,7 +68,7 @@ mytext <- paste(
   lapply(htmltools::HTML)
 
 # carte Finale
-leaflet(world_spdf) %>% 
+m <- leaflet(world_spdf) %>% 
   addTiles()  %>% 
   setView( lat=10, lng=0 , zoom=2) %>%
   addPolygons( 
