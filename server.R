@@ -7,7 +7,7 @@ library(shinymaterial)
 
 shinyServer(function(input, output) {
   data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
-  
+
   toshow = data %>% 
     select(Anneeunivconvention,
            cycle,
@@ -77,7 +77,50 @@ shinyServer(function(input, output) {
                      color = "Type de convention"))
   }) 
  
+
+  output$entre <- renderPlot({
+    
+    naf<-as.data.frame(table(Nometablissement))
+    t<-as.data.frame(arrange(naf,desc(naf$Freq)))
+    dn<-t[1:10,]
+    dn
+    p<-ggplot(data=dn, aes(x=reorder(dn$Nometablissement,dn$Freq), y=dn$Freq)) + geom_bar(stat="identity")+coord_flip()+ ggtitle("Top 10 des entreprises recrutant le plus de stagiaires") +
+      xlab("") + ylab("Nombre de stages")
+    p
+    
+  })
+    
+  output$pays <- renderPlot({
+    pays<-subset(data,Paysetablissement!="FRANCE")
+    pays2<-as.data.frame(table(pays$Paysetablissement))
+    t<-as.data.frame(arrange(pays2,desc(pays2$Freq)))
+    dp<-t[1:10,]
+    
+    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq)) + geom_bar(stat="identity")+coord_flip()+ ggtitle("Top 10 des pays étrangers préférés") +
+      xlab("") + ylab("Nombre de stages")
+    p
+    
+  })
+
+  output$tauxetr <- renderPlot({
+
+    ta<-as.data.frame(table(Anneeunivconvention))
+    ta
+    pays<-subset(data,Paysetablissement!="FRANCE")
+    ta2<-as.data.frame(table(pays$Anneeunivconvention))
+    ta2
+    
+    tauxetr<-as.data.frame(cbind(ta,ta2[,2]))
+    tauxetr
+    
+    tauxetr["txetranger"]=tauxetr[,3]/tauxetr[,2]*100
+    
+    p<-ggplot(data=tauxetr, aes(x=tauxetr$Anneeunivconvention, y=tauxetr$txetranger)) + geom_bar(stat="identity")+ ggtitle("Evolution de la part des stages effectués à l'étranger") +
+      xlab("") + ylab("Part des stages effectués à l'étranger (%)")
+    p
+    
+    
+  })
   
-   
 
 })
