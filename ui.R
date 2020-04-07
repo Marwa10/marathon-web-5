@@ -2,6 +2,7 @@ library(shinydashboard)
 library(DT)
 library(shinymaterial)
 library(plotly)
+library(leaflet)
 
 
 
@@ -18,11 +19,12 @@ material_page(
     material_side_nav_tabs(
       side_nav_tabs = c(
         "Accueil" = "accueil",
-        "Vis1" = "vis1",
-        "Vis2" = "vis2",
+        "Stage" = "vis1",
+        "Stagiaire" = "vis2",
+        "Cartographie" = "carto",
         "Liste des stages" = "liste_stage"
       ),
-      icons = c("code", "insert_chart", "insert_chart", "explore")
+      icons = c("code", "insert_chart", "insert_chart", "explore", "explore")
     )
   ),
   # Define side-nav tab content
@@ -40,8 +42,8 @@ material_page(
         
         offset = 1,
         material_card(
-        
-        # SELECTION COMPOSANTE
+          
+          # SELECTION COMPOSANTE
           
           material_column(
             width = 6,
@@ -53,17 +55,17 @@ material_page(
             )
           ),
           
-          # SELECTION FILIERE
-          
-          material_column(
-            width = 6,
-            material_dropdown(
-              input_id = "filiere",
-              label = "Filière", 
-              choices = sort(unique(data$Filiere)),
-              color = "blue"
-            )
-          ),
+          # # SELECTION FILIERE
+          # 
+          # material_column(
+          #   width = 6,
+          #   material_dropdown(
+          #     input_id = "filiere",
+          #     label = "Filière", 
+          #     choices = sort(unique(data$Filiere)),
+          #     color = "blue"
+          #   )
+          # ),
           
           # SELECTION TYPE CONVENTION
           
@@ -78,26 +80,26 @@ material_page(
             label = "Stage facultatif",
             initial_value = TRUE,
             color = "#209b7f"
-          ),
+          )
           
-          # SELECTION ANNEE
-          
-          material_slider(
-            input_id = "from_year",
-            label = "From Year",
-            min_value = 2014,
-            max_value = 2018,
-            initial_value = 2016,
-            color = "blue"
-            ),
-          material_slider(
-            input_id = "to_year",
-              label = "Through Year",
-              min_value = 2014,
-              max_value = 2018,
-              initial_value = 2016,
-              color = "blue"
-            )
+          # # SELECTION ANNEE
+          # 
+          # material_slider(
+          #   input_id = "from_year",
+          #   label = "From Year",
+          #   min_value = 2014,
+          #   max_value = 2018,
+          #   initial_value = 2016,
+          #   color = "blue"
+          # ),
+          # material_slider(
+          #   input_id = "to_year",
+          #   label = "Through Year",
+          #   min_value = 2014,
+          #   max_value = 2018,
+          #   initial_value = 2016,
+          #   color = "blue"
+          # )
         ),
         
         
@@ -141,7 +143,7 @@ material_page(
         # GRAPHIQUE PAYS TOP 10
         
         material_card(
-            title = "Stages à l'étranger",
+          title = "Stages à l'étranger",
           
           material_row(
             material_column(
@@ -195,9 +197,13 @@ material_page(
         )
       )
     )
-  ),
+  )
   
-
+  
+  
+  
+ ,
+  
   
   material_side_nav_tab_content(
     side_nav_tab_id = "vis2",
@@ -207,44 +213,46 @@ material_page(
         offset = 1,
         material_row(
           material_column(
-            width = 6,
-            material_dropdown(
-              input_id = "Area_State",
-              label = "Location", 
-              choices = c('x', 'y', 'z'),
-              color = "blue"
-            )
+            width = 3,
+            material_card(title = HTML("<strong><center> +35% </center></strong>"),
+                          HTML("</center>Ont effectué plus de 2 stages</center>") ,
+                          color = "#f5f5f5 grey lighten-4",
+                          depth = 5)
           ),
           material_column(
             width = 3,
-            material_slider(
-              input_id = "from_year",
-              label = "From Year",
-              min_value = 1995,
-              max_value = 2010,
-              initial_value = 1995,
-              color = "blue"
-            )
+            material_card(title = HTML("<strong><center> +39% </center></strong>"), 
+                          HTML("<center>En Licence</center>"),
+                          color = "#f5f5f5 grey lighten-4", 
+                          depth = 5)
           ),
           material_column(
             width = 3,
-            material_slider(
-              input_id = "to_year",
-              label = "Through Year",
-              min_value = 1996,
-              max_value = 2010,
-              initial_value = 1999,
-              color = "blue"
-            )
+            material_card(title = HTML("<strong><center> +43% </center></strong>"), 
+                          HTML("<center>Candidature spontanée</center>"),
+                          color = "#f5f5f5 grey lighten-4",
+                          depth = 5)
+          ),
+          material_column(
+            width = 3,
+            material_card(title = HTML("<strong><center> +12 </center></strong>"), 
+                          HTML("<center> stages effectués par un étudiant</center>"),
+                          color = "#f5f5f5 grey lighten-4",
+                          depth = 5)
           )
         ),
         material_row(
           material_column(
             width = 12,
             material_card(
-              title = "titre"
-              #plotOutput("housing_plot"),
-              #uiOutput("housing_plot_error")
+              title = "Distribution des stages en fonction du cycle universitaire",
+              divider = TRUE,
+              plotlyOutput("p2")
+            ),
+            material_card(
+              title = "Distribution des stages en fonction de la composante",
+              divider = TRUE,
+              plotlyOutput("p3")
             )
           )
         )
@@ -264,6 +272,12 @@ material_page(
         
       )
     )
+  ),
+  
+  material_side_nav_tab_content(
+    side_nav_tab_id = "carto",
+    leafletOutput("map")
+    
   )
 )
 
