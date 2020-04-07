@@ -82,7 +82,9 @@ shinyServer(function(input, output) {
   output$entre <- renderPlotly({
     
     naf<- data %>% 
-      group_by(Nometablissement) %>% 
+     # filter(data$Libellecomposante==input$compo)
+    #%>%
+      group_by(Nometablissement)      %>%
       summarise(total = n()) %>% 
       top_n(10)
     
@@ -171,5 +173,26 @@ shinyServer(function(input, output) {
     ggplotly(p)
     
   })
+  
+  # GRAPHIQUE PART STAGES FACULTATIFS
+  
+  output$facultatif <- renderPlotly({
+    
+    tc<- data %>% 
+      group_by(Typeconvention) %>% 
+      summarise(total = n())
+    tc<-as.data.frame(tc)
+    tc
+    
+    ggplotly(ggplot(data=tc, aes(x=" ",y=tc$total , fill=tc$Typeconvention)) + 
+               geom_bar(width = 1, stat = "identity") + 
+               theme_minimal()+
+               ylab("Nombre de stages")+
+               xlab("")+
+               labs(fill="Type de convention")+
+               theme(legend.position="bottom"))
+    
+  })
+ 
 
 })

@@ -45,7 +45,7 @@ material_page(
             material_dropdown(
               input_id = "compo",
               label = "Composante", 
-              choices = "....",
+              choices = sort(unique(data$Libellecomposante)),
               color = "blue"
             )
           ),
@@ -90,10 +90,17 @@ material_page(
               )
             ),
             material_column(
-              width = 12,
+              width = 6,
               material_card(
                 title = "Evolution",
                 plotlyOutput("nbstage")
+              )
+            ),
+            material_column(
+              width = 6,
+              material_card(
+                title = "Part des stages facultatifs",
+                plotlyOutput("facultatif")
               )
             )
           )
