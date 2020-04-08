@@ -6,7 +6,7 @@ library(plotly)
 library(shinymaterial)
 library(leaflet)
 library(plotly)
-source("carto.R")
+#source("carto.R")
 #source("carto_fr.R")
 
 
@@ -419,9 +419,9 @@ shinyServer(function(input, output) {
   
   
   
-  output$map <- renderLeaflet({
-    map
-  })
+  #output$map <- renderLeaflet({
+  #  map
+  #})
   
   
   # output$map_fr <- renderLeaflet({

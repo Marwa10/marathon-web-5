@@ -1,6 +1,7 @@
 # library
 library(dplyr)
 library(treemap)
+library(stringr)
 #inspiration : 
 # http://www.buildingwidgets.com/blog/2015/7/22/week-29-d3treer-v2
 
@@ -24,40 +25,87 @@ departements <-read.csv("data/departments.csv",sep = ',')
 newRow <- data.frame(id='0',region_code='0',code='0',name ='Etranger', slug='etranger') 
 departements <- rbind(departements, newRow)
 
+################################## carto par departement ######
 
 # regroupement des données pour avoir le nombre d'heures et le nombre de stages
-data_resume_tree<- data_stages %>%
+# par departement
+data_resume_tree_by_filliere<- data_stages %>%
+  mutate(Filiere_global = str_replace_all(Filiere_global, "[[:punct:]]", " "),
+         cycle= str_replace_all(cycle, "[[:punct:]]", " ")
+  )%>%
   group_by(Filiere_global,cycle,codeDepartement,.drop = TRUE) %>%
   summarise(total = n(),
             nb_heures = sum(as.numeric( Duree_calcul))
             )%>%
   mutate(codeDepartement = coalesce(codeDepartement, as.integer(0) )
-        )
+        )%>%
+  filter(total>1)
 
 # jointure entre les données de departement et les données de stage
-data_resume_tree <-merge(data_resume_tree,departements,by.x="codeDepartement", by.y = "code", all= TRUE) 
+data_resume_tree_by_filliere <-merge(data_resume_tree_by_filliere,departements,by.x="codeDepartement", by.y = "code", all= TRUE) 
 # création du treemap
-p <- treemap(data_resume_tree,
-             title="Répartition des stages (taille Nbre de stages, couleur :  nbre d'heures) ",
+tree_map_filiere_dep <- treemap(data_resume_tree_by_filliere,
+             title="Répartition des stages par fillière et départment(taille Nbre de stages, couleur :  nbre d'heures) ",
              index=c("Filiere_global","cycle","name"),
              vSize="total",
              vColor="nb_heures",
              palette="-RdGy",
             # type="value",
-             type="index",
+             type="value",
              #palette = "YlOrBr",
              bg.labels=c("white"),
              align.labels=list(
                c("center", "center"), 
-               c("right", "bottom"),
-               c("right", "bottom")
+               c("right", "top"),
+               c("right", "top")
              )  
 )            
 
 # Mise en place de l'interactivité
-titre= "Répartition des stages (taille Nbre de stages, couleur :  nbre d'heures) "
-#d3tree( p,rootname = titre)
-d3tree2( p ,  rootname = titre )
+titre= "Répartition des stages  par fillière et départment (taille Nbre de stages, couleur :  nbre d'heures) "
+d3tree( tree_map_filiere_dep,rootname = titre)
+d3tree2( tree_map_filiere_dep ,  rootname = titre )
+
+ #############################
+
+
+##### carto par etablissement#######################################
+
+data_resume_tree_by_filliere_etab<- data_stages %>%
+  mutate(Filiere_global = str_replace_all(Filiere_global, "[[:punct:]]", " "),
+         Nometablissement= str_replace_all(Nometablissement, "[[:punct:]]", " "),
+         cycle= str_replace_all(cycle, "[[:punct:]]", " ")
+  )%>%
+  group_by(Filiere_global,cycle,Nometablissement,.drop = TRUE) %>%
+  summarise(total = n(),
+            nb_heures = sum(as.numeric( Duree_calcul)) 
+              )%>%
+  filter(total>20)
+  
+
+# création du treemap
+tree_map_filiere_etab <- treemap(data_resume_tree_by_filliere_etab,
+                                title="Répartition des stages (taille Nbre de stages, couleur :  nbre d'heures) ",
+                                index=c("Filiere_global","cycle","Nometablissement"),
+                                vSize="total",
+                                vColor="nb_heures",
+                                #palette="-RdGy",
+                                type="value",
+                                #type="index",
+                                palette = "YlOrBr",
+                                bg.labels=c("white"),
+                                align.labels=list(
+                                  c("center", "center"), 
+                                  c("right", "bottom"),
+                                  c("right", "bottom")
+                                )  
+)            
+
+# Mise en place de l'interactivité
+titre= "Répartition des stages par filière, etablissement (taille Nbre de stages, couleur :  nbre d'heures) "
+d3tree( tree_map_filiere_etab,rootname = titre)
+d3tree2( tree_map_filiere_etab ,  rootname = titre )
+
 
 
 ####################### fin du code à  intégrer ############
