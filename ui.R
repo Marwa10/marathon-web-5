@@ -162,7 +162,7 @@ material_page(
                  tags$p(class="accueil", id="SCUIO", "SCUIO-IP"),
                  tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
                  
-        ),
+        )
         
       )
     )
@@ -304,13 +304,13 @@ material_page(
         # GRAPHIQUE TOP 10 ENTREPRISES
         
         material_card(
-          title = "Principaux employeurs",
+          title = "Employeurs",
           
           material_row(
             material_column(
               width = 12,
               material_card(
-                title = "Top 10 des entreprises qui recrutent le plus de stagiaires",
+                title = "Les entreprises ayant recruté des stagiaires",
                 plotlyOutput("entre")
               )
             )
@@ -363,28 +363,28 @@ material_page(
         material_row(
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +35% </center></strong>"),
+            material_card(title = HTML("<strong><center> 35% </center></strong>"),
                           HTML("</center>Ont effectué plus de 2 stages</center>") ,
                           color = "#f5f5f5 grey lighten-4",
                           depth = 5)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +39% </center></strong>"), 
+            material_card(title = HTML("<strong><center> 39% </center></strong>"), 
                           HTML("<center>En Licence</center>"),
                           color = "#f5f5f5 grey lighten-4", 
                           depth = 5)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +43% </center></strong>"), 
+            material_card(title = HTML("<strong><center> 43% </center></strong>"), 
                           HTML("<center>Candidature spontanée</center>"),
                           color = "#f5f5f5 grey lighten-4",
                           depth = 5)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +12 </center></strong>"), 
+            material_card(title = HTML("<strong><center> 12 </center></strong>"), 
                           HTML("<center> stages effectués par un étudiant</center>"),
                           color = "#f5f5f5 grey lighten-4",
                           depth = 5)

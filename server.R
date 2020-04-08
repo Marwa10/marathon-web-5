@@ -157,14 +157,18 @@ shinyServer(function(input, output) {
       top_n(10)
     
     
-    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total,fill= Nometablissement)) +
+    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total#,
+                                   #fill= Nometablissement
+                                   )) +
                geom_bar(stat="identity")+ 
                coord_flip()+
                ggtitle("") +
                xlab("") + 
+               geom_text(aes(label = total),size=3.5, color = "Black")+
                ylab("Nombre de stages") +
-               theme(legend.position="none")+ 
-               scale_fill_brewer(palette="Spectral") )
+               theme(legend.position="none")#+ 
+               #scale_fill_brewer(palette="Spectral")
+             )
     
   })
   
@@ -181,11 +185,13 @@ shinyServer(function(input, output) {
     pays<-subset(w,Paysetablissement!="FRANCE")
     pays2<-as.data.frame(table(pays$Paysetablissement))
     t<-as.data.frame(arrange(pays2,desc(pays2$Freq)))
-    dp<-t[1:10,]
-    dp<-as.data.frame(dp)
+    #dp<-t[1:10,]
+    dp<-as.data.frame(t)
     dp
     
-    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq,fill=dp$Var1)) + 
+    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq#,
+                           #fill=dp$Var1
+                           )) + 
       geom_bar(stat="identity")+
       coord_flip()+ 
       ggtitle("") +
@@ -193,7 +199,8 @@ shinyServer(function(input, output) {
       ylab("Nombre de stages")+
       labs(fill="Pays")+
       theme(legend.position="none") + 
-      scale_fill_brewer(palette="Spectral")
+      geom_text(aes(label = dp$Freq),size=3.5, color = "Black")#+
+      #scale_fill_brewer(palette="Spectral")
     
     
     ggplotly(p)
@@ -223,7 +230,9 @@ shinyServer(function(input, output) {
     #tauxetr
     
     p<-ggplot(data=ta2, aes(x=ta2$Anneeunivconvention, y=ta2$total)) + 
-      geom_bar(stat="identity",fill = "#ffe082", color = "#C4961A")+ 
+      geom_bar(stat="identity",fill = "#ffe082"#,
+               #color = "#C4961A"
+               )+ 
       ggtitle("") +
       xlab("") + 
       geom_text(aes(label = total),size=3.5, color = "Black")+
@@ -252,7 +261,9 @@ shinyServer(function(input, output) {
     #ta<-ta
     
     p<-ggplot(data=ta, aes(x=Anneeunivconvention, y=total)) + 
-      geom_bar(stat="identity",fill = "#ffe082", color = "#C4961A")+ 
+      geom_bar(stat="identity",fill = "#ffe082"
+               #, color = "#C4961A"
+               )+ 
       ggtitle("") +
       xlab("") + 
       geom_text(aes(label = total),size=3.5, color = "Black")+
@@ -419,15 +430,15 @@ shinyServer(function(input, output) {
   
   
   
-  #output$map <- renderLeaflet({
-  #  map
-  #})
+  output$map <- renderLeaflet({
+    map
+  })
   
   
-  # output$map_fr <- renderLeaflet({
-  #   m_dep 
-  # })
-  # 
+   output$map_fr <- renderLeaflet({
+     m_dep 
+   })
+   
  
   
    
