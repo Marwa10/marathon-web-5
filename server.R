@@ -433,14 +433,14 @@ shinyServer(function(input, output) {
   
   
   
-  output$map <- renderLeaflet({
-    map
-  })
+  #output$map <- renderLeaflet({
+    #map
+  #})
   
   
-   output$map_fr <- renderLeaflet({
-     m_dep 
-   })
+   #output$map_fr <- renderLeaflet({
+     #m_dep 
+   #})
 
   
    

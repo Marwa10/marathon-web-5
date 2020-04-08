@@ -150,14 +150,6 @@ material_page(
   
   # Define side-nav tab content
   material_tab_content(
-    offset = 1,
-    tab_id = "first_tab"),
-  
-  
-  
-  
-  # Define side-nav tab content
-  material_tab_content(
     tab_id = "accueil",
     
     material_card( 
@@ -177,14 +169,13 @@ material_page(
           width = 12,
           tags$div(id = "fond2", checked = NA,
                    tags$p(class="accueil", "STAGES"),
-                   tags$p(class="accueil", class="titre","Envie d'en dÃ©couvrir davantage?"),
+                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
-                   tags$p(class="accueil", "3 cases Ã  inserer!!!"),
                    tags$div(class="accueil",id="cases", 
-                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages rÃ©alisÃ©s"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages rÃ©alisÃ©s Ã  l'Ã©tranger"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages rÃ©alisÃ©s avec l'organisme d'accueil UniversitÃ© Paul Valery Montpellier 3"))),
-                   tags$p(class="accueil", "Les stages sont une grande question en dÃ©but de parcours professionnel. En cliquant sur l'onglet Stages, constatez les donnÃ©es informatives et les statistiques que nous avons rÃ©coltÃ©es sur l'ensemble des stages."),
+                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
+                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel. En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages."),
                    
                    
                    
