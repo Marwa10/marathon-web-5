@@ -223,10 +223,12 @@ shinyServer(function(input, output) {
     #tauxetr
     
     p<-ggplot(data=ta2, aes(x=ta2$Anneeunivconvention, y=ta2$total)) + 
-      geom_bar(stat="identity")+ 
+      geom_bar(stat="identity",fill = "#ffe082", color = "#C4961A")+ 
       ggtitle("") +
       xlab("") + 
-      ylab("Nombre de stages effectués à l'étranger")
+      geom_text(aes(label = total),size=3.5, color = "Black")+
+      ylab("Nombre de stages effectués à l'étranger")+
+      theme(legend.position="none")
     
     ggplotly(p)
     
@@ -317,6 +319,39 @@ shinyServer(function(input, output) {
   })
   
   
+  
+  # GRAPHIQUE DIAGRAMME ORIGINE DU STAGE
+  
+  
+  output$origine <- renderPlotly({
+    
+    if(input$compo != "Toutes les composantes"){
+      oi<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+          oi<-data
+        }
+    
+    toi<- oi %>% 
+      group_by(Originestage) %>% 
+      summarise(total = n())
+    toi<-as.data.frame(toi[-1,])
+    toi
+    
+    fig <- plot_ly(data, labels = ~toi$Originestage, values = ~toi$total, type = 'pie',
+                   textinfo = 'label+percent',
+                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)','rgb(51,51,51)')),
+                   showlegend = FALSE)
+    fig <- fig %>% layout(title = '',
+                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    
+    fig
+    
+    
+  })
+  
+  # GRAPHIQUE INDEMNISATION
+  
   output$indem <- renderPlotly({
     
     if(input$compo != "Toutes les composantes"){
@@ -330,8 +365,16 @@ shinyServer(function(input, output) {
       summarise(total = n())
     tu<-as.data.frame(tu)
     tu
-    ggplotly(ggplot(data=tu, aes(x=tu$Indemnisation, y=tu$total, fill=tu$Indemnisation)) + 
-               geom_bar(stat="identity") + xlab("")+ylab("Nombre de stages"))
+    
+    fig <- plot_ly(data, labels = ~tu$Indemnisation, values = ~tu$total, type = 'pie',
+                   textinfo = 'label+percent',
+                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)','rgb(51,51,51)')),
+                   showlegend = FALSE)
+    fig <- fig %>% layout(title = '',
+                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    
+    fig
   })
   
   

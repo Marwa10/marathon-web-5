@@ -262,10 +262,19 @@ material_page(
           
           material_row(
             material_column(
-              width = 12,
+              width = 6,
               material_card(
                 title="Evolution du nombre de stages effectués",
                 plotlyOutput("nbstage")
+              )
+            ),
+            
+            
+            material_column(
+              width = 6,
+              material_card(
+                title="Origine du stage",
+                plotlyOutput("origine")
               )
             ),
             
@@ -316,22 +325,6 @@ material_page(
           )
           
         ),
-        
-        # GRAPHIQUE 
-        
-        #material_card(
-         # title = "Durée des stages",
-          
-          #material_row(
-           # material_column(
-            #  width = 12,
-             # material_card(
-              #  title = "Répartition des stages selon leur durée",
-               # plotlyOutput("duree")
-             # )
-            #)
-          #)
-        #),
         
         
         # GRAPHIQUE TOP 10 ENTREPRISES
