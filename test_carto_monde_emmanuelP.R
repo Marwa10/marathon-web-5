@@ -34,7 +34,8 @@ result <- merge(data,pays,by.x="Paysetablissement", by.y="libcog", all= TRUE)
 interships_counts_by_country <- result %>%
   group_by(codeiso3) %>%
   summarise(number_internships = n(),
-            nb_heures = sum(as.numeric( Duree_calcul)))
+            nb_heures = sum(as.numeric( Duree_calcul)),
+            nb_etab = n_distinct(Numsiret))
 
 
 #names(interships_counts_by_country)[names(interships_counts_by_country) == 'n'] <- 'number_internships'
@@ -61,9 +62,10 @@ mypalette <- colorBin( palette="YlOrBr", domain=world_spdf@data$number_internshi
 
 # Tooltips
 mytext <- paste(
-  "Country: ", world_spdf@data$NAME,"<br/>", 
-  "Area: ", world_spdf@data$AREA, "<br/>", 
-  "Number of internships: ", round(world_spdf@data$number_internships, 2), 
+  "Pays: ", world_spdf@data$NAME,"<br/>", 
+  "Nombre de stages: ", round(world_spdf@data$number_internships, 2), "<br/>", 
+  "Cumul des heures: ",round(world_spdf@data$nb_heures, 2), "<br/>", 
+  "Nombre d'établissements d'accueil: ",world_spdf@data$nb_etab,"<br/>", 
   sep="") %>%
   lapply(htmltools::HTML)
 
@@ -84,7 +86,7 @@ m <- leaflet(world_spdf) %>%
       direction = "auto"
     )
   ) %>%
-  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Number internships", position = "bottomleft" )
+  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Nombre de stages", position = "bottomleft" )
 
 m  
 

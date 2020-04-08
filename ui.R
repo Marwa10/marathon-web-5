@@ -211,7 +211,6 @@ material_page(
 
   ),
   
-  
 
   
   material_tab_content(
@@ -322,7 +321,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Durée",
+                title = "Durée des stages en semaine (ETP)",
                 plotlyOutput("duree")
               )
             ),
@@ -350,7 +349,7 @@ material_page(
             material_column(
               width = 12,
               material_card(
-                title = "Les entreprises ayant recruté des stagiaires",
+                title = "Les entreprises recrutant le plus de stagiaires",
                 plotlyOutput("entre")
               )
             )
@@ -403,31 +402,33 @@ material_page(
         material_row(
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> 35% </center></strong>"),
-                          HTML("</center>Ont effectué plus de 2 stages</center>") ,
-                          color = "#f5f5f5 grey lighten-4",
-                          depth = 5)
+            material_card(title = HTML("<strong><center>20 334</center></strong>"),
+                          HTML("</center> stages effectués depuis 2014 </center>") ,
+                          color = "white",
+                          depth = 1)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> 39% </center></strong>"), 
-                          HTML("<center>En Licence</center>"),
-                          color = "#f5f5f5 grey lighten-4", 
-                          depth = 5)
+            material_card(title = HTML("<strong><center> 1,53 </center></strong>"), 
+                          HTML("<center> stages en moyenne par étudiant </center>"),
+                          color = "white", 
+                          depth = 1)
+            
+            
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 43% </center></strong>"), 
-                          HTML("<center>Candidature spontanée</center>"),
-                          color = "#f5f5f5 grey lighten-4",
-                          depth = 5)
+                          HTML("<center>de candidature spontanée</center>"),
+                          color = "white",
+                          depth = 1)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> 12 </center></strong>"), 
-                          HTML("<center> stages effectués par un étudiant</center>"),
-                          color = "#f5f5f5 grey lighten-4",
-                          depth = 5)
+            material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
+                          HTML("<center> de stages facultatifs </center>"),
+                          color = "white",
+                          depth = 1)
           )
         ),
         material_row(
