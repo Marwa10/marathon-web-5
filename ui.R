@@ -9,7 +9,7 @@ library(leaflet)
 material_page(
   title = "Paul In",
   #nav_bar_color = "pink",
-  data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE),
+  #data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE),
   # nav_bar_fixed = TRUE,
   # include_fonts = TRUE,
   # Place side-nav in the beginning of the UI
@@ -44,17 +44,7 @@ material_page(
   # Define tab content
   material_tab_content(
     tab_id = "first_tab"),
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
   
@@ -103,7 +93,30 @@ material_page(
             material_dropdown(
               input_id = "compo",
               label = "Composante", 
-              #choices = sort(unique(data$Libellecomposante)),
+              choices = c(   "Administration Economique et Social  "       
+                             , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
+                             , "Arts du spectacle MTP  "           ,           "Arts plastiques MTP  "                       
+                             , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
+                             , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
+                             , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
+                             , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
+                             , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
+                             , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
+                             , "Histoire MTP  "                ,               "Information et communication BEZ  "          
+                             , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
+                             , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
+                             , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
+                             , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
+                             , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
+                             , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
+                             , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
+                             , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
+                             , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
+                             , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
+                             , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
+                             , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
+                             , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
+                             , "UFR 6"    ,"Toutes les composantes"),
               color = "blue"
             )
           ),

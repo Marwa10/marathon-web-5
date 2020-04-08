@@ -12,13 +12,13 @@ shinyServer(function(input, output) {
   
   data_ufr = read.csv2("data/donnees_ufr.csv", stringsAsFactors = FALSE) 
   
-  data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE)
+  #data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE)
   
   data$Libellecomposante[which(data$Libellecomposante == "")] <- "Inconnue"
   data_ufr$Libellecomposante[which(data_ufr$Libellecomposante == "")] <- "Inconnue"
 
   
-  
+  #sort(unique(data$Libellecomposante))
   
   toshow = data_ufr %>% 
     select(Anneeunivconvention,
@@ -78,10 +78,10 @@ shinyServer(function(input, output) {
   
   output$p1 <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       z<-data %>% 
         filter(Libellecomposante == input$compo)
-      } else if (input$compo == ""){
+      } else if (input$compo == "Toutes les composantes"){
           z<-data
         }
     
@@ -113,9 +113,9 @@ shinyServer(function(input, output) {
   
   output$entre <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       y<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           y<-data
         }
     
@@ -140,9 +140,9 @@ shinyServer(function(input, output) {
   
   output$pays <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       w<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           w<-data
         }
     
@@ -172,9 +172,9 @@ shinyServer(function(input, output) {
   
   output$tauxetr <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       t<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           t<-data
         }
     
@@ -205,9 +205,9 @@ shinyServer(function(input, output) {
   
   output$nbstage <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       u<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           u<-data
         }
     
@@ -231,9 +231,9 @@ shinyServer(function(input, output) {
   
   output$facultatif <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       v<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           v<-data
         }
     
@@ -260,9 +260,9 @@ shinyServer(function(input, output) {
   
   output$duree <- renderPlotly({
     
-    if(input$compo != ""){
+    if(input$compo != "Toutes les composantes"){
       i<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           i<-data
         }
     
