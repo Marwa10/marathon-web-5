@@ -7,7 +7,13 @@ library(leaflet)
 
 
 material_page(
-  title = "Paul In",
+  nav_bar_color = "#ffe082 amber lighten-3",
+  #nav_bar_color = "#ffe082 amber lighten-3",
+  title = HTML('<img src="img/logo-orange-vf2.png" alt="Smiley face" height="50" width="50"> Paul In'),
+    
+    
+    #tags$img(width=90, height = 90, src = "img/logo-orange-vf2.png"),
+    #"Paul In",
   #nav_bar_color = "pink",
   #data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE),
   # nav_bar_fixed = TRUE,
@@ -15,41 +21,159 @@ material_page(
   # Place side-nav in the beginning of the UI
   material_side_nav(
     fixed = FALSE, 
-    image_source = "img/material.png",
-    # Place side-nav tabs within side-nav
-    material_side_nav_tabs(
-      side_nav_tabs = c(
-        "Accueil" = "accueil",
-        "Stage" = "vis1",
-        "Stagiaire" = "vis2",
-        "Cartographie" = "carto",
-        "Recherche" = "liste_stage"
+    br(),
+    br(),
+    material_row(
+      material_column(
+        offset = 1,
+        width = 12,
+      material_checkbox(
+        input_id = "c1",
+        label = "Stage obligatoire",
+        initial_value = TRUE,
+        color = "#209b7f"
       ),
-      icons = c("code", "insert_chart", "insert_chart", "explore", "explore")
-    )
+      material_checkbox(
+        input_id = "c2",
+        label = "Stage facultatif",
+        initial_value = TRUE,
+        color = "#209b7f"
+      )
+      
+    )),
+    tags$br(),
+    
+    material_row(
+      material_column(
+        offset = 1,
+        material_radio_button(input_id = "cycle",
+                              label = "Niveau",
+                              choices = c("DU",
+                                          "DUT",
+                                          "Licence",
+                                          "LP",
+                                          "Master",
+                                          "Mobilité",
+                                          "Doctorat"),
+                              selected = "Licence",
+                              with_gap = TRUE)
+      )
+      
+    ),
+    
+    
+    material_row(
+      material_column(
+        offset = 1,
+        material_dropdown(
+          input_id = "ufr",
+          label = "UFR",
+          choices = c("UFR1",
+                      "UFR2",
+                      "UFR3",
+                      "UFR4",
+                      "UFR5",
+                      "UFR6",
+                      "Ecole doctorale",
+                      "IEF",
+                      "ITIC",
+                      "RI"
+          )
+        )
+      )
+    ),
+    
+    
+  
+    material_row(
+      material_column(
+        width = 12,
+      material_dropdown(
+      input_id = "compo",
+      label = "Composante",
+      choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
+                  , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
+                  , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
+                  , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
+                  , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
+                  , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
+                  , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
+                  , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
+                  , "Histoire MTP  "                ,               "Information et communication BEZ  "          
+                  , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
+                  , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
+                  , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
+                  , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
+                  , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
+                  , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
+                  , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
+                  , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
+                  , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
+                  , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
+                  , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
+                  , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
+                  , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
+                  , "UFR 6"    ,"Toutes les composantes"),
+      
+      
+      color = "green"
+    )))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
   ),
   
   # Define tabs
   material_tabs(
+    color = "Moccasin",
     tabs = c(
       "Accueil" = "accueil",
-      "Recherche" = "recherche",
       "Stage" = "stage",
       "Stagiaire"= "stagiaire",
-      "Cartographie"= "carto"
+      "Cartographie"= "carto",
+      "Recherche" = "recherche"
       
       
     )
   ),
   # Define tab content
   material_tab_content(
+    offset = 1,
     tab_id = "first_tab"),
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
   # Define side-nav tab content
   material_tab_content(
+    offset = 1,
     tab_id = "accueil",
     material_parallax(
       image_source = "img/siora-photography-hgFY1mZY-Y0-unsplash.jpg"
@@ -77,6 +201,7 @@ material_page(
 
   ),
   material_tab_content(
+    offset = 1,
     tab_id = "stage",
     #tags$br(),
     material_row(
@@ -89,37 +214,9 @@ material_page(
           # SELECTION COMPOSANTE
           
           material_column(
-            width = 6,
-            material_dropdown(
-              input_id = "compo",
-              label = "Composante", 
-              choices = c(   "Administration Economique et Social  "       
-                             , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
-                             , "Arts du spectacle MTP  "           ,           "Arts plastiques MTP  "                       
-                             , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
-                             , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
-                             , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
-                             , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
-                             , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
-                             , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
-                             , "Histoire MTP  "                ,               "Information et communication BEZ  "          
-                             , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
-                             , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
-                             , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
-                             , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
-                             , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
-                             , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
-                             , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
-                             , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
-                             , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
-                             , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
-                             , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
-                             , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
-                             , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
-                             , "UFR 6"    ,"Toutes les composantes"),
-              color = "blue"
-            )
-          ),
+            width = 6
+
+          )
           
           # # SELECTION FILIERE
           # 
@@ -135,18 +232,7 @@ material_page(
           
           # SELECTION TYPE CONVENTION
           
-          material_checkbox(
-            input_id = "c1",
-            label = "Stage obligatoire",
-            initial_value = TRUE,
-            color = "#209b7f"
-          ),
-          material_checkbox(
-            input_id = "c2",
-            label = "Stage facultatif",
-            initial_value = TRUE,
-            color = "#209b7f"
-          )
+          
           
           # # SELECTION ANNEE
           # 
@@ -178,7 +264,6 @@ material_page(
             material_column(
               width = 12,
               material_card(
-                title = "Type de convention",
                 plotlyOutput("p1")
               )
             ),
@@ -201,15 +286,7 @@ material_page(
                 title = "Part des stages facultatifs",
                 plotlyOutput("facultatif")
               )
-            )#,
-          #  material_column(
-             # width = 12,
-            #  material_card(
-              #  title = "Evolution du nombre de stages effectués",
-             #   plotlyOutput("")
-            #  )
-           # )
-            
+            )
           )
           
         ),
@@ -293,6 +370,7 @@ material_page(
   
   
   material_tab_content(
+    offset = 1,
     tab_id = "stagiaire",
     material_row(
       material_column(
@@ -355,6 +433,7 @@ material_page(
     
   ),
   material_tab_content(
+    offset = 1,
     tab_id = "recherche",
     material_row(
       material_column(
@@ -368,8 +447,17 @@ material_page(
   
   material_tab_content(
     tab_id = "carto",
-    leafletOutput("map")
+    offset = 1,
+    material_card(
+      leafletOutput("map")
+    ),
+    material_card(
+      title = "carte département"
+      #leafletOutput("map_fr")
+      
+    )
     
+   
   )
 )
 
