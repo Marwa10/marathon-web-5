@@ -135,6 +135,7 @@ shinyServer(function(input, output) {
     ggplotly(ggplot(data = g, 
                     mapping = aes(x = Anneeunivconvention, y = total, color = Typeconvention)) +
                geom_line()+
+               scale_color_manual(values=c("#1F73BB","#F2AF1A"))+
                labs( x = "Année de convention",
                      y = "Nombre de stage ",
                      color = "Type de convention"))
@@ -156,8 +157,8 @@ shinyServer(function(input, output) {
       top_n(10)
     
     
-    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total#,
-                                   #fill= Nometablissement
+    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total,
+                                   fill= Nometablissement
                                    )) +
                geom_bar(stat="identity")+ 
                coord_flip()+
@@ -165,8 +166,10 @@ shinyServer(function(input, output) {
                xlab("") + 
                geom_text(aes(label = total),size=3.5, color = "Black")+
                ylab("Nombre de stages") +
-               theme(legend.position="none")#+ 
-               #scale_fill_brewer(palette="Spectral")
+               theme(legend.position="none")#+
+            #scale_fill_manual(values=c("#1f73bb", "#f2af1a", "#7f549c","#e74d95", "#209b7f", "#d73a27","#e7e7e7", "#6d6e72", "#8fbbe7","#237ccc", "#ffcf69", "#7f6834","#e8d5ea", "#776b7f", "#fea1cd","#8050669", "#99d1cb", "#417f70","#1f73bb", "#f2af1a", "#7f549c","#e74d95", "#209b7f", "#d73a27","#e7e7e7", "#6d6e72", "#8fbbe7","#237ccc", "#ffcf69", "#7f6834","#e8d5ea", "#776b7f", "#fea1cd","#8050669", "#99d1cb", "#417f70","#1f73bb", "#f2af1a", "#7f549c","#e74d95", "#209b7f", "#d73a27","#e7e7e7", "#6d6e72", "#8fbbe7","#237ccc", "#ffcf69", "#7f6834","#e8d5ea", "#776b7f", "#fea1cd","#8050669", "#99d1cb", "#417f70"))
+             #+ 
+               #scale_fill_brewer(palette="Paired")
              )
     
   })
@@ -184,12 +187,12 @@ shinyServer(function(input, output) {
     pays<-subset(w,Paysetablissement!="FRANCE")
     pays2<-as.data.frame(table(pays$Paysetablissement))
     t<-as.data.frame(arrange(pays2,desc(pays2$Freq)))
-    #dp<-t[1:10,]
+    dp<-t[1:10,]
     dp<-as.data.frame(t)
     dp
     
-    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq#,
-                           #fill=dp$Var1
+    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq,
+                           fill=dp$Var1
                            )) + 
       geom_bar(stat="identity")+
       coord_flip()+ 
@@ -198,8 +201,8 @@ shinyServer(function(input, output) {
       ylab("Nombre de stages")+
       labs(fill="Pays")+
       theme(legend.position="none") + 
-      geom_text(aes(label = dp$Freq),size=3.5, color = "Black")#+
-      #scale_fill_brewer(palette="Spectral")
+      geom_text(aes(label = dp$Freq),size=3.5, color = "Black")+
+      scale_fill_brewer(palette="Paired")
     
     
     ggplotly(p)
@@ -229,7 +232,7 @@ shinyServer(function(input, output) {
     #tauxetr
     
     p<-ggplot(data=ta2, aes(x=ta2$Anneeunivconvention, y=ta2$total)) + 
-      geom_bar(stat="identity",fill = "#ffe082"#,
+      geom_bar(stat="identity",fill = "#f2af1a"#,
                #color = "#C4961A"
                )+ 
       ggtitle("") +
@@ -265,7 +268,7 @@ shinyServer(function(input, output) {
                )+ 
       ggtitle("") +
       xlab("") + 
-      geom_text(aes(label = total),size=3.5, color = "Black")+
+      geom_text(aes(label = total),size=3,color = "Black")+
       ylab("Nombre de stages")+
       theme(legend.position="none")
     
@@ -285,8 +288,10 @@ shinyServer(function(input, output) {
           i<-data
         }
     
-    ggplotly(ggplot(data=i, aes(x=i$Duree_heure)) + 
-               geom_histogram()+xlab("Durée en heures"))
+    i$Duree_calcul<-as.numeric(i$Duree_calcul)
+    
+    ggplotly(ggplot(data=i, aes(x=i$Duree_calcul)) + 
+               geom_histogram()+xlab("Nombre de semaines de stage (calculé sur un ETP)"))
     #ggplotly(ggplot(data=tc, aes(x=" ",y=tc$total , fill=tc$Typeconvention)) + 
     #           geom_bar(width = 1, stat = "identity",color="white") + 
     #           coord_polar("y", start = 0)+
@@ -400,6 +405,7 @@ shinyServer(function(input, output) {
                geom_bar(position= "identity") +
                labs(x = "Année", y = "Nombre de stagiaire")+
                theme(legend.position="none"))
+    
     
   })
   
