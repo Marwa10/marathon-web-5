@@ -258,23 +258,24 @@ material_page(
         material_card(
           title = "Stages effectués par les étudiants",
           
-          # GRAPHIQUE EVO TYPE CONVENTION
+          # GRAPHIQUE EVO NB STAGE
           
           material_row(
             material_column(
               width = 12,
               material_card(
-                plotlyOutput("p1")
+                title="Evolution du nombre de stages effectués",
+                plotlyOutput("nbstage")
               )
             ),
             
-            # GRAPHIQUE EVO NB STAGE
+            # GRAPHIQUE EVO TYPE CONVENTION
             
             material_column(
               width = 6,
               material_card(
-                title = "Evolution du nombre de stages effectués",
-                plotlyOutput("nbstage")
+                title = "Evolution du type de convention",
+                plotlyOutput("p1")
               )
             ),
             
@@ -284,11 +285,69 @@ material_page(
               width = 6,
               material_card(
                 title = "Part des stages facultatifs",
-                plotlyOutput("facultatif")
+                plotlyOutput("taux")
               )
             )
           )
           
+        ),
+        
+        material_card(
+          title = "Caractéristiques techniques des stages effetués",
+          
+          material_row(
+            material_column(
+              width = 6,
+              material_card(
+                title = "Durée",
+                plotlyOutput("duree")
+              )
+            ),
+            
+            # GRAPHIQUE EVO STAGE ETRANGER
+            
+            material_column(
+              width = 6,
+              material_card(
+                title = "Indemnisation",
+                plotlyOutput("indem")
+              )
+            )
+          )
+          
+        ),
+        
+        # GRAPHIQUE 
+        
+        #material_card(
+         # title = "Durée des stages",
+          
+          #material_row(
+           # material_column(
+            #  width = 12,
+             # material_card(
+              #  title = "Répartition des stages selon leur durée",
+               # plotlyOutput("duree")
+             # )
+            #)
+          #)
+        #),
+        
+        
+        # GRAPHIQUE TOP 10 ENTREPRISES
+        
+        material_card(
+          title = "Principaux employeurs",
+          
+          material_row(
+            material_column(
+              width = 12,
+              material_card(
+                title = "Top 10 des entreprises qui recrutent le plus de stagiaires",
+                plotlyOutput("entre")
+              )
+            )
+          )
         ),
         
         # GRAPHIQUE PAYS TOP 10
@@ -316,48 +375,6 @@ material_page(
             )
           )
           
-        ),
-        
-        # GRAPHIQUE TOP 10 ENTREPRISES
-        
-        material_card(
-          title = "Principaux employeurs",
-          
-          material_row(
-            material_column(
-              width = 12,
-              material_card(
-                title = "Top 10 des entreprises qui recrutent le plus de stagiaires",
-                plotlyOutput("entre")
-              )
-            )
-          )
-        ),
-        material_card(
-          title = "Durée des stages",
-          
-          material_row(
-            material_column(
-              width = 12,
-              material_card(
-                title = "Répartition des stages selon leur durée",
-                plotlyOutput("duree")
-              )
-            )
-          )
-        ),
-        material_card(
-          title = "Indemnisation des stages",
-          
-          material_row(
-            material_column(
-              width = 12,
-              material_card(
-                title = "Proportion de stages indemnisés",
-                plotlyOutput("indem")
-              )
-            )
-          )
         )
       )
     )

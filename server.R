@@ -5,6 +5,7 @@ library(ggplot2)
 library(plotly)
 library(shinymaterial)
 library(leaflet)
+library(plotly)
 source("carto.R")
 #source("carto_fr.R")
 
@@ -249,43 +250,18 @@ shinyServer(function(input, output) {
     #ta<-ta
     
     p<-ggplot(data=ta, aes(x=Anneeunivconvention, y=total)) + 
-      geom_bar(stat="identity")+ 
+      geom_bar(stat="identity",fill = "#ffe082", color = "#C4961A")+ 
       ggtitle("") +
       xlab("") + 
-      ylab("Nombre de stages")
+      geom_text(aes(label = total),size=3.5, color = "Black")+
+      ylab("Nombre de stages")+
+      theme(legend.position="none")
     
     ggplotly(p)
     
   })
   
-  # GRAPHIQUE PART STAGES FACULTATIFS
-  
-  output$facultatif <- renderPlotly({
-    
-    if(input$compo != "Toutes les composantes"){
-      v<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
-          v<-data
-        }
-    
-    tc<- v %>% 
-      group_by(Typeconvention) %>% 
-      summarise(total = n())
-    tc<-as.data.frame(tc)
-    tc
-    
-    ggplotly(ggplot(data=tc, aes(x=tc$Typeconvention,y=tc$total , fill=tc$Typeconvention)) + 
-               geom_bar(stat="identity") + xlab("")+ylab("Nombre de stages"))
-    #ggplotly(ggplot(data=tc, aes(x=" ",y=tc$total , fill=tc$Typeconvention)) + 
-    #           geom_bar(width = 1, stat = "identity",color="white") + 
-    #           coord_polar("y", start = 0)+
-    #           theme_void()+
-    #           theme(legend.position="bottom"))
-    
-    
-    
-  })
-  
+
   # GRAPHIQUE DUREE STAGE
   
   
@@ -308,6 +284,38 @@ shinyServer(function(input, output) {
     
     
   })
+  
+  
+  # GRAPHIQUE DIAGRAMME TAUX FACULTATIF
+  
+  
+  output$taux <- renderPlotly({
+    
+    if(input$compo != "Toutes les composantes"){
+      o<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+          o<-data
+        }
+    
+    to<- o %>% 
+      group_by(Typeconvention) %>% 
+      summarise(total = n())
+    to<-as.data.frame(to)
+    to
+    
+    fig <- plot_ly(data, labels = ~to$Typeconvention, values = ~to$total, type = 'pie',
+                   textinfo = 'label+percent',
+                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)')),
+                   showlegend = FALSE)
+    fig <- fig %>% layout(title = '',
+                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    
+    fig
+    
+    
+  })
+  
   
   output$indem <- renderPlotly({
     
