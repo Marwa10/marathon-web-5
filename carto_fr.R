@@ -12,9 +12,9 @@ library(rgdal)
 
 # récupération des info geo départements
 departements_carto_FR <- rgdal::readOGR("data/departements.geojson"
-                               #layer="TM_WORLD_BORDERS_SIMPL-0.3",
-                               #GDAL1_integer64_policy = TRUE
-                               )
+                                        #layer="TM_WORLD_BORDERS_SIMPL-0.3",
+                                        #GDAL1_integer64_policy = TRUE
+)
 # écupétrtiondes données de département
 dep <-read.csv("data/departments.csv",sep = ',')
 # jointure gauche
@@ -68,5 +68,3 @@ m_dep <- leaflet(departements_carto_FR) %>%
   addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Nombre de Stages", position = "bottomleft" )
 
 m_dep 
-
-####################### fin du code à  intégrer ############

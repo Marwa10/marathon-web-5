@@ -6,29 +6,60 @@ library(plotly)
 library(shinymaterial)
 library(leaflet)
 source("carto.R")
+#source("carto_fr.R")
+
 
 shinyServer(function(input, output) {
-  data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE)
+  data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE)
   
   data_ufr = read.csv2("data/donnees_ufr.csv", stringsAsFactors = FALSE) 
   
-  #data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE)
   
   data$Libellecomposante[which(data$Libellecomposante == "")] <- "Inconnue"
   data_ufr$Libellecomposante[which(data_ufr$Libellecomposante == "")] <- "Inconnue"
+  
+  
+  data$Typeconvention[which(data$Typeconvention=="Formation Initiale - Obligatoire (=ECTS)")]<-"Obligatoire" 
+  data$Typeconvention[which(data$Typeconvention=="Formation Initiale - Facultatif (non ECTS)")]<-"Facultatif"
 
   
-  #sort(unique(data$Libellecomposante))
   
+  ##test avec data_ufr
+  
+  test  <- reactive({
+    g = data_ufr %>% 
+      filter(Libellecomposante == "Sciences du sujet et de la société")
+    
+    if(input$c1 & input$c2){
+      g = data_ufr
+    }else if (input$c1){
+      g = data_ufr %>% 
+        filter(Typeconvention == "Obligatoire")
+      
+    }else if(input$c2){
+      g = data_ufr %>% 
+        filter(Typeconvention == "Facultatif")
+    }
+    
+  })
+  
+  
+  
+
   toshow = data_ufr %>% 
     select(Anneeunivconvention,
+           Originestage,
+           Dureestageenheures,
            cycle,
            ufr,
            Libellecomposante,
+           Indemnisation,
            Nometablissement,
            Paysetablissement,
            CodeDepartement,
-           Numsiret
+           Numsiret,
+           Libellenaf,
+           Typeconvention
            ) %>% 
     rename(
       Année = Anneeunivconvention,
@@ -125,9 +156,7 @@ shinyServer(function(input, output) {
       top_n(10)
     
     
-    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total#,
-                                   #fill= Nometablissement
-                                   )) +
+    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total,fill= Nometablissement)) +
                geom_bar(stat="identity")+ 
                coord_flip()+
                ggtitle("") +
@@ -207,9 +236,9 @@ shinyServer(function(input, output) {
   
   output$nbstage <- renderPlotly({
     
-    if(input$compo != "Toutes les composantes"){
+    if(input$compo != ""){
       u<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
           u<-data
         }
     
@@ -280,9 +309,6 @@ shinyServer(function(input, output) {
     
   })
   
-  
-  # GRAPHIQUE INDEMNISATION
-  
   output$indem <- renderPlotly({
     
     if(input$compo != "Toutes les composantes"){
@@ -301,29 +327,15 @@ shinyServer(function(input, output) {
   })
   
   
-  # GRAPHIQUE ORIGINE STAGE
   
-  #output$origine <- renderPlotly({
-   # 
-    #if(input$compo != "Toutes les composantes"){
-     # c<-data %>% 
-      #  filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
-       #   c<-data
-        #}
-    #
-    #td<- data %>% 
-     # group_by(Originestage) %>% 
-      #summarise(total = n())
-    #td<-as.data.frame(td[-1,])
-    #td
-    #ggplotly(ggplot(data=tu, aes(x=td$Originestage, y=td$total)) + 
-     #          geom_bar(stat="identity") + xlab("")+ylab("Nombre de stages"))
-  #})
+  
+  
   
   
   
   output$p2 <- renderPlotly({
-    ggplotly(ggplot(data_ufr, aes(Anneeunivconvention, color=cycle, fill=cycle)) +
+    to_use = test()
+    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=cycle, fill=cycle)) +
                geom_bar(position= "identity") +
                labs(x = "Année", y = "Nombre de stagiaire"))
     
@@ -332,7 +344,8 @@ shinyServer(function(input, output) {
   
   
   output$p3 <- renderPlotly({
-    ggplotly(ggplot(data_ufr, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
+    to_use = test()
+    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
                geom_bar(position= "identity") +
                labs(x = "Année",
                     y = "Nombre de stagiaire",
@@ -344,7 +357,8 @@ shinyServer(function(input, output) {
   
   
   output$p4 <- renderPlotly({
-    ggplotly(ggplot(data_ufr, aes(Anneeunivconvention, color=ufr, fill=ufr)) +
+    to_use = test()
+    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=ufr, fill=ufr)) +
                geom_bar(position= "identity") +
                labs(x = "Année",
                     y = "Nombre de stagiaire",
@@ -359,7 +373,10 @@ shinyServer(function(input, output) {
   })
   
   
-  
+  # output$map_fr <- renderLeaflet({
+  #   m_dep 
+  # })
+  # 
  
   
    
