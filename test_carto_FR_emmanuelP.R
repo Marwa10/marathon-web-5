@@ -65,7 +65,7 @@ m_dep <- leaflet(departements_carto_FR) %>%
       direction = "auto"
     )
   ) %>%
-  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Number internships", position = "bottomleft" )
+  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Nombre de Stages", position = "bottomleft" )
 
 m_dep 
 
