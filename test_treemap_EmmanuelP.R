@@ -1,36 +1,60 @@
-library(treemap)
+# library
 library(dplyr)
-library(d)
+library(treemap)
+#inspiration : 
+# http://www.buildingwidgets.com/blog/2015/7/22/week-29-d3treer-v2
 
-data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
-head(data)
-colnames(data)
-#aggdata <-aggregate(data, by=list(Filiere_global,Paysetablissement,codeDepartement ), 
-#                    FUN=co, na.rm=TRUE)
+###### Attention on doit installer ceci : 
+# on doit installer la version sur github : 
+#devtools::install_github("gluc/data.tree")
+#devtools::install_github("timelyportfolio/d3treeR")
+##########################
 
 
-data_resume<- data %>%
-  group_by(Filiere_global,Paysetablissement,codeDepartement,.drop = TRUE) %>%
+library(d3treeR)
+
+
+## chargement du dataset :
+data_stages = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
+
+# récupérationdes données de département
+departements <-read.csv("data/departments.csv",sep = ',')
+
+# je créé un département fictif pour l'étranger
+newRow <- data.frame(id='0',region_code='0',code='0',name ='Etranger', slug='etranger') 
+departements <- rbind(departements, newRow)
+
+
+# regroupement des données pour avoir le nombre d'heures et le nombre de stages
+data_resume_tree<- data_stages %>%
+  group_by(Filiere_global,cycle,Paysetablissement,codeDepartement,.drop = TRUE) %>%
   summarise(total = n(),
-            nb_heures = sum(as.numeric( Duree_calcul)))
-head(data_resume)
+            nb_heures = sum(as.numeric( Duree_calcul))
+            )%>%
+  mutate(codeDepartement = coalesce(codeDepartement, as.integer(0) )
+        )
 
-#group_by(Filiere_global/Paysetablissement/codeDepartement) %>% summarize(h = sum(heure), nb = n())
+# jointure entre les données de departement et les données de stage
+data_resume_tree <-merge(data_resume_tree,departements,by.x="codeDepartement", by.y = "code", all= TRUE) 
+# création du treemap
+p <- treemap(data_resume_tree,
+             title="Répartition des stages (taille Nbre de stages, couleur :  nbre d'heures) ",
+             index=c("Filiere_global","cycle","name"),
+             vSize="total",
+             vColor="nb_heures",
+             type="value",
+             palette = "YlOrBr",
+             bg.labels=c("white"),
+             align.labels=list(
+               c("center", "center"), 
+               c("right", "bottom")
+             )  
+)            
 
-d3tree(
-  treemap(data_resume,
-          index=c("Filiere_global","codeDepartement"),
-          vSize="total",
-          vColor="total",
-          type="value",
-          palette="-RdGy",
-          range=c(-30000,30000))
-  , rootname="Nombre de stages par Fillère, pays et département"
-)
+# Mise en place de l'interactivité
+titre= "Répartition des stages (taille Nbre de stages, couleur :  nbre d'heures) "
+d3tree( p,rootname = titre)
+d3tree2( p ,  rootname = titre )
 
-treemap(data_resume,index = c("Filiere_global","Paysetablissement","codeDepartement"),
-        vSize ="nb_heures",
-        vColor = "total",
-        type="value",
-        title = "Nombre de stages par Fillère, pays et département",
-        fontsize.labels = c(15,10))
+
+####################### fin du code à  intégrer ############
