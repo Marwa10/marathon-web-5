@@ -7,43 +7,48 @@ library(geojsonio)
 library(broom)
 library(leaflet)
 library(RColorBrewer)
+library(rgdal)
 
 
 # récupération des info geo départements
-departements <- rgdal::readOGR("data/departements.geojson",
-                               layer="TM_WORLD_BORDERS_SIMPL-0.3",)
+departements_carto_FR <- rgdal::readOGR("data/departements.geojson",
+                               #layer="TM_WORLD_BORDERS_SIMPL-0.3",
+                               #GDAL1_integer64_policy = TRUE
+                               )
 # écupétrtiondes données de département
 dep <-read.csv("data/departments.csv",sep = ',')
 # jointure gauche
-departements <-merge(departements,dep,by.x="code", by.y = "region_code", all= TRUE) 
+departements_carto_FR <-merge(departements_carto_FR,dep,by.x="code", by.y = "region_code", all= TRUE) 
 
 # récupération des données de stage
-data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
-interships_counts_by_departments <- result %>%
+data_stage_carto_FR = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
+interships_counts_by_departments <- data_stage_carto_FR %>%
   group_by(codeDepartement) %>%
   summarise(number_internships = n(),
-            nb_heures = sum(as.numeric( Duree_calcul)))
+            nb_heures = sum(as.numeric( Duree_calcul)),
+            nb_etab = n_distinct(Numsiret) )
 
 # jointure entre les données de departement et les données de stage
-departements <-merge(departements,interships_counts_by_departments,by.x="code", by.y = "codeDepartement", all= TRUE) 
-departements
-
+departements_carto_FR <-merge(departements_carto_FR,interships_counts_by_departments,by.x="code", by.y = "codeDepartement", all= TRUE) 
+#departements
+interships_counts_by_departments
 
 mybins <- c(1,10,20,50,100,10000,Inf)
 
 # creation de la palette:
-mypalette <- colorBin( palette="YlOrBr", domain=departements@data$number_internships, na.color="transparent", bins=mybins)
+mypalette <- colorBin( palette="YlOrBr", domain=departements_carto_FR@data$number_internships, na.color="transparent", bins=mybins)
 
 # Tooltips
 mytext <- paste(
-  "Département: ", departements$nom,"<br/>", 
-  "Number of internships: ", round(departements$number_internships, 2), 
-  "Cumul of Hours: ",round(departements$nb_heures, 2), 
+  "Département: ", departements_carto_FR$nom,"<br/>", 
+  "Nombre d'établissements d'accueil: ",departements_carto_FR$nb_etab,"<br/>", 
+  "Nombre de stages: ", round(departements_carto_FR$number_internships, 2), "<br/>", 
+  "Cumul des heures: ",round(departements_carto_FR$nb_heures, 2), 
   sep="") %>%
   lapply(htmltools::HTML)
 
 # carte Finale
-m_dep <- leaflet(departements) %>% 
+m_dep <- leaflet(departements_carto_FR) %>% 
   addTiles()  %>% 
   setView(lng = 2.292551, lat = 48.858255, zoom = 5) %>%
   #setView( lat=10, lng=0 , zoom=2) %>%
@@ -63,3 +68,5 @@ m_dep <- leaflet(departements) %>%
   addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Number internships", position = "bottomleft" )
 
 m_dep 
+
+####################### fin du code à  intégrer ############
