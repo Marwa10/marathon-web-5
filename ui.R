@@ -201,7 +201,15 @@ material_page(
                 title = "Part des stages facultatifs",
                 plotlyOutput("facultatif")
               )
-            )
+            )#,
+          #  material_column(
+             # width = 12,
+            #  material_card(
+              #  title = "Evolution du nombre de stages effectués",
+             #   plotlyOutput("")
+            #  )
+           # )
+            
           )
           
         ),
@@ -257,6 +265,19 @@ material_page(
               material_card(
                 title = "Répartition des stages selon leur durée",
                 plotlyOutput("duree")
+              )
+            )
+          )
+        ),
+        material_card(
+          title = "Indemnisation des stages",
+          
+          material_row(
+            material_column(
+              width = 12,
+              material_card(
+                title = "Proportion de stages indemnisés",
+                plotlyOutput("indem")
               )
             )
           )

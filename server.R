@@ -125,7 +125,9 @@ shinyServer(function(input, output) {
       top_n(10)
     
     
-    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total,fill= Nometablissement)) +
+    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total#,
+                                   #fill= Nometablissement
+                                   )) +
                geom_bar(stat="identity")+ 
                coord_flip()+
                ggtitle("") +
@@ -278,6 +280,45 @@ shinyServer(function(input, output) {
     
   })
   
+  
+  # GRAPHIQUE INDEMNISATION
+  
+  output$indem <- renderPlotly({
+    
+    if(input$compo != "Toutes les composantes"){
+      j<-data %>% 
+        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+          j<-data
+        }
+    
+    tu<- j %>% 
+      group_by(Indemnisation) %>% 
+      summarise(total = n())
+    tu<-as.data.frame(tu)
+    tu
+    ggplotly(ggplot(data=tu, aes(x=tu$Indemnisation, y=tu$total, fill=tu$Indemnisation)) + 
+               geom_bar(stat="identity") + xlab("")+ylab("Nombre de stages"))
+  })
+  
+  
+  # GRAPHIQUE ORIGINE STAGE
+  
+  #output$origine <- renderPlotly({
+   # 
+    #if(input$compo != "Toutes les composantes"){
+     # c<-data %>% 
+      #  filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+       #   c<-data
+        #}
+    #
+    #td<- data %>% 
+     # group_by(Originestage) %>% 
+      #summarise(total = n())
+    #td<-as.data.frame(td[-1,])
+    #td
+    #ggplotly(ggplot(data=tu, aes(x=td$Originestage, y=td$total)) + 
+     #          geom_bar(stat="identity") + xlab("")+ylab("Nombre de stages"))
+  #})
   
   
   
