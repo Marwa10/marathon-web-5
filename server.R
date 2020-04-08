@@ -22,7 +22,6 @@ shinyServer(function(input, output) {
   
   data$Typeconvention[which(data$Typeconvention=="Formation Initiale - Obligatoire (=ECTS)")]<-"Obligatoire" 
   data$Typeconvention[which(data$Typeconvention=="Formation Initiale - Facultatif (non ECTS)")]<-"Facultatif"
-
   
   
   ##test avec data_ufr
@@ -153,18 +152,22 @@ shinyServer(function(input, output) {
     
     naf<- y %>% 
       group_by(Nometablissement) %>%
-      summarise(total = n()) %>% 
+      summarise(total = n())%>% 
       top_n(10)
     
     
-    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total,fill= Nometablissement)) +
+    ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total#,
+                                   #fill= Nometablissement
+                                   )) +
                geom_bar(stat="identity")+ 
                coord_flip()+
                ggtitle("") +
                xlab("") + 
+               geom_text(aes(label = total),size=3.5, color = "Black")+
                ylab("Nombre de stages") +
-               theme(legend.position="none")+ 
-               scale_fill_brewer(palette="Spectral") )
+               theme(legend.position="none")#+ 
+               #scale_fill_brewer(palette="Spectral")
+             )
     
   })
   
@@ -181,11 +184,13 @@ shinyServer(function(input, output) {
     pays<-subset(w,Paysetablissement!="FRANCE")
     pays2<-as.data.frame(table(pays$Paysetablissement))
     t<-as.data.frame(arrange(pays2,desc(pays2$Freq)))
-    dp<-t[1:10,]
-    dp<-as.data.frame(dp)
+    #dp<-t[1:10,]
+    dp<-as.data.frame(t)
     dp
     
-    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq,fill=dp$Var1)) + 
+    p<-ggplot(data=dp, aes(x=reorder(dp$Var1,dp$Freq), y=dp$Freq#,
+                           #fill=dp$Var1
+                           )) + 
       geom_bar(stat="identity")+
       coord_flip()+ 
       ggtitle("") +
@@ -193,7 +198,8 @@ shinyServer(function(input, output) {
       ylab("Nombre de stages")+
       labs(fill="Pays")+
       theme(legend.position="none") + 
-      scale_fill_brewer(palette="Spectral")
+      geom_text(aes(label = dp$Freq),size=3.5, color = "Black")#+
+      #scale_fill_brewer(palette="Spectral")
     
     
     ggplotly(p)
@@ -223,7 +229,9 @@ shinyServer(function(input, output) {
     #tauxetr
     
     p<-ggplot(data=ta2, aes(x=ta2$Anneeunivconvention, y=ta2$total)) + 
-      geom_bar(stat="identity",fill = "#ffe082", color = "#C4961A")+ 
+      geom_bar(stat="identity",fill = "#ffe082"#,
+               #color = "#C4961A"
+               )+ 
       ggtitle("") +
       xlab("") + 
       geom_text(aes(label = total),size=3.5, color = "Black")+
@@ -251,8 +259,10 @@ shinyServer(function(input, output) {
     #ta<-as.data.frame(table(Anneeunivconvention))
     #ta<-ta
     
-    p<-ggplot(data=ta, aes(x=Anneeunivconvention, y=total)) + 
-      geom_bar(stat="identity",fill = "#ffe082", color = "#C4961A")+ 
+    p<-ggplot(data=ta, aes(x=ta$Anneeunivconvention,y=ta$total)) + 
+      geom_bar(stat="identity",fill = "#6d6e72"
+               #, color = "#C4961A"
+               )+ 
       ggtitle("") +
       xlab("") + 
       geom_text(aes(label = total),size=3.5, color = "Black")+
@@ -307,7 +317,7 @@ shinyServer(function(input, output) {
     
     fig <- plot_ly(data, labels = ~to$Typeconvention, values = ~to$total, type = 'pie',
                    textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)')),
+                   marker = list(colors =c('rgb(31,115,187)', 'rgb(242,175,26)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(title = '',
                           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
@@ -339,7 +349,7 @@ shinyServer(function(input, output) {
     
     fig <- plot_ly(data, labels = ~toi$Originestage, values = ~toi$total, type = 'pie',
                    textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)','rgb(51,51,51)')),
+                   marker = list(colors =c('rgb(32,155,127)', 'rgb(242,175,26)','rgb(109,110,114)','rgb(31,115,187)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(title = '',
                           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
@@ -368,7 +378,7 @@ shinyServer(function(input, output) {
     
     fig <- plot_ly(data, labels = ~tu$Indemnisation, values = ~tu$total, type = 'pie',
                    textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)','rgb(51,51,51)')),
+                   marker = list(colors =c('rgb(242,175,26)', 'rgb(109,110,114)','rgb(32,155,127)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(title = '',
                           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
@@ -386,9 +396,10 @@ shinyServer(function(input, output) {
   
   output$p2 <- renderPlotly({
     to_use = test()
-    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=cycle, fill=cycle)) +
+    ggplotly(ggplot(to_use, aes(cycle, color=cycle, fill=cycle)) +
                geom_bar(position= "identity") +
-               labs(x = "Année", y = "Nombre de stagiaire"))
+               labs(x = "Année", y = "Nombre de stagiaire")+
+               theme(legend.position="none"))
     
   })
   
@@ -396,10 +407,11 @@ shinyServer(function(input, output) {
   
   output$p3 <- renderPlotly({
     to_use = test()
-    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
+    ggplotly(ggplot(to_use, aes(Libellecomposante, color=Libellecomposante, fill=Libellecomposante)) +
                geom_bar(position= "identity") +
+               coord_flip()+ 
                labs(x = "Année",
-                    y = "Nombre de stagiaire",
+                    y = "Nombre de stages",
                     fill = "Composante"))
     
   })
@@ -409,27 +421,24 @@ shinyServer(function(input, output) {
   
   output$p4 <- renderPlotly({
     to_use = test()
-    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=ufr, fill=ufr)) +
+    ggplotly(ggplot(to_use, aes(ufr, color=ufr, fill=ufr)) +
                geom_bar(position= "identity") +
-               labs(x = "Année",
-                    y = "Nombre de stagiaire",
-                    fill = "UFR"))
+               labs(x = "UFR",
+                    y = "Nombre de stages",
+                    fill = "UFR")+
+              theme(legend.position="none"))
    
   })
-  
-  
+
   
   #output$map <- renderLeaflet({
-  #  map
+    #map
   #})
   
   
-  # output$map_fr <- renderLeaflet({
-  #   m_dep 
-  # })
-  # 
- 
-  
-   
+   #output$map_fr <- renderLeaflet({
+     #m_dep 
+   #})
 
+  
 })

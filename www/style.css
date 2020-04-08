@@ -15,34 +15,72 @@
 	
 }
 
-/* Page accueil */
-#fond{
-	height:50%;
-	width:100%;
-	position: fixed;
-	top: 12em;
-	background-image:url("img/paulva.jpg");
 
+
+
+/* Page accueil */
+#fond1{
+	background-image:url("img/paulva.jpg");
+	background-repeat: no-repeat ;
+	padding-bottom:2em;
+	width:100%;
 }
+
+#fond2{
+	background-color:#2ABC9B;
+	padding-top:2em;
+	padding-bottom:2em;
+}
+
+
 
 .accueil {
 	text-align:center;
 	color:white;
-	line-height: 1em;
 }
 
 #logo2{
-	height:5em;
-	width:5em;	
+	height:10em;
+	width:10em;	
 }
 
 #barre{
 	height:0.1em;
-
 }
 
-#SCUIO {
+.titre {
 	font-weight: bold;
+	padding-bottom:0.5em;
+	font-size:1.5em;
 }
+
+#fond2{
+	background-color:#2ABC9B;
+}
+
+
+
+#cases {
+	display:flex;
+	justify-content:space-around;
+	flex-wrap:wrap
+}
+
+.case {
+	border: 0.05em white dotted;
+	padding:0.6em;
+	margin-bottom:2em;
+	margin-top:2em;
+	width:12em;
+
+}
+
+.chiffre {
+	font-weight: bold;
+	font-size:4em;
+}
+
+
+
 
 

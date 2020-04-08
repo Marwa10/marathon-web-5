@@ -152,22 +152,37 @@ material_page(
   material_tab_content(
     tab_id = "accueil",
     
-    
-    material_row(
-      material_column(
-        width = 12,
-        tags$div(id = "fond", checked = NA,
-                 tags$p(class="accueil", tags$img(id="logo2",src="img/logo2.png")),
-                 tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
-                 tags$p(class="accueil", id="SCUIO", "SCUIO-IP"),
-                 tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
-                 
-        ),
-        
+    material_card( 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond1", checked = NA,
+                   tags$p(class="accueil", tags$img(id="logo2",src="img/logo2.png")),
+                   tags$br(""),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$p(class="accueil", class="titre", "SCUIO-IP"),
+                   tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
+          ))),
+      
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond2", checked = NA,
+                   tags$p(class="accueil", "STAGES"),
+                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$div(class="accueil",id="cases", 
+                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
+                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel. En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")#,
+                   
+                   
+                   
+          ))#,
       )
+      
     )
-    
-
   ),
   
   
@@ -304,13 +319,13 @@ material_page(
         # GRAPHIQUE TOP 10 ENTREPRISES
         
         material_card(
-          title = "Principaux employeurs",
+          title = "Employeurs",
           
           material_row(
             material_column(
               width = 12,
               material_card(
-                title = "Top 10 des entreprises qui recrutent le plus de stagiaires",
+                title = "Les entreprises ayant recruté des stagiaires",
                 plotlyOutput("entre")
               )
             )
@@ -363,29 +378,31 @@ material_page(
         material_row(
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +35% </center></strong>"),
-                          HTML("</center>Ont effectué plus de 2 stages</center>") ,
+            material_card(title = HTML("<strong><center>20 334</center></strong>"),
+                          HTML("</center> stages effectués depuis 2014 </center>") ,
                           color = "#f5f5f5 grey lighten-4",
                           depth = 5)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +39% </center></strong>"), 
-                          HTML("<center>En Licence</center>"),
+            material_card(title = HTML("<strong><center> 1,53 </center></strong>"), 
+                          HTML("<center> stages en moyenne par étudiant </center>"),
                           color = "#f5f5f5 grey lighten-4", 
                           depth = 5)
+            
+            
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +43% </center></strong>"), 
-                          HTML("<center>Candidature spontanée</center>"),
+            material_card(title = HTML("<strong><center> 43% </center></strong>"), 
+                          HTML("<center>de candidature spontanée</center>"),
                           color = "#f5f5f5 grey lighten-4",
                           depth = 5)
           ),
           material_column(
             width = 3,
-            material_card(title = HTML("<strong><center> +12 </center></strong>"), 
-                          HTML("<center> stages effectués par un étudiant</center>"),
+            material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
+                          HTML("<center> de stages facultatifs </center>"),
                           color = "#f5f5f5 grey lighten-4",
                           depth = 5)
           )
