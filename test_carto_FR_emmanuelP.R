@@ -16,22 +16,28 @@ departements_carto_FR <- rgdal::readOGR("data/departements.geojson"
                                #GDAL1_integer64_policy = TRUE
                                )
 # écupétrtiondes données de département
-dep <-read.csv("data/departments.csv",sep = ',')
+dep <-read.csv("data/departments.csv",sep = ',') %>%
+  select(-code,-slug)%>%
+  rename(code = region_code)
 # jointure gauche
-departements_carto_FR <-merge(departements_carto_FR,dep,by.x="code", by.y = "region_code", all= TRUE) 
+departements_carto_FR <-merge(departements_carto_FR,dep,by="code",  all= TRUE,duplicateGeoms = TRUE) 
 
 # récupération des données de stage
 data_stage_carto_FR = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
 interships_counts_by_departments <- data_stage_carto_FR %>%
-  group_by(codeDepartement) %>%
+  group_by(code) %>%
   summarise(number_internships = n(),
             nb_heures = sum(as.numeric( Duree_calcul)),
             nb_etab = n_distinct(Numsiret) )
 
 # jointure entre les données de departement et les données de stage
-departements_carto_FR <-merge(departements_carto_FR,interships_counts_by_departments,by.x="code", by.y = "codeDepartement", all= TRUE) 
+departements_carto_FR <-merge(departements_carto_FR,interships_counts_by_departments,
+                              by="code", all= TRUE,duplicateGeoms = TRUE) 
+
+#departements_carto_FR <-left_join(departements_carto_FR,interships_counts_by_departments,
+#                              by="code") 
 #departements
-interships_counts_by_departments
+#interships_counts_by_departments
 
 mybins <- c(1,10,20,50,100,10000,Inf)
 
