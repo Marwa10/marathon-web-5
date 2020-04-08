@@ -61,7 +61,29 @@ material_page(
   # Define side-nav tab content
   material_tab_content(
     tab_id = "accueil",
-    tags$br()
+    material_parallax(
+      image_source = "img/siora-photography-hgFY1mZY-Y0-unsplash.jpg"
+    ),
+    material_card(title= "Something",
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  depth = 5),
+    material_parallax(
+      image_source = "img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg"
+    ),
+    material_card(title= "Something",
+                  br(),
+                  br(),
+                  br(),
+                  depth = 5)
+    
+    
 
   ),
   material_tab_content(
@@ -302,7 +324,7 @@ material_page(
     tab_id = "recherche",
     material_row(
       material_column(
-        width = 4,
+        width = 10,
         offset = 1,
         dataTableOutput("plot")
         
