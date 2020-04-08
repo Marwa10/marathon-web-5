@@ -8,17 +8,10 @@ library(leaflet)
 
 material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
+ 
+  nav_bar_color = "#bdbdbd grey lighten-1", 
   
-  
-  
-  nav_bar_color = "#ffe082 amber lighten-3",
-
-  #title = HTML('<img src="img/logo-orange-vf2.png" alt="Smiley face" height="50" width="50"> Paul In'),
-  #tags$div(id = "header", tags$img(id="logo", src="img/logo-orange-vf2.png")), 
-  # je sais que ça va pas mais il m'emmerde ce fucking logo --'
-
   include_nav_bar = TRUE,
-  
   
   # Place side-nav in the beginning of the UI
   material_side_nav(
@@ -127,7 +120,7 @@ material_page(
   
   # Define tabs
   material_tabs(
-    color = "Moccasin",
+    color = "black",
     tabs = c(
       "Accueil" = "accueil",
       "Stage" = "stage",
@@ -138,6 +131,8 @@ material_page(
       
     )
   ),
+  
+  
   
   
   # Define tab content
@@ -153,6 +148,8 @@ material_page(
     tab_id = "accueil",
     
     material_card( 
+      
+ #Fond1     
       material_row(
         material_column(
           width = 12,
@@ -164,6 +161,8 @@ material_page(
                    tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
           ))),
       
+      
+  #Fond2      
       material_row(
         material_column(
           width = 12,
@@ -175,19 +174,45 @@ material_page(
                             tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
-                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel. En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages."),
+                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
+                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages."),
+                 
+          ))),
+  
+  #Fond3 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond3", checked = NA,
+                   tags$p(class="accueil", "STAGES"),
+                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$div(class="accueil",id="cases", 
+                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
+                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
+                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages."),
                    
-                   
+          )))  
+    
+    ),
+    
+ 
+    
+ #Footer    
+    material_column(
+          width = 12,
+          tags$a(id = "footer", checked = NA,
+                 tags$img(id="logo",src="img/logo-orange-vf2.png"),
+                 tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00"),
                    
           )),
-      )
-      
-    )
+
   ),
   
   
-  
-  
+
   
   material_tab_content(
     offset = 1,

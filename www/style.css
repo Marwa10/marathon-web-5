@@ -1,29 +1,38 @@
-/* En tête */
-
-#header {
-	height:3.5em;
-	width:100%;
-	position: fixed;
-	top: 8em;
-	background-color:white;
-}
-
+/* Pied de page */
 #logo {
-	height:50px;
-	width:50px;
-	position: fixed;
-	
+	height:4em;
+	width:4em;
+	margin-right: 2em;
+	margin-left: 2em;
+	margin-bottom: 0.3em;
 }
 
+#footer {
+	background-color:white;
+	bottom:0em;
+	width:100%;
+	position:fixed;
+	color:black;
+	font-size:0.7em;
+	border-top:0.5em white solid;
+}
+
+#footer  > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+			
 
 
-
+			
 /* Page accueil */
+
 #fond1{
-	background-image:url("img/paulva.jpg");
+	background-image:url("img/fond1.jpg");
 	background-repeat: no-repeat ;
 	padding-bottom:2em;
-	width:100%;
+	
+	background-size: cover;
 }
 
 #fond2{
@@ -32,11 +41,21 @@
 	padding-bottom:2em;
 }
 
+#fond3{
+	background-color:#99D1CB;
+	padding-top:2em;
+	padding-bottom:2em;
+}
+
+
+
+
 
 
 .accueil {
 	text-align:center;
 	color:white;
+	font-family:arial;
 }
 
 #logo2{
@@ -54,11 +73,6 @@
 	font-size:1.5em;
 }
 
-#fond2{
-	background-color:#2ABC9B;
-}
-
-
 
 #cases {
 	display:flex;
@@ -71,7 +85,7 @@
 	padding:0.6em;
 	margin-bottom:2em;
 	margin-top:2em;
-	width:12em;
+	width:13em;
 
 }
 
@@ -79,7 +93,6 @@
 	font-weight: bold;
 	font-size:4em;
 }
-
 
 
 
