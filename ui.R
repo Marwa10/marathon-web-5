@@ -4,11 +4,7 @@ library(shinymaterial)
 library(plotly)
 
 
-uui <- shinyUI(semanticPage(
-  tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
-  )
-))
+shinyUI(fluidPage(theme = "style.css",
 
 material_page(
   title = "Paul In",
@@ -166,3 +162,4 @@ material_page(
   )
 )
 
+))
