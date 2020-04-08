@@ -22,7 +22,6 @@ shinyServer(function(input, output) {
   
   data$Typeconvention[which(data$Typeconvention=="Formation Initiale - Obligatoire (=ECTS)")]<-"Obligatoire" 
   data$Typeconvention[which(data$Typeconvention=="Formation Initiale - Facultatif (non ECTS)")]<-"Facultatif"
-
   
   
   ##test avec data_ufr
@@ -153,7 +152,7 @@ shinyServer(function(input, output) {
     
     naf<- y %>% 
       group_by(Nometablissement) %>%
-      summarise(total = n()) %>% 
+      summarise(total = n())%>% 
       top_n(10)
     
     
@@ -260,8 +259,8 @@ shinyServer(function(input, output) {
     #ta<-as.data.frame(table(Anneeunivconvention))
     #ta<-ta
     
-    p<-ggplot(data=ta, aes(x=Anneeunivconvention, y=total)) + 
-      geom_bar(stat="identity",fill = "#ffe082"
+    p<-ggplot(data=ta, aes(x=ta$Anneeunivconvention,y=ta$total)) + 
+      geom_bar(stat="identity",fill = "#6d6e72"
                #, color = "#C4961A"
                )+ 
       ggtitle("") +
@@ -318,7 +317,7 @@ shinyServer(function(input, output) {
     
     fig <- plot_ly(data, labels = ~to$Typeconvention, values = ~to$total, type = 'pie',
                    textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)')),
+                   marker = list(colors =c('rgb(31,115,187)', 'rgb(242,175,26)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(title = '',
                           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
@@ -350,7 +349,7 @@ shinyServer(function(input, output) {
     
     fig <- plot_ly(data, labels = ~toi$Originestage, values = ~toi$total, type = 'pie',
                    textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)','rgb(51,51,51)')),
+                   marker = list(colors =c('rgb(32,155,127)', 'rgb(242,175,26)','rgb(109,110,114)','rgb(31,115,187)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(title = '',
                           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
@@ -379,7 +378,7 @@ shinyServer(function(input, output) {
     
     fig <- plot_ly(data, labels = ~tu$Indemnisation, values = ~tu$total, type = 'pie',
                    textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(255,204,0)', 'rgb(128,133,133)','rgb(51,51,51)')),
+                   marker = list(colors =c('rgb(242,175,26)', 'rgb(109,110,114)','rgb(32,155,127)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(title = '',
                           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
@@ -430,8 +429,7 @@ shinyServer(function(input, output) {
               theme(legend.position="none"))
    
   })
-  
-  
+
   
   #output$map <- renderLeaflet({
     #map
@@ -443,6 +441,4 @@ shinyServer(function(input, output) {
    #})
 
   
-   
-
 })
