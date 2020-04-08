@@ -7,17 +7,19 @@ library(leaflet)
 
 
 material_page(
+  tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
+  
+  
+  
   nav_bar_color = "#ffe082 amber lighten-3",
-  #nav_bar_color = "#ffe082 amber lighten-3",
-  title = HTML('<img src="img/logo-orange-vf2.png" alt="Smiley face" height="50" width="50"> Paul In'),
-    
-    
-    #tags$img(width=90, height = 90, src = "img/logo-orange-vf2.png"),
-    #"Paul In",
-  #nav_bar_color = "pink",
-  #data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE),
-  # nav_bar_fixed = TRUE,
-  # include_fonts = TRUE,
+
+  #title = HTML('<img src="img/logo-orange-vf2.png" alt="Smiley face" height="50" width="50"> Paul In'),
+  #tags$div(id = "header", tags$img(id="logo", src="img/logo-orange-vf2.png")), 
+  # je sais que ça va pas mais il m'emmerde ce fucking logo --'
+
+  include_nav_bar = TRUE,
+  
+  
   # Place side-nav in the beginning of the UI
   material_side_nav(
     fixed = FALSE, 
@@ -119,24 +121,7 @@ material_page(
       color = "green"
     )))
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
 
   ),
   
@@ -153,6 +138,8 @@ material_page(
       
     )
   ),
+  
+  
   # Define tab content
   material_tab_content(
     offset = 1,
@@ -161,45 +148,32 @@ material_page(
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   # Define side-nav tab content
   material_tab_content(
-    offset = 1,
     tab_id = "accueil",
-    material_parallax(
-      image_source = "img/siora-photography-hgFY1mZY-Y0-unsplash.jpg"
-    ),
-    material_card(title= "Something",
-                  br(),
-                  br(),
-                  br(),
-                  br(),
-                  br(),
-                  br(),
-                  br(),
-                  br(),
-                  depth = 5),
-    material_parallax(
-      image_source = "img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg"
-    ),
-    material_card(title= "Something",
-                  br(),
-                  br(),
-                  br(),
-                  depth = 5)
     
+    
+    material_row(
+      material_column(
+        width = 12,
+        tags$div(id = "fond", checked = NA,
+                 tags$p(class="accueil", tags$img(id="logo2",src="img/logo2.png")),
+                 tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                 tags$p(class="accueil", id="SCUIO", "SCUIO-IP"),
+                 tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
+                 
+        ),
+        
+      )
+    )
     
 
   ),
+  
+  
+  
+  
+  
   material_tab_content(
     offset = 1,
     tab_id = "stage",
@@ -262,10 +236,19 @@ material_page(
           
           material_row(
             material_column(
-              width = 12,
+              width = 6,
               material_card(
                 title="Evolution du nombre de stages effectués",
                 plotlyOutput("nbstage")
+              )
+            ),
+            
+            
+            material_column(
+              width = 6,
+              material_card(
+                title="Origine du stage",
+                plotlyOutput("origine")
               )
             ),
             
@@ -316,22 +299,6 @@ material_page(
           )
           
         ),
-        
-        # GRAPHIQUE 
-        
-        #material_card(
-         # title = "Durée des stages",
-          
-          #material_row(
-           # material_column(
-            #  width = 12,
-             # material_card(
-              #  title = "Répartition des stages selon leur durée",
-               # plotlyOutput("duree")
-             # )
-            #)
-          #)
-        #),
         
         
         # GRAPHIQUE TOP 10 ENTREPRISES

@@ -1,0 +1,48 @@
+/* En tête */
+
+#header {
+	height:3.5em;
+	width:100%;
+	position: fixed;
+	top: 8em;
+	background-color:white;
+}
+
+#logo {
+	height:50px;
+	width:50px;
+	position: fixed;
+	
+}
+
+/* Page accueil */
+#fond{
+	height:50%;
+	width:100%;
+	position: fixed;
+	top: 12em;
+	background-image:url("img/paulva.jpg");
+
+}
+
+.accueil {
+	text-align:center;
+	color:white;
+	line-height: 1em;
+}
+
+#logo2{
+	height:5em;
+	width:5em;	
+}
+
+#barre{
+	height:0.1em;
+
+}
+
+#SCUIO {
+	font-weight: bold;
+}
+
+
