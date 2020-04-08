@@ -27,7 +27,7 @@ departements <- rbind(departements, newRow)
 
 # regroupement des données pour avoir le nombre d'heures et le nombre de stages
 data_resume_tree<- data_stages %>%
-  group_by(Filiere_global,cycle,Paysetablissement,codeDepartement,.drop = TRUE) %>%
+  group_by(Filiere_global,cycle,codeDepartement,.drop = TRUE) %>%
   summarise(total = n(),
             nb_heures = sum(as.numeric( Duree_calcul))
             )%>%
@@ -42,18 +42,21 @@ p <- treemap(data_resume_tree,
              index=c("Filiere_global","cycle","name"),
              vSize="total",
              vColor="nb_heures",
+             palette="-RdGy",
              type="value",
-             palette = "YlOrBr",
+            # type="index",
+             #palette = "YlOrBr",
              bg.labels=c("white"),
              align.labels=list(
                c("center", "center"), 
+               c("right", "bottom"),
                c("right", "bottom")
              )  
 )            
 
 # Mise en place de l'interactivité
 titre= "Répartition des stages (taille Nbre de stages, couleur :  nbre d'heures) "
-d3tree( p,rootname = titre)
+#d3tree( p,rootname = titre)
 d3tree2( p ,  rootname = titre )
 
 
