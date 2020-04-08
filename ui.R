@@ -8,7 +8,8 @@ library(leaflet)
 
 material_page(
   title = "Paul In",
-  nav_bar_color = "pink",
+  #nav_bar_color = "pink",
+  data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE),
   # nav_bar_fixed = TRUE,
   # include_fonts = TRUE,
   # Place side-nav in the beginning of the UI
@@ -22,19 +23,71 @@ material_page(
         "Stage" = "vis1",
         "Stagiaire" = "vis2",
         "Cartographie" = "carto",
-        "Liste des stages" = "liste_stage"
+        "Recherche" = "liste_stage"
       ),
       icons = c("code", "insert_chart", "insert_chart", "explore", "explore")
     )
   ),
+  
+  # Define tabs
+  material_tabs(
+    tabs = c(
+      "Accueil" = "accueil",
+      "Recherche" = "recherche",
+      "Stage" = "stage",
+      "Stagiaire"= "stagiaire",
+      "Cartographie"= "carto"
+      
+      
+    )
+  ),
+  # Define tab content
+  material_tab_content(
+    tab_id = "first_tab"),
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   # Define side-nav tab content
-  material_side_nav_tab_content(
-    side_nav_tab_id = "accueil",
-    tags$br()
+  material_tab_content(
+    tab_id = "accueil",
+    material_parallax(
+      image_source = "img/siora-photography-hgFY1mZY-Y0-unsplash.jpg"
+    ),
+    material_card(title= "Something",
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  br(),
+                  depth = 5),
+    material_parallax(
+      image_source = "img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg"
+    ),
+    material_card(title= "Something",
+                  br(),
+                  br(),
+                  br(),
+                  depth = 5)
+    
+    
 
   ),
-  material_side_nav_tab_content(
-    side_nav_tab_id = "vis1",
+  material_tab_content(
+    tab_id = "stage",
     #tags$br(),
     material_row(
       material_column(
@@ -50,7 +103,7 @@ material_page(
             material_dropdown(
               input_id = "compo",
               label = "Composante", 
-              choices = sort(unique(data$Libellecomposante)),
+              #choices = sort(unique(data$Libellecomposante)),
               color = "blue"
             )
           ),
@@ -205,8 +258,8 @@ material_page(
  ,
   
   
-  material_side_nav_tab_content(
-    side_nav_tab_id = "vis2",
+  material_tab_content(
+    tab_id = "stagiaire",
     material_row(
       material_column(
         width = 10,
@@ -253,6 +306,11 @@ material_page(
               title = "Distribution des stages en fonction de la composante",
               divider = TRUE,
               plotlyOutput("p3")
+            ),
+            material_card(
+              title = "Distribution des stages en fonction de l'UFR",
+              divider = TRUE,
+              plotlyOutput("p4")
             )
           )
         )
@@ -262,11 +320,11 @@ material_page(
     
     
   ),
-  material_side_nav_tab_content(
-    side_nav_tab_id = "liste_stage",
+  material_tab_content(
+    tab_id = "recherche",
     material_row(
       material_column(
-        width = 4,
+        width = 10,
         offset = 1,
         dataTableOutput("plot")
         
@@ -274,8 +332,8 @@ material_page(
     )
   ),
   
-  material_side_nav_tab_content(
-    side_nav_tab_id = "carto",
+  material_tab_content(
+    tab_id = "carto",
     leafletOutput("map")
     
   )

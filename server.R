@@ -8,6 +8,7 @@ library(leaflet)
 source("carto.R")
 
 shinyServer(function(input, output) {
+  data= read.csv2("data/donnees.csv", stringsAsFactors = FALSE)
   
   data_ufr = read.csv2("data/donnees_ufr.csv", stringsAsFactors = FALSE) 
   
@@ -58,15 +59,15 @@ shinyServer(function(input, output) {
     )
   )
   
-  # trend_year = data %>% 
-  #   group_by(Anneeunivconvention,Typeconvention) %>% 
+  # trend_year = data %>%
+  #   group_by(Anneeunivconvention,Typeconvention) %>%
   #   summarise(total = n())
   
-  etablissement = as.data.frame(table(data$Nometablissement)) %>% 
-    rename(
-      `Nombre de stage` = Freq,
-      Etablissement = Var1 ) %>% 
-    arrange(desc(`Nombre de stage`))
+  # etablissement = as.data.frame(table(data$Nometablissement)) %>% 
+  #   rename(
+  #     `Nombre de stage` = Freq,
+  #     Etablissement = Var1 ) %>% 
+  #   arrange(desc(`Nombre de stage`))
   
 ## Valeur checkbox, 1 : stage obligatoire
 ##                  2 = stage facultatif 
@@ -79,7 +80,8 @@ shinyServer(function(input, output) {
     
     if(input$compo != ""){
       z<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == ""){
+        filter(Libellecomposante == input$compo)
+      } else if (input$compo == ""){
           z<-data
         }
     
@@ -280,7 +282,7 @@ shinyServer(function(input, output) {
   
   
   output$p2 <- renderPlotly({
-    ggplotly(ggplot(data, aes(Anneeunivconvention, color=cycle, fill=cycle)) +
+    ggplotly(ggplot(data_ufr, aes(Anneeunivconvention, color=cycle, fill=cycle)) +
                geom_bar(position= "identity") +
                labs(x = "Année", y = "Nombre de stagiaire"))
     
@@ -289,12 +291,24 @@ shinyServer(function(input, output) {
   
   
   output$p3 <- renderPlotly({
-    ggplotly(ggplot(data, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
+    ggplotly(ggplot(data_ufr, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
                geom_bar(position= "identity") +
                labs(x = "Année",
                     y = "Nombre de stagiaire",
                     fill = "Composante"))
     
+  })
+  
+  
+  
+  
+  output$p4 <- renderPlotly({
+    ggplotly(ggplot(data_ufr, aes(Anneeunivconvention, color=ufr, fill=ufr)) +
+               geom_bar(position= "identity") +
+               labs(x = "Année",
+                    y = "Nombre de stagiaire",
+                    fill = "UFR"))
+   
   })
   
   
