@@ -397,9 +397,10 @@ shinyServer(function(input, output) {
   
   output$p2 <- renderPlotly({
     to_use = test()
-    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=cycle, fill=cycle)) +
+    ggplotly(ggplot(to_use, aes(cycle, color=cycle, fill=cycle)) +
                geom_bar(position= "identity") +
-               labs(x = "Année", y = "Nombre de stagiaire"))
+               labs(x = "Année", y = "Nombre de stagiaire")+
+               theme(legend.position="none"))
     
   })
   
@@ -407,10 +408,11 @@ shinyServer(function(input, output) {
   
   output$p3 <- renderPlotly({
     to_use = test()
-    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
+    ggplotly(ggplot(to_use, aes(Libellecomposante, color=Libellecomposante, fill=Libellecomposante)) +
                geom_bar(position= "identity") +
+               coord_flip()+ 
                labs(x = "Année",
-                    y = "Nombre de stagiaire",
+                    y = "Nombre de stages",
                     fill = "Composante"))
     
   })
@@ -420,11 +422,12 @@ shinyServer(function(input, output) {
   
   output$p4 <- renderPlotly({
     to_use = test()
-    ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=ufr, fill=ufr)) +
+    ggplotly(ggplot(to_use, aes(ufr, color=ufr, fill=ufr)) +
                geom_bar(position= "identity") +
-               labs(x = "Année",
-                    y = "Nombre de stagiaire",
-                    fill = "UFR"))
+               labs(x = "UFR",
+                    y = "Nombre de stages",
+                    fill = "UFR")+
+              theme(legend.position="none"))
    
   })
   
@@ -438,8 +441,7 @@ shinyServer(function(input, output) {
    output$map_fr <- renderLeaflet({
      m_dep 
    })
-   
- 
+
   
    
 
