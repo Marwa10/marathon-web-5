@@ -6,8 +6,8 @@ library(plotly)
 library(shinymaterial)
 library(leaflet)
 library(plotly)
-#source("carto.R")
-#source("carto_fr.R")
+source("carto.R")
+source("carto_fr.R")
 #source("test_treemap_EmmanuelP.R")
 
 
@@ -576,14 +576,14 @@ shinyServer(function(session,input, output) {
 
   ### Cartographie
   
-  #output$map <- renderLeaflet({
-  #  m
-  #})
+  output$map <- renderLeaflet({
+    m
+  })
   
    
-  #output$map_fr <- renderLeaflet({
-  #   m_dep 
-  # })
+  output$map_fr <- renderLeaflet({
+     m_dep 
+   })
   
   # output$t_dep<- renderD3tree2({
   #   d3tree2(dep)
