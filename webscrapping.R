@@ -10,18 +10,14 @@ library(rlang)
 ###### web scrapping et extraction des mots clefs #########
 
 
-wiki_link<-"https://asmquantmacro.com/2016/04/30/web-scraping-for-text-mining-in-r"
-head(test_url[0])
-
-basename("https://asmquantmacro.com/2016/04/30/web-scraping-for-text-mining-in-r.html")
-
-
 
 
 ######## méthode get_comments_and_abstracts_from_dbpedia##########
 get_comments_and_abstracts_from_dbpedia <- function(wiki_link){
   wiki_name <-basename(wiki_link)
   cat("extratcer wiki name : ",wiki_name)
+  
+# requete SPARQL
 query_SPARQL <-paste("PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
 PREFIX dbpedia: <http://dbpedia.org/resource/>
 PREFIX dcterms: <http://purl.org/dc/terms/> 
@@ -39,25 +35,12 @@ LIMIT 1", sep ="")
 message("SPARQL",query_SPARQL)
 
 endpoint <- "http://dbpedia.org/sparql"
-
-
-
-
+# mise en place du try catch pour forcer l'execution
 out <- tryCatch(
   {
-    # Just to highlight: if you want to use more than one 
-    # R expression in the "try" part then you'll have to 
-    # use curly brackets.
-    # 'tryCatch()' will return the last evaluated expression 
-    # in case the "try" part was completed successfully
-    
+
     message("This is the 'try' part")
-    # The return value of `readLines()` is the actual value 
-    # that will be returned in case there is no condition 
-    # (e.g. warning or error). 
-    # You don't need to state the return value via `return()` as code 
-    # in the "try" part is not wrapped insided a function (unlike that
-    # for the condition handlers for warnings and error below)
+    
     resultList <- SPARQL(endpoint,query_SPARQL)
     queryResult<-resultList$results 
     #print(queryResult)
@@ -70,27 +53,10 @@ out <- tryCatch(
     message(paste("URL does not seem to exist:", query_SPARQL))
     message("Here's the original error message:")
     message(cond)
-    # Choose a return value in case of error
+   
     return("")
   }
-  #,
-  # warning=function(cond) {
-  #   message(paste("URL caused a warning:", query_SPARQL))
-  #   message("Here's the original warning message:")
-  #   message(cond)
-  #   # Choose a return value in case of warning
-  #   #return("warning")
-  # },
-  # finally={
-  #   # NOTE:
-  #   # Here goes everything that should be executed at the end,
-  #   # regardless of success or error.
-  #   # If you want more than one expression to be executed, then you 
-  #   # need to wrap them in curly brackets ({...}); otherwise you could
-  #   # just have written 'finally=<expression>' 
-  #   message(paste("Processed SPARQL:", query_SPARQL))
-  #   message("Some other message at the end")
-  #} 
+ 
   
   ) 
   
@@ -172,6 +138,12 @@ extract_keywords_from_url <- function(url, top_n_keywords=10){
   return(result)
 }
 
+################ Fin des méthodes #################
+
+
+
+
+
 ################  demarrage du processus de web scrapping + extraction  mots clefs 
 
 
@@ -202,12 +174,17 @@ for (row in 1:rows) {
     
   }
   
-  ##RDF
+
   
 }
 
-### écriture des mots clefs dnas le csv
-
-write.csv2(data_url_etab,"data/etab_url_keywords.csv",row.names = TRUE)
+### écriture des mots clefs dnas le csv en supprimant les NA
+data_final_csv <-data_url_etab %>% 
+  mutate(keywords_wiki_dbpedia=replace(keywords_wiki_dbpedia, keywords_wiki_dbpedia=="NA", ""),
+         keywords_wiki = replace(keywords_wiki, keywords_wiki == "NA", "")) %>%
+  mutate(keywords_wiki_dbpedia = replace(keywords_wiki_dbpedia, is.na(keywords_wiki_dbpedia)  , ""),
+         keywords_wiki = replace(keywords_wiki, is.na(keywords_wiki ), "")
+         )
+write.csv2(data_final_csv,"data/etab_url_keywords.csv",row.names = TRUE)
 
 ########## fin du code  ##########
