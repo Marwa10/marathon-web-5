@@ -154,13 +154,11 @@ material_page(
     )
   ),
   
+
   
-  # material_tab_content(
-  #   tab_id = "exemple"),
+
+#Onglet Accueil ####
   
-  
-  
-  # Define side-nav tab content
   material_tab_content(
     tab_id = "accueil",
     
@@ -230,14 +228,13 @@ material_page(
              
       ))
     
-  )
- # ))
-,
+  ),
+
+
   
   
   
-  
-  
+#Onglet Stage ####  
   material_tab_content(
     offset = 1,
     tab_id = "stage",
@@ -409,15 +406,20 @@ material_page(
           
         )
       )
-    )
-  )
+    ),
   
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
+  ),
+
   
-  
-  
- ,
-  
-  
+#Onglet Stagiaires ####    
   material_tab_content(
     offset = 1,
     tab_id = "stagiaire",
@@ -482,13 +484,22 @@ material_page(
           )
         )
       )
-    )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
     
     
     
   ),
 
-#Onglet Recherche
+#Onglet Recherche #### 
   material_tab_content(
     offset = 1,
     tab_id = "recherche",
@@ -499,10 +510,19 @@ material_page(
         dataTableOutput("plot")
         
       )
-    )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
   ),
 
-#Onglet Contact
+#Onglet Contact  #### 
   material_tab_content(
     offset = 1,
     tab_id = "contact",
@@ -512,10 +532,19 @@ material_page(
         
         
       )
-    )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
   ),
   
-#Onglet FAQ
+#Onglet FAQ  #### 
   material_tab_content(
     offset = 1,
     tab_id = "FAQ",
@@ -525,11 +554,20 @@ material_page(
   
         
       )
-    )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
   ),
 
 
-#Onglet Carto
+#Onglet Carto  #### 
   material_tab_content(
     tab_id = "carto",
     material_row(
@@ -565,6 +603,15 @@ material_page(
     #     
     #   )
     # )
-  )
+  ),
+
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
 )
 
