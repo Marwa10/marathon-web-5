@@ -685,45 +685,43 @@ shinyServer(function(session,input, output) {
   
   output$plot2 <- DT::renderDataTable(
     
-    data %>% 
+    data_ufr %>% 
       filter(ufr == input$id_UFR2,
              cycle == input$niveau,
              Paysetablissement == input$lieu_stage) %>%
       select(Nometablissement,
              Paysetablissement,
-             codeDepartement,
+             CodeDepartement,
              Numsiret,
              Libellenaf,
              #Typeconvention,
              Indemnisation) %>% 
       group_by(Nometablissement,
                Paysetablissement,
-               codeDepartement,
+               CodeDepartement,
                Numsiret,
                Libellenaf,
                #Typeconvention,
                Indemnisation )%>% 
       summarise(`Nombre de stages`=n())%>% 
-      arrange(desc(`Nombre de stages`))
-    # #%>% 
-    #   rename(
-    #     #`Type convention` = Typeconvention,
-    #     #URF= ufr,
-    #     #Durée = Dureestageenheures,
-    #     #Origine = Originestage,
-    #     #Année = Anneeunivconvention,
-    #     Etablissement =  Nometablissement,
-    #     #Composante = Libellecomposante,
-    #     #Cycle = cycle,
-    #     Pays = Paysetablissement,
-    #     Département = codeDepartement,
-    #     `Numéro siret` = Numsiret,
-    #     `Secteur d'activité`=Libellenaf)
+      arrange(desc(`Nombre de stages`)) %>%
+      rename(
+        #`Type convention` = Typeconvention,
+        #URF= ufr,
+        #Durée = Dureestageenheures,
+        #Origine = Originestage,
+        #Année = Anneeunivconvention,
+        Etablissement =  Nometablissement,
+        #Composante = Libellecomposante,
+        #Cycle = cycle,
+        Pays = Paysetablissement,
+        Département = CodeDepartement,
+        `Numéro siret` = Numsiret,
+        `Secteur d'activité`=Libellenaf)
   )
   
   
   
-  
-  
+
   
 })

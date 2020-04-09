@@ -27,10 +27,13 @@
 #titre {
   color : black;
   font-family: 'Montserrat', sans-serif;
-  font-size: 30px;
+  /*font-size: 30px;
   margin-left : 14px;
-  padding-bottom: 50px;
+  padding-bottom: 50px; */
 }
+
+
+
 
 .tabs .tab a {
   color : black;
@@ -42,14 +45,14 @@
 }
 
 
+
+
+
 #logo_titre{
-  height:60px;
   width : 65px;
-  righ-padding : 20px;
 }
 
 #logo {
-	height:4em;
 	width:4em;
 	margin-right: 2em;
 	margin-left: 2em;
@@ -181,6 +184,7 @@
 		height : 500px;
 	padding-bottom:3em;
 }
+
 
 
 
