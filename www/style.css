@@ -48,7 +48,6 @@
     margin-left: auto;
     margin-right: auto;
 	line-height:1em;
-
 }
 
 .conta {
@@ -71,6 +70,47 @@
 
 .adr {
 	font-weight: bold;
+}
+
+
+ /*Page FAQ */	
+#fondfaq{
+	background-color: #ffe082;
+	padding-top:1em;
+	padding-bottom:1em;
+	width:80%;	
+	margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+	line-height:1em;
+}
+
+.boxfaq{
+	background-color: #FFFFFF;
+	width:90%;	
+    margin-left: auto;
+    margin-right: auto;
+	margin-top:1em;
+	margin-bottom:1em;
+	line-height:1.1em;
+	font-family:arial;
+	border: 0.02em #e7e7e7 solid;
+	border-radius:1.3em;
+	padding-top:0em;
+}
+
+.headfaq{
+	border: 0.1em #F5F5F5 solid;
+	border-radius:5em;
+	padding:0.7em 0 0.7em 2em;
+	margin-top:0em;
+
+}
+
+.parfaq{
+	text-align:justify;
+	padding:0 2em 0 2em;
+	font-size:0.8em;
 }
 
 
@@ -209,3 +249,4 @@
 	margin-bottom:1em;
 	box-shadow: -1em -1em .3em #D73A27;
 }
+

@@ -539,12 +539,12 @@ material_tab_content(
                tags$br(""),
                tags$p(class="conta", "Contactez votre service SCUIO-IP"),
                tags$p(class="conta", "du lundi au vendredi"),
-               tags$p(class="conta", "de 9h30 Ã  12h30 et de 14h Ã  17h"),
-               tags$p(class="conta", "(sauf le vendredi aprÃ¨s-midi)"),
+               tags$p(class="conta", "de 9h30 à 12h30 et de 14h à 17h"),
+               tags$p(class="conta", "(sauf le vendredi après-midi)"),
                tags$br(""),
-               tags$p(class="conta", class="adr", "Maison des Etudiants - BÃ¢t. U"),
+               tags$p(class="conta", class="adr", "Maison des Etudiants - Bât. U"),
                tags$p(class="conta", class="adr","04 67 14 26 11"),
-               tags$p(class="conta", class="adr","scuio@univ-montp3.fr")
+               tags$p(class="conta", class="adr","scuio@univ-montp3.fr"),
       ))),
   
   #Footer    
@@ -552,7 +552,7 @@ material_tab_content(
     width = 12,
     tags$a(id = "footer", checked = NA,
            tags$img(id="logo",src="img/logo-orange-vf2.png"),
-           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'UniversitÃ© : 04 67 14 20 00")
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
            
     ))
   
@@ -562,18 +562,40 @@ material_tab_content(
 material_tab_content(
   offset = 1,
   tab_id = "FAQ",
+  
   material_row(
     material_column(
-      width = 10
-    )
-  ),
+      width = 12,
+      tags$div(id = "fondfaq", checked = NA,
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","Qui sommes-nous ?"),
+                        tags$p(class="parfaq","Ce site est dirigé par le Service Commun Universitaire d'Information, d'Orientation et d'Insertion Professionnelle (SCUIO-IP) de l'Université Paul Valéry 3. Nous accompagnons les étudiants tout au long de leur projet d'études et d'insertion professionnelle, au même titre que les enseignants dans le suivi de recherche de stage des étudiants. La conception de ce site web nous permet de remplir notre mission : celle d'accroître pour les enseignants et administratifs la connaissance et l'aide à la décision quant aux stages pour accompagner au mieux ses étudiants.")
+               ),
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","A qui s'adresse ce site web ?"),
+                        tags$p(class="parfaq","Ce site web s'adresse aux enseignants et administratifs. Il permet de visualiser les tendances des stages, réalisés par les étudiants depuis cinq ans, comme outil de connaissance et d'aide à la décision. Chaque enseignant pourra ainsi visualiser les stages des étudiants, et de ceux de sa filière s'il le souhaite.")
+               ),
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","Je veux contacter un professionnel d'un établissement. Comment faire ?"),
+                        tags$p(class="parfaq","Vous pouvez vous approcher des personnels du SCUIO-IP qui sauront vous diriger vers l'organisme en question.")
+               ),
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","A quoi servent les options de filtrage situés à gauche de mon écran ?"),
+                        tags$p(class="parfaq","Les filtres situés dans le menu, situé à gauche de votre écran, s'appliquent sur toutes les pages du site web, exceptés sur l'onglet Recherche. En sélectionnant les paramètres que vous souhaitez, vous pourriez visualiser les graphiques définis en fonction de vos choix.")
+               )
+               
+      ))),
   
   #Footer    
   material_column(
     width = 12,
     tags$a(id = "footer", checked = NA,
            tags$img(id="logo",src="img/logo-orange-vf2.png"),
-           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'UniversitÃ© : 04 67 14 20 00")
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
            
     ))
 ),
