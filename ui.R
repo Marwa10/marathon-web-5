@@ -145,11 +145,11 @@ material_page(
     tabs = c(
       "Accueil" = "accueil",
       "Stage" = "stage",
-      "Stagiaire"= "stagiaire",
+      "Profil des stagiaires"= "stagiaire",
       "Cartographie"= "carto",
-      "Recherche" = "recherche"
-      #"Exemple" = "exemple"
-      
+      "Recherche" = "recherche",
+      "Contact" = "contact",
+      "FAQ" = "FAQ"
       
     )
   ),
@@ -487,6 +487,8 @@ material_page(
     
     
   ),
+
+#Onglet Recherche
   material_tab_content(
     offset = 1,
     tab_id = "recherche",
@@ -499,7 +501,35 @@ material_page(
       )
     )
   ),
+
+#Onglet Contact
+  material_tab_content(
+    offset = 1,
+    tab_id = "contact",
+    material_row(
+      material_column(
+        width = 10
+        
+        
+      )
+    )
+  ),
   
+#Onglet FAQ
+  material_tab_content(
+    offset = 1,
+    tab_id = "FAQ",
+    material_row(
+      material_column(
+        width = 10,
+  
+        
+      )
+    )
+  ),
+
+
+#Onglet Carto
   material_tab_content(
     tab_id = "carto",
     material_row(
@@ -508,7 +538,7 @@ material_page(
         width = 10,
         material_card(
           title = "Stages en France",
-          leafletOutput("map_fr")
+          #leafletOutput("map_fr")
     ))),
     material_row(
       material_column(
@@ -516,7 +546,7 @@ material_page(
         width = 10,
         material_card(
           title = "Stages à l'étranger", 
-          leafletOutput("map")
+          #leafletOutput("map")
         )
       )
     )
