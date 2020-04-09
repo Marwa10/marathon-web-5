@@ -50,14 +50,14 @@
 }
 
 #fond2{
-	background-color:#2ABC9B;
+	background-color:#209b7f;
 	padding-top:3em;
 	height : 500px;
 	padding-bottom:3em;
 }
 
 #fond3{
-	background-color:#99D1CB;
+	background-color:#1f73bb;
 	padding-top:6em;
 	height : 500px;
 	padding-bottom:3em;
@@ -69,6 +69,14 @@
 	height : 500px;
 	padding-bottom:3em;
 }
+
+#fond5{
+	background-color:#EEEEEE;
+	padding-top:3em;
+	height : 500px;
+	padding-bottom:3em;
+}
+
 
 
 .acceuil p {

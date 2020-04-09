@@ -231,6 +231,20 @@ material_page(
                    tags$p(class="accueil", tags$img(id="carte",src="img/Carto.png")),
                    tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France."),
                    
+          ))),
+      
+      #Fond5 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond5", checked = NA,
+                   tags$p(class="accueil", class="tete","RECHERCHE"),
+                   tags$p(class="accueil", class="titre2","Une idée, une entreprise, une recherche ?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
+                   tags$p(class="accueil", tags$img(id="carte",src="img/Rech.jpg")),
+                   tags$p(class="accueil", "L'onglet Rec herche vous permet de visualiser le détail des stages réalisés par les étudiants au cours de ces dernières années."),
+                   tags$p(class="accueil", "De quoi ne pas vous laisser sur votre faim.")
+                   
           )))
       
       
