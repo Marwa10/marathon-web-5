@@ -33,13 +33,50 @@
   color : black;
   font-family: arial;
   font-size: 30px;
-  margin-left : 4px;
+  margin-left : 14px;
+}
+
+
+
+ /*Page contact */	
+
+#fondcontact{
+	/*background-color:#ffe082;*/
+	background-color:#F5F5F5;
+	padding-top:3em;
+	width:50%;	
+    margin-left: auto;
+    margin-right: auto;
+	line-height:1em;
+
+}
+
+.conta {
+	text-align:center;
+	color:black;
+	font-family:arial;
+	font-size:1em
+}
+
+#scuio {
+	width:10em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
 }
 	
+.titre3 {
+	font-weight: bold;
+	font-size:2.5em;
+}	
+
+.adr {
+	font-weight: bold;
+}
+
+
 	
 	
 /* Page accueil */
-
 #fond1{
 	background-image:url("img/fond1.jpg");
 	background-repeat: no-repeat ;
@@ -91,10 +128,6 @@
 	padding-bottom:3em;
 }
 
-.acceuil p {
-  font-size: 20px;
-  
-}
 
 
 .accueil {

@@ -520,13 +520,24 @@ material_tab_content(
 material_tab_content(
   offset = 1,
   tab_id = "contact",
+  
   material_row(
     material_column(
-      width = 10
-      
-      
-    )
-  ),
+      width = 12,
+      tags$div(id = "fondcontact", checked = NA,
+               tags$p(class="conta", class="tete","CONTACT"),
+               tags$p(class="conta", class="titre3","Une question ?"),
+               tags$p(class="conta", tags$img(id="barre",src="img/barre3.jpg")),
+               tags$br(""),
+               tags$p(class="conta", "Contactez votre service SCUIO-IP"),
+               tags$p(class="conta", "du lundi au vendredi"),
+               tags$p(class="conta", "de 9h30 à 12h30 et de 14h à 17h"),
+               tags$p(class="conta", "(sauf le vendredi après-midi)"),
+               tags$br(""),
+               tags$p(class="conta", class="adr", "Maison des Etudiants - Bât. U"),
+               tags$p(class="conta", class="adr","04 67 14 26 11"),
+               tags$p(class="conta", class="adr","scuio@univ-montp3.fr"),
+      ))),
   
   #Footer    
   material_column(
@@ -536,6 +547,7 @@ material_tab_content(
            tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
            
     ))
+  
 ),
 
 #Onglet FAQ  #### 
