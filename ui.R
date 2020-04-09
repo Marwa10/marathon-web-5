@@ -662,7 +662,7 @@ material_tab_content(
                     "IEF",
                     "ITIC",
                     "RI"),
-       # selected = "Tous",
+       selected = "UFR5",
         
         
         color = "green"
@@ -684,113 +684,27 @@ material_tab_content(
     )
     
   ),
-    material_column(
-      offset = 1,
-      width = 10,
-      material_dropdown(
-        input_id = "compo2",
-        label = "Ma composante",
-        choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
-                    , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
-                    , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
-                    , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
-                    , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
-                    , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
-                    , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
-                    , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
-                    , "Histoire MTP  "                ,               "Information et communication BEZ  "          
-                    , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
-                    , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
-                    , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
-                    , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
-                    , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
-                    , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
-                    , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
-                    , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
-                    , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
-                    , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
-                    , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
-                    , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
-                    , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
-                    , "UFR 6"    ,"Toutes les composantes"),
-        selected = "Toutes les composantes",
+  #  material_column(
+    #  offset = 1,
+    # width = 10,
+    #  material_dropdown(
+   #     input_id = "compo2",
+  #      label = "Ma composante",
+       # choices = NULL,
+      #  #selected = "Toutes les composantes",
         
         
-        color = "green"
-      )
-    ),
+     #   color = "green"
+    #  )
+   # ),
   material_column(
     offset = 1,
     width = 10,
     material_dropdown(
       input_id = "lieu_stage",
       label = "Envie d'un stage à l'étranger ?",
-      choices=c(  "ACORES, MADERE"             ,              "AFRIQUE DU SUD"                          
-                  , "ALGERIE"                       ,           "ALLEMAGNE"                               
-                  , "ANDORRE"                       ,           "ANTILLES NEERLANDAISES"                  
-                  , "ARABIE SAOUDITE"         ,                 "ARGENTINE"                               
-                  , "ARMENIE"                       ,           "AUSTRALIE"                               
-                  , "AUTRICHE"                     ,            "AZERBAIDJAN"                             
-                  , "BELGIQUE"                      ,           "BENIN"                                   
-                  , "BOLIVIE, l'ETAT PLURINATIONAL DE"    ,     "BOSNIE-HERZEGOVINE"                      
-                  , "BRESIL"                       ,            "BULGARIE"                                
-                  , "BURKINA FASO"         ,                    "CAMBODGE"                                
-                  , "CAMEROUN"              ,                   "CANADA"                                  
-                  , "CHILI"                        ,            "CHINE"                                   
-                  , "CHYPRE"                   ,                "COLOMBIE"                                
-                  , "COMORES"                ,                  "CONGO"                                   
-                  , "CONGO, LA REPUBLIQUE DEMOCRATIQUE DU"   ,  "COREE, REPUBLIQUE DE"                    
-                  , "COSTA RICA"               ,                "COTE D'IVOIRE"                           
-                  , "CROATIE"                      ,            "CUBA"                                    
-                  , "DANEMARK"                  ,               "DJIBOUTI"                                
-                  , "DOMINICAINE, REPUBLIQUE"      ,            "DOMINIQUE"                               
-                  , "EGYPTE"                   ,                "EMIRATS ARABES UNIS"                     
-                  , "ESPAGNE"                 ,                 "ESTONIE"                                 
-                  , "ETATS-UNIS"              ,                 "ETHIOPIE"                                
-                  , "FINLANDE"                  ,               "FRANCE"                                  
-                  , "GABON"                        ,            "GEORGIE"                                 
-                  , "GHANA"                         ,           "GRECE"                                   
-                  , "GUADELOUPE"              ,                 "GUATEMALA"                               
-                  , "GUINEE"                          ,         "GUYANE FRANCAISE"                        
-                  , "HAITI"                             ,       "HONG-KONG"                               
-                  , "HONGRIE"                     ,             "ILE DE MAN"                              
-                  , "ILES VIERGES BRITANNIQUES"     ,           "INDE"                                    
-                  , "INDONESIE"                    ,            "IRAN, REPUBLIQUE ISLAMIQUE D'"           
-                  , "IRLANDE"                  ,                "ISRAEL"                                  
-                  , "ITALIE"                         ,          "JAPON"                                   
-                  , "JERSEY"                       ,            "JORDANIE"                                
-                  , "KAZAKHSTAN"              ,                 "KENYA"                                   
-                  , "KOWEIT"                       ,            "LAO, REPUBLIQUE DEMOCRATIQUE POPULAIRE"  
-                  , "LESOTHO"                     ,             "LETTONIE"                                
-                  , "LIBAN"                             ,       "LITUANIE"                                
-                  , "LUXEMBOURG"               ,                "MACEDOINE, L'EX-REPUBLIQUE YOUGOSLAVE DE"
-                  , "MADAGASCAR"                ,               "MALI"                                    
-                  , "MALTE"                            ,        "MAROC"                                   
-                  , "MARTINIQUE"                  ,             "MAURICE"                                 
-                  , "MAURITANIE"                   ,            "MAYOTTE"                                 
-                  , "MEXIQUE"                        ,          "MOLDOVA, REPUBLIQUE DE"                  
-                  , "MONACO"                          ,         "MONGOLIE"                                
-                  , "MYANMAR (BIRMANIE)"       ,                "NICARAGUA"                               
-                  , "NORVEGE"                          ,        "NOUVELLE-CALEDONIE"                      
-                  , "NOUVELLE-ZELANDE"          ,               "PANAMA"                                  
-                  , "PARAGUAY"                     ,            "PAYS-BAS"                                
-                  , "PEROU"                         ,           "PHILIPPINES"                             
-                  , "POLOGNE"                     ,             "POLYNESIE FRANCAISE"                     
-                  , "PORTUGAL"                    ,             "QATAR"                                   
-                  , "REUNION"                        ,          "ROUMANIE"                                
-                  , "ROYAUME-UNI"                ,              "RUSSIE, FEDERATION DE"                   
-                  , "SENEGAL"                     ,             "SERBIE"                                  
-                  , "SINGAPOUR"                 ,               "SLOVAQUIE"                               
-                  , "SLOVENIE"                      ,           "SRI LANKA"                               
-                  , "SUEDE"                             ,       "SUISSE"                                  
-                  , "SYRIENNE, REPUBLIQUE ARABE"      ,         "TAIWAN, PROVINCE DE CHINE"               
-                  , "TANZANIE, REPUBLIQUE-UNIE DE"      ,       "TCHEQUE, REPUBLIQUE"                     
-                  , "THAILANDE"                        ,        "TOGO"                                    
-                  , "TRINITE-ET-TOBAGO"         ,               "TUNISIE"                                 
-                  , "TURQUIE"                      ,            "UKRAINE"                                 
-                  , "URUGUAY"                     ,             "VIET NAM"                                
-                  , "ZAMBIE"    , "Peu importe !"  ),
-      selected = "FRANCE",
+      choices=NULL,
+      #selected = "FRANCE",
       
       
       color = "green"

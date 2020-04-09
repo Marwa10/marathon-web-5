@@ -529,30 +529,64 @@ shinyServer(function(session,input, output) {
     update_material_dropdown(session,input_id = "niveau", choices=liste,value=liste[1])
   })
   
-  #toshow3$Cycle = as.factor(toshow3$Cycle)
+  choixpays <-reactive({
+    data %>% filter(cycle == input$niveau )
+    
+  })
+  
+  observeEvent(input$niveau, { 
+    a <- choixpays()
+    liste=unique(a$Paysetablissement)
+    update_material_dropdown(session,input_id = "lieu_stage", choices=liste,value=liste[1])
+  })
+  
+  
+#  tps <-reactive({
+ #   data %>%
+  #    filter(ufr == input$id_UFR2,
+   #          cycle == input$niveau,
+    #         Paysetablissement == input$lieu_stage#,
+  #            #Libellecomposante == input$compo2
+  #     )
+  #   
+  # })
+  
+  #choixcomposante <-reactive({
+  # data %>% filter(cycle == input$niveau )
+    
+  #})
+  
+  #observeEvent(input$niveau, { 
+   # a <- choixcomposante()
+  #  liste=unique(a$Libellecomposante)
+  #  update_material_dropdown(session,input_id = "compo2", choices=liste,value=liste[1])
+  #})
+  
   #toshow3$Pays = as.factor(toshow3$Pays)
   #toshow3$`Numéro siret` = as.factor(toshow3$`Numéro siret`)
   
   output$plot2 <- DT::renderDataTable(
     
-    data_ufr %>%
-      filter(ufr == input$id_UFR2,
-             cycle == input$niveau)%>%
-      select(Nometablissement,
+     data %>% filter(ufr == input$id_UFR2,
+                     cycle == input$niveau,
+                     Paysetablissement == input$lieu_stage#,
+                     #Libellecomposante == input$compo2
+     ) %>%
+       select(Nometablissement,
              Paysetablissement,
-             CodeDepartement,
+             codeDepartement,
              Numsiret,
              Libellenaf,
-             Typeconvention,
+             #Typeconvention,
              Indemnisation
       ) %>% 
-      group_by(Nometablissement,Paysetablissement,CodeDepartement,Numsiret,
+      group_by(Nometablissement,Paysetablissement,codeDepartement,Numsiret,
               Libellenaf,
-              Typeconvention,
+              #Typeconvention,
               Indemnisation )%>% summarise(`Nombre de stages`=n())%>% 
       arrange(desc(`Nombre de stages`))%>% 
       rename(
-        `Type convention` = Typeconvention,
+        #`Type convention` = Typeconvention,
         #URF= ufr,
         #Durée = Dureestageenheures,
         #Origine = Originestage,
@@ -561,24 +595,9 @@ shinyServer(function(session,input, output) {
         #Composante = Libellecomposante,
         #Cycle = cycle,
         Pays = Paysetablissement,
-        Département = CodeDepartement,
+        Département = codeDepartement,
         `Numéro siret` = Numsiret,
         `Secteur d'activité`=Libellenaf)
-    
- ,
-    #server = TRUE,
-    rownames = FALSE#,
-    #filter = "top",
-    #options = list(searchHighlight = TRUE,
-     #              scrollX = TRUE,
-      #             class = 'cell-border stripe',
-       #            autoWidth = TRUE ,
-        #           columnDefs = list(list(className = 'dt-center', targets = 4)),
-                   #lengthMenu = c(50, 100, 150, 200),
-         #          pageLength = 10
-                   #initComplete = JS(js)
-                   #search = list(smart = FALSE, caseInsensitive = FALSE, regex = TRUE)
-    #)
   )
   
   
