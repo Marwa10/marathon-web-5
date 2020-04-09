@@ -22,7 +22,7 @@ library(RColorBrewer)
 
 
 # récupération des données de stage
-data = read.csv2("data/donnees.csv", stringsAsFactors = FALSE) 
+data = read.csv2("data/donnees_c2.csv", stringsAsFactors = FALSE) 
 # récupération des données pays
 pays = read.csv2("data/pays2020.csv",sep = ',')
 
@@ -55,7 +55,7 @@ world_spdf <-merge(world_spdf,interships_counts_by_country,by.x="ISO3", by.y = "
 
 
 
-mybins <- c(1,10,20,50,100,10000,Inf)
+mybins <- c(1,10,20,50,70,100,200,250,10000,Inf)
 
 # creation de la palette:
 mypalette <- colorBin( palette="YlOrBr", domain=world_spdf@data$number_internships, na.color="transparent", bins=mybins)
