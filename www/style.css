@@ -23,41 +23,58 @@
 	vertical-align: middle;
 }
 			
-
+/* En-tête */
 .material-icons {
 	color:black;
 }
+	
+
+#titre {
+  color : black;
+  font-family: arial;
+  font-size: 30px;
+  margin-left : 4px;
+}
+	
+	
 	
 /* Page accueil */
 
 #fond1{
 	background-image:url("img/fond1.jpg");
 	background-repeat: no-repeat ;
-	padding-bottom:2em;
-	/*height : 700px;*/
+	padding-bottom:3em;
+	height : 500px;
+	padding-bottom:3em;
 	background-size: cover;
 }
 
 #fond2{
 	background-color:#2ABC9B;
-	padding-top:2em;
-	/*height : 700px; */
-	padding-bottom:2em;
+	padding-top:3em;
+	height : 500px;
+	padding-bottom:3em;
 }
 
 #fond3{
 	background-color:#99D1CB;
-	padding-top:2em;
-	/*height : 700px; */
-	padding-bottom:2em;
+	padding-top:6em;
+	height : 500px;
+	padding-bottom:3em;
 }
+
+#fond4{
+	background-color:#A486B9;
+	padding-top:3em;
+	height : 500px;
+	padding-bottom:3em;
+}
+
 
 .acceuil p {
   font-size: 20px;
   
 }
-
-
 
 
 .accueil {
@@ -81,6 +98,11 @@
 	font-size:1.5em;
 }
 
+.titre2 {
+	font-weight: bold;
+	padding-bottom:0.5em;
+	font-size:2em;
+}
 
 #cases {
 	display:flex;
@@ -93,28 +115,23 @@
 	padding:0.6em;
 	margin-bottom:2em;
 	margin-top:2em;
-	width:13em;
+	width:12.5em;
 
 }
 
 .chiffre {
 	font-weight: bold;
-	font-size:4em;
+	font-size:3.5em;
 }
 
-
-/* titre*/
-
-#titre {
-  color : black;
-  font-family: arial;
-  font-size: 30px;
-  margin-left : 14px;
-
+.tete{
+	font-size:0.7em;
 }
 
-#img_logo {
-  width : 45px;
-  height : inherit;
-  
+#carte {
+	width:50em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
+
+	box-shadow: -1em -1em .3em #8A63A5;
 }

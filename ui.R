@@ -15,7 +15,10 @@ material_page(
   title = HTML('<span id ="titre">Paul In </span>'),
 
 
-  include_nav_bar = TRUE,
+  #include_nav_bar = TRUE,
+  
+  
+#Menu des filtres #### 
   material_side_nav(
     fixed = FALSE, 
     br(),
@@ -137,11 +140,12 @@ material_page(
         )))
   ),
   
-  
+
+#Menu de navigation ####  
   # Define tabs
   material_tabs(
     #color = "Moccasin",
-    color = "#ffe082",
+    #color = "#ffe082",
     tabs = c(
       "Accueil" = "accueil",
       "Stage" = "stage",
@@ -186,11 +190,11 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond2", checked = NA,
-                   tags$p(class="accueil", "STAGES"),
-                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
-                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$p(class="accueil", class="tete","STAGES"),
+                   tags$p(class="accueil", class="titre2","Envie d'en découvrir davantage?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$div(class="accueil",id="cases", 
-                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","4 408"),tags$p("Stages réalisés"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
                    tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
@@ -203,17 +207,33 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond3", checked = NA,
-                   tags$p(class="accueil", "STAGES"),
-                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
-                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$p(class="accueil", class="tete","PROFIL DES STAGIAIRES"),
+                   tags$p(class="accueil", class="titre2","Les stagiaires au coeur des statistiques"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$div(class="accueil",id="cases", 
-                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
-                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
-                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")
+                            tags$div(class="case",tags$p(class="chiffre","20 334"),tags$p("Stages effectués"),tags$p("depuis 2014")),
+                            tags$div(class="case",tags$p(class="chiffre","1.53"),tags$p("Stages en moyenne"),tags$p("par étudiant")),
+                            tags$div(class="case",tags$p(class="chiffre","43%"),tags$p("de candidature spontanée")),
+                            tags$div(class="case",tags$p(class="chiffre","19.4%"),tags$p("de stages facultatifs"))),
+                   tags$p(class="accueil", "Les cycles universitaires, les composantes ainsi que les IFR regorgent d'informations quant à la distribution des stages."),
+                   tags$p(class="accueil", "Cliquez sur l'onglet Profil des stagiaires afin d'en savoir plus.")
                    
-          )))  
+          ))),
+      
+      #Fond4 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond4", checked = NA,
+                   tags$p(class="accueil", class="tete","CARTOGRAPHIE"),
+                   tags$p(class="accueil", class="titre2","Visitez le monde à l'aide de notre cartographie"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
+                   tags$p(class="accueil", tags$img(id="carte",src="img/Carto.png")),
+                   tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France."),
+                   
+          )))
+      
+      
       
     ),
     
