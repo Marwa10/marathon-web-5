@@ -23,6 +23,14 @@ material_page(
     fixed = FALSE, 
     br(),
     br(),
+    
+    material_row(
+      material_column(
+    material_switch(
+      input_id="activation", label="Filtrage des données", off_label = "OFF", on_label = "ON",
+                    initial_value = FALSE, color = NULL
+                    )
+      )),
     material_row(
       material_column(
         offset = 1,
