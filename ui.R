@@ -3,17 +3,20 @@ library(DT)
 library(shinymaterial)
 library(plotly)
 library(leaflet)
+#library(d3treeR)
 
 
 
 material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
- 
-  nav_bar_color = "#bdbdbd grey lighten-1", 
-  
+  #nav_bar_color = "#ffe082 amber lighten-3",
+  #nav_bar_color = "#bdbdbd grey lighten-1",
+  nav_bar_color = "#eeeeee grey lighten-2",
+  title = HTML('<img src="img/logo-orange-vf2.png" alt="logo" id = "img_logo"><span id ="titre">Paul In </span>'),
+  # tags$div(id = "header", tags$img(id="logo", src="img/logo-orange-vf2.png")), 
+  # je sais que ça va pas mais il m'emmerde ce fucking logo --'
+
   include_nav_bar = TRUE,
-  
-  # Place side-nav in the beginning of the UI
   material_side_nav(
     fixed = FALSE, 
     br(),
@@ -22,33 +25,51 @@ material_page(
       material_column(
         offset = 1,
         width = 12,
-      material_checkbox(
-        input_id = "c1",
-        label = "Stage obligatoire",
-        initial_value = TRUE,
-        color = "#209b7f"
-      ),
-      material_checkbox(
-        input_id = "c2",
-        label = "Stage facultatif",
-        initial_value = TRUE,
-        color = "#209b7f"
+        material_checkbox(
+          input_id = "c1",
+          label = "Stage obligatoire",
+          initial_value = TRUE,
+          color = "#209b7f"
+        ),
+        material_checkbox(
+          input_id = "c2",
+          label = "Stage facultatif",
+          initial_value = TRUE,
+          color = "#209b7f"
+        )
+        
+      )),
+    material_row(
+      material_column(
+        offset = 1,
+        material_slider(input_id = "start_year",
+                        label = "Start",
+                        min_value = 2014,
+                        max_value = 2018,
+                        step_size = 1,
+                        initial_value = 2016,
+                        color = NULL),
+        material_slider(input_id = "end_year",
+                        label = "End",
+                        min_value = 2014,
+                        max_value = 2018,
+                        step_size = 1,
+                        initial_value = 2016,
+                        color = NULL)
       )
-      
-    )),
+    ),
+    
     tags$br(),
     
     material_row(
       material_column(
         offset = 1,
-        material_radio_button(input_id = "cycle",
-                              label = "Niveau",
-                              choices = c("DU",
-                                          "DUT",
+        material_radio_button(input_id = "id_cycle",
+                              label = "Cursus",
+                              choices = c("DU/DUT",
                                           "Licence",
                                           "LP",
                                           "Master",
-                                          "Mobilité",
                                           "Doctorat"),
                               selected = "Licence",
                               with_gap = TRUE)
@@ -61,7 +82,7 @@ material_page(
       material_column(
         offset = 1,
         material_dropdown(
-          input_id = "ufr",
+          input_id = "id_ufr",
           label = "UFR",
           choices = c("UFR1",
                       "UFR2",
@@ -73,53 +94,54 @@ material_page(
                       "IEF",
                       "ITIC",
                       "RI"
-          )
+          ),
+          selected = "UFR5"
         )
       )
     ),
     
     
-  
+    
     material_row(
       material_column(
         width = 12,
-      material_dropdown(
-      input_id = "compo",
-      label = "Composante",
-      choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
-                  , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
-                  , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
-                  , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
-                  , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
-                  , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
-                  , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
-                  , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
-                  , "Histoire MTP  "                ,               "Information et communication BEZ  "          
-                  , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
-                  , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
-                  , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
-                  , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
-                  , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
-                  , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
-                  , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
-                  , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
-                  , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
-                  , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
-                  , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
-                  , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
-                  , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
-                  , "UFR 6"    ,"Toutes les composantes"),
-      
-      
-      color = "green"
-    )))
-    
- 
-
+        material_dropdown(
+          input_id = "compo",
+          label = "Composante",
+          choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
+                      , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
+                      , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
+                      , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
+                      , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
+                      , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
+                      , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
+                      , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
+                      , "Histoire MTP  "                ,               "Information et communication BEZ  "          
+                      , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
+                      , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
+                      , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
+                      , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
+                      , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
+                      , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
+                      , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
+                      , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
+                      , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
+                      , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
+                      , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
+                      , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
+                      , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
+                      , "UFR 6"    ,"Toutes les composantes"),
+          selected = "Toutes les composantes",
+          
+          
+          color = "green"
+        )))
   ),
+  
   
   # Define tabs
   material_tabs(
+    #color = "Moccasin",
     color = "black",
     tabs = c(
       "Accueil" = "accueil",
@@ -127,19 +149,15 @@ material_page(
       "Stagiaire"= "stagiaire",
       "Cartographie"= "carto",
       "Recherche" = "recherche"
+      #"Exemple" = "exemple"
       
       
     )
   ),
   
   
-  
-  
-  # Define tab content
-  material_tab_content(
-    offset = 1,
-    tab_id = "first_tab"),
-  
+  # material_tab_content(
+  #   tab_id = "exemple"),
   
   
   
@@ -147,9 +165,13 @@ material_page(
   material_tab_content(
     tab_id = "accueil",
     
-    material_card( 
+    # material_row(
+    #   material_column(
+    #     offset = 0.5,
+    #     width = 12,
       
- #Fond1     
+    material_card( 
+      #Fond1     
       material_row(
         material_column(
           width = 12,
@@ -162,7 +184,7 @@ material_page(
           ))),
       
       
-  #Fond2      
+      #Fond2      
       material_row(
         material_column(
           width = 12,
@@ -175,11 +197,11 @@ material_page(
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
                    tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
-                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages."),
-                 
+                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")
+                   
           ))),
-  
-  #Fond3 
+      
+      #Fond3 
       material_row(
         material_column(
           width = 12,
@@ -192,26 +214,30 @@ material_page(
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
                    tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
-                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages."),
+                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")
                    
           )))  
-    
+      
     ),
     
- 
     
- #Footer    
+    
+    #Footer    
     material_column(
-          width = 12,
-          tags$a(id = "footer", checked = NA,
-                 tags$img(id="logo",src="img/logo-orange-vf2.png"),
-                 tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00"),
-                   
-          )),
-
-  ),
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
+    
+  )
+ # ))
+,
   
-
+  
+  
+  
   
   material_tab_content(
     offset = 1,
@@ -318,13 +344,6 @@ material_page(
           title = "Caractéristiques techniques des stages effetués",
           
           material_row(
-            material_column(
-              width = 6,
-              material_card(
-                title = "Durée des stages en semaine (ETP)",
-                plotlyOutput("duree")
-              )
-            ),
             
             # GRAPHIQUE EVO STAGE ETRANGER
             
@@ -334,6 +353,14 @@ material_page(
                 title = "Indemnisation",
                 plotlyOutput("indem")
               )
+            ),
+            material_column(
+              width = 6,
+              material_card(
+                title = "Durée de stage",
+                plotlyOutput("p5")
+              )
+              
             )
           )
           
@@ -349,7 +376,7 @@ material_page(
             material_column(
               width = 12,
               material_card(
-                title = "Les entreprises recrutant le plus de stagiaires",
+                title = "Les entreprises ayant recruté des stagiaires",
                 plotlyOutput("entre")
               )
             )
@@ -404,15 +431,17 @@ material_page(
             width = 3,
             material_card(title = HTML("<strong><center>20 334</center></strong>"),
                           HTML("</center> stages effectués depuis 2014 </center>") ,
+                          #color = "#f5f5f5 grey lighten-4",
+                          #depth = 5,
                           color = "white",
-                          depth = 1)
+                          depth = 3)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 1,53 </center></strong>"), 
                           HTML("<center> stages en moyenne par étudiant </center>"),
-                          color = "white", 
-                          depth = 1)
+                          color = "white",
+                          depth = 3)
             
             
           ),
@@ -421,14 +450,14 @@ material_page(
             material_card(title = HTML("<strong><center> 43% </center></strong>"), 
                           HTML("<center>de candidature spontanée</center>"),
                           color = "white",
-                          depth = 1)
+                          depth = 3)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
                           HTML("<center> de stages facultatifs </center>"),
                           color = "white",
-                          depth = 1)
+                          depth = 3)
           )
         ),
         material_row(
@@ -440,15 +469,17 @@ material_page(
               plotlyOutput("p2")
             ),
             material_card(
-              title = "Distribution des stages en fonction de la composante",
-              divider = TRUE,
-              plotlyOutput("p3")
-            ),
-            material_card(
               title = "Distribution des stages en fonction de l'UFR",
               divider = TRUE,
               plotlyOutput("p4")
+            ),
+            material_card(
+              title = "Distribution des stages en fonction de la composante",
+              divider = TRUE,
+              plotlyOutput("p3")
             )
+            
+           
           )
         )
       )
@@ -472,17 +503,39 @@ material_page(
   
   material_tab_content(
     tab_id = "carto",
-    offset = 1,
-    material_card(
-      leafletOutput("map")
-    ),
-    material_card(
-      title = "carte département"
-      #leafletOutput("map_fr")
-      
+    material_row(
+      material_column(
+        offset = 1,
+        width = 10,
+        material_card(
+          title = "Stages en France",
+          leafletOutput("map_fr")
+    ))),
+    material_row(
+      material_column(
+        offset = 1,
+        width = 10,
+        material_card(
+          title = "Stages à l'étranger", 
+          leafletOutput("map")
+        )
+      )
     )
-    
-   
+    # material_row(
+    #   material_column(
+    #     offset = 1,
+    #     width = 10,
+    #     d3tree2Output("t_dep")
+    #   )
+    # ),
+    # material_row(
+    #   material_column(
+    #     offset = 1,
+    #     width = 10,
+    #     d3tree2Output("t_etab")
+    #     
+    #   )
+    # )
   )
 )
 
