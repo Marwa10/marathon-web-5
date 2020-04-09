@@ -213,9 +213,12 @@ shinyServer(function(session,input, output) {
   
   output$p1 <- renderPlotly({
     
+    if(input$activation){
     c = composante() %>% 
       filter(cycle == input$id_cycle,
              ufr == input$id_ufr)
+    
+    
     trend_year = c  %>% 
       group_by(Anneeunivconvention,Typeconvention) %>% 
       summarise(total = n())
@@ -230,6 +233,10 @@ shinyServer(function(session,input, output) {
       g = trend_year %>% 
         filter(Typeconvention == "Facultatif")
     }
+    } else {
+      g= data%>%group_by(Anneeunivconvention,Typeconvention) %>% 
+        summarise(total = n())}
+    
     ggplotly(ggplot(data = g, 
                     mapping = aes(x = Anneeunivconvention, y = total, color = Typeconvention)) +
                geom_line()+
@@ -242,12 +249,14 @@ shinyServer(function(session,input, output) {
   
   output$entre <- renderPlotly({
     
+    if(input$activation){
+    
     y <- composante_convention() %>% 
       filter(ufr == input$id_ufr,
              cycle == input$id_cycle,
              Anneeunivconvention >= input$start_year,
              Anneeunivconvention <= input$end_year
-      )
+      ) } else {y=data}
     
 
     
@@ -276,12 +285,13 @@ shinyServer(function(session,input, output) {
   
   output$pays <- renderPlotly({
     
+    if(input$activation){
     y <- composante_convention() %>% 
       filter(ufr == input$id_ufr,
              cycle == input$id_cycle,
              Anneeunivconvention >= input$start_year,
              Anneeunivconvention <= input$end_year
-      )
+      ) } else {y<-data}
     
     pays = y %>% 
       filter(Paysetablissement!="FRANCE") %>% 
@@ -318,11 +328,15 @@ shinyServer(function(session,input, output) {
   
   output$tauxetr <- renderPlotly({
     
+    if(input$activation){
+    
     if(input$compo != "Toutes les composantes"){
       t<-data %>% 
         filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           t<-data
         }
+      
+    } else{t<-data}
     
     #ta<- t %>% 
     #group_by(t$Anneeunivconvention) %>% 
@@ -355,12 +369,16 @@ shinyServer(function(session,input, output) {
   
   output$nbstage <- renderPlotly({
     
+    if(input$activation){
     u = composante_convention() %>% 
       filter(cycle == input$id_cycle,
              ufr == input$id_ufr) %>% 
       group_by(Anneeunivconvention) %>% 
       summarise(total = n())
-
+    } else {u=data%>% 
+      group_by(Anneeunivconvention) %>% 
+      summarise(total = n())
+    }
     
     p<-ggplot(data= u , aes(x=Anneeunivconvention,y= total)) + 
       geom_bar(stat="identity",fill = "#6d6e72"
@@ -385,11 +403,13 @@ shinyServer(function(session,input, output) {
   
   output$taux <- renderPlotly({
     
+    if(input$activation){
+    
     if(input$compo != "Toutes les composantes"){
       o<-data %>% 
         filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
           o<-data
-        }
+        }} else {o<-data}
     
     to<- o %>% 
       group_by(Typeconvention) %>% 
@@ -417,12 +437,14 @@ shinyServer(function(session,input, output) {
   
   output$origine <- renderPlotly({
     
+    if(input$activation){
+    
     oi<- composante_convention() %>% 
       filter(ufr == input$id_ufr,
              cycle == input$id_cycle,
              Anneeunivconvention >= input$start_year,
              Anneeunivconvention <= input$end_year
-             )
+             )} else {oi<-data}
     
     toi<- oi %>% 
       group_by(Originestage) %>% 
@@ -446,13 +468,16 @@ shinyServer(function(session,input, output) {
   # GRAPHIQUE INDEMNISATION
   
   output$indem <- renderPlotly({
+    
+    if(input$activation){
+    
     j <- composante_convention() %>% 
       filter(ufr == input$id_ufr,
              cycle == input$id_cycle,
              Anneeunivconvention >= input$start_year,
              Anneeunivconvention <= input$end_year
       )
-    
+    }else{j<-data}
   
     tu<- j %>% 
       group_by(Indemnisation) %>% 
@@ -477,13 +502,17 @@ shinyServer(function(session,input, output) {
   ## Distribution des stages en fonction du cycle universitaire
   
   output$p2 <- renderPlotly({
+    
+    if(input$activation){
+    
     to_use = type_convention() %>% 
       filter(Anneeunivconvention >= input$start_year,
              Anneeunivconvention <= input$end_year)
+    } else {to_use=data}
     
     ggplotly(ggplot(to_use, aes(cycle, color=cycle, fill=cycle)) +
                geom_bar(position= "identity") +
-               labs(x = "Année", y = "Nombre de stagiaire")+
+               labs(x = "Cycle universitaire", y = "Nombre de stages")+
                theme(legend.position="none"))
     
   })
@@ -500,7 +529,7 @@ shinyServer(function(session,input, output) {
                geom_bar(position= "identity") +
               # coord_flip()+ 
                labs(x = "Année",
-                    y = "Nombre de stagiaires",
+                    y = "Nombre de stages",
                     fill = "Composante"))
     
   })
@@ -509,14 +538,16 @@ shinyServer(function(session,input, output) {
   ## Distribution des stages en fonction de l'UFR
   
   output$p4 <- renderPlotly({
+    
+    if(input$activation){
     to_use = type_convention() %>% 
-      filter(Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year)
+        filter(Anneeunivconvention >= input$start_year,
+             Anneeunivconvention <= input$end_year) }else{to_use=data}
   
     ggplotly(ggplot(to_use, aes(ufr, color=ufr, fill=ufr)) +
                geom_bar(position= "identity") +
                labs(x = "UFR",
-                    y = "Nombre de stagiaires",
+                    y = "Nombre de stages",
                     fill = "UFR")+
               theme(legend.position="none"))
    
@@ -524,8 +555,16 @@ shinyServer(function(session,input, output) {
   
   
   output$p5 <- renderPlotly({
-   to_use = data %>% 
-      filter(!is.na(temps))
+   
+    if(input$activation){
+    to_use = data %>% 
+      filter(!is.na(temps),
+             ufr == input$id_ufr,
+             cycle == input$id_cycle,
+             Anneeunivconvention >= input$start_year,
+             Anneeunivconvention <= input$end_year)
+    
+    }else{to_use=data}
     
     ggplotly(ggplot(to_use, aes(temps, fill = temps)) +
                geom_bar(position= "identity") +

@@ -437,14 +437,14 @@ material_page(
                           #color = "#f5f5f5 grey lighten-4",
                           #depth = 5,
                           color = "white",
-                          depth = 3)
+                          depth = 1)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 1,53 </center></strong>"), 
                           HTML("<center> stages en moyenne par étudiant </center>"),
                           color = "white",
-                          depth = 3)
+                          depth = 1)
             
             
           ),
@@ -453,14 +453,14 @@ material_page(
             material_card(title = HTML("<strong><center> 43% </center></strong>"), 
                           HTML("<center>de candidature spontanée</center>"),
                           color = "white",
-                          depth = 3)
+                          depth = 1)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
                           HTML("<center> de stages facultatifs </center>"),
                           color = "white",
-                          depth = 3)
+                          depth = 1)
           )
         ),
         material_row(
