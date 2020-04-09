@@ -51,7 +51,7 @@
 
 #fond2{
 	background-color:#2ABC9B;
-	padding-top:3em;
+	padding-top:4em;
 	height : 500px;
 	padding-bottom:3em;
 }
@@ -70,6 +70,26 @@
 	padding-bottom:3em;
 }
 
+#fond5{
+	background-color:#F4BE40;
+	padding-top:3em;
+	height : 500px;
+	padding-bottom:3em;
+}
+
+#fond5{
+	background-color:#F4BE40;
+	padding-top:3em;
+	height : 500px;
+	padding-bottom:3em;
+}
+
+#fond6{
+	background-color:#DF5E4F;
+	padding-top:3em;
+	height : 500px;
+	padding-bottom:3em;
+}
 
 .acceuil p {
   font-size: 20px;
@@ -134,4 +154,25 @@
 	margin-bottom:1em;
 
 	box-shadow: -1em -1em .3em #8A63A5;
+}
+
+#rech {
+	width:50em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
+	box-shadow: -1em -1em .3em #DFA00D;
+}
+
+#rec {
+	width:50em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
+	box-shadow: -1em -1em .3em #D73A27;
+}
+
+#trouve {
+	width:40em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
+	box-shadow: -1em -1em .3em #D73A27;
 }

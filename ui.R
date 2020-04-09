@@ -177,7 +177,7 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond1", checked = NA,
-                   tags$p(class="accueil", tags$img(id="logo2",src="img/logo2.png")),
+                   tags$p(class="accueil", tags$img(id="logo2",src="img/logo3.png")),
                    tags$br(""),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
                    tags$p(class="accueil", class="titre", "SCUIO-IP"),
@@ -230,6 +230,34 @@ material_page(
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$p(class="accueil", tags$img(id="carte",src="img/Carto.png")),
                    tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France."),
+                   
+          ))),
+      
+      #Fond5 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond5", checked = NA,
+                   tags$p(class="accueil", class="tete","RECHERCHE"),
+                   tags$p(class="accueil", class="titre2","Une idée, une entreprise, une recherche ?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
+                   tags$p(class="accueil", tags$img(id="rech",src="img/Rech.jpg")),
+                   tags$p(class="accueil", "L'onglet Recherche vous permet de visualiser le détail des stages réalisés par les étudiants au cours de ces dernières années."),
+                   tags$p(class="accueil", "De quoi ne pas vous laisser sur votre faim.")
+                   
+          ))),
+      
+      #Fond6 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond6", checked = NA,
+                   tags$p(class="accueil", class="tete","TROUVE TON STAGE"),
+                   tags$p(class="accueil", class="titre2","Tu cherches un stage ?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
+                   tags$p(class="accueil", tags$img(id="trouve",src="img/Reco.jpg")),
+                   tags$p(class="accueil", "Pas toujours évident de savoir où candidater."),
+                   tags$p(class="accueil", "Sur l'onglet Trouve ton stage, différents lieux de stage potentiellement adaptés à ton profil te seront proposés.")
                    
           )))
       
