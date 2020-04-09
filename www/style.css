@@ -44,11 +44,13 @@
 
 #logo_titre{
   height:60px;
+  width : 65px;
   righ-padding : 20px;
 }
 
 #logo {
 	height:4em;
+	width:4em;
 	margin-right: 2em;
 	margin-left: 2em;
 	margin-bottom: 0.3em;

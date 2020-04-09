@@ -311,19 +311,18 @@ shinyServer(function(session,input, output) {
     # dp<-as.data.frame(t)
     # dp
     
-    ggplotly(ggplot(data=pays, aes(x=reorder(Paysetablissement, total), y=total,
-                           fill=Paysetablissement
-                           )) + 
-      geom_bar(stat="identity")+
-      coord_flip()+ 
-      xlab("")+
-      ylab("Nombre de stages")+
-      labs(fill="Pays")+
-      theme(legend.position="none") + 
-      geom_text(aes(label = total),size=3.5, color = "Black")+
-      scale_fill_brewer(palette="PRGn")
+    ggplotly(ggplot(data=pays, aes(x=reorder(Paysetablissement, total), y=total,	
+                                   fill=Paysetablissement	
+    )) + 	
+      geom_bar(stat="identity")+	
+      coord_flip()+ 	
+      xlab("")+	
+      ylab("Nombre de stages")+	
+      labs(fill="Pays")+	
+      theme(legend.position="none") + 	
+      geom_text(aes(label = total),size=3.5, color = "Black")+	
+      scale_fill_brewer(palette="PRGn")	
     )
-    
   })
   
   # GRAPHIQUE EVOLUTION TAUX STAGE ETRANGER
@@ -448,18 +447,18 @@ shinyServer(function(session,input, output) {
              Anneeunivconvention <= input$end_year
              )} else {oi<-data}
     
-    toi<- data %>% 
-      group_by(Originestage) %>% 
-      summarise(total = n())
-    toi<-as.data.frame(toi)
+    toi<- data %>% 	
+      group_by(Originestage) %>% 	
+      summarise(total = n())	
+    toi<-as.data.frame(toi)	
     
-    fig <- plot_ly(data, labels = ~toi$Originestage, values = ~toi$total, type = 'pie',
-                   textinfo = 'label+percent',
-                   marker = list(colors =c('rgb(32,155,127)', 'rgb(242,175,26)','rgb(109,110,114)','rgb(31,115,187)','rgb(127,84,156)')),
-                   showlegend = FALSE)
-    fig <- fig %>% layout(title = '',
-                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+    fig <- plot_ly(data, labels = ~toi$Originestage, values = ~toi$total, type = 'pie',	
+                   textinfo = 'label+percent',	
+                   marker = list(colors =c('rgb(32,155,127)', 'rgb(242,175,26)','rgb(109,110,114)','rgb(31,115,187)','rgb(127,84,156)')),	
+                   showlegend = FALSE)	
+    fig <- fig %>% layout(title = '',	
+                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),	
+                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))	
     
     fig
     
@@ -572,9 +571,9 @@ shinyServer(function(session,input, output) {
                labs(x = "Période",
                     y = "Nombre de stage",
                     fill = "Durée de stage")+
-               #order(c("<1jour","1jour-1semaine","1semaine-1mois","1mois-2mois",">2 mois","1mois-2mois")
-                     #)+
-             theme(legend.position="none")
+               #order(c("<1jour","1jour-1semaine","1semaine-1mois","1mois-2mois",">2 mois","1mois-2mois")	
+               #)+	
+               theme(legend.position="none")	
              +scale_fill_manual(values=c("#1f73bb","#209b7f","#f2af1a","#7f549c","#6d6e72")))
   })
 
@@ -632,7 +631,7 @@ shinyServer(function(session,input, output) {
   
   
   choixpays <-reactive({
-    data %>% filter(Libellecomposante== input$compo2 )
+    data %>% filter(Libellecomposante == input$compo2 )
     
   })
   
@@ -674,8 +673,8 @@ shinyServer(function(session,input, output) {
     
     data %>% 
       filter(ufr == input$id_UFR2,
-                    cycle == input$niveau,
-                    Paysetablissement == input$lieu_stage) %>%
+              cycle == input$niveau,
+              Paysetablissement == input$lieu_stage) %>%
       select(Nometablissement,
              Paysetablissement,
              codeDepartement,
