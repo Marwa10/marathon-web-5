@@ -189,7 +189,7 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond2", checked = NA,
-                   tags$p(class="accueil", class="tete","STAGES"),
+                   tags$a(class="accueil", class="tete", href = "", "STAGES"),
                    tags$p(class="accueil", class="titre2","Envie d'en découvrir davantage?"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$div(class="accueil",id="cases", 

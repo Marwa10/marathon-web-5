@@ -14,6 +14,13 @@ source("carto_fr.R")
 shinyServer(function(session,input, output) {
   data = read.csv2("data/donnees_c2.csv", stringsAsFactors = FALSE)
   
+  
+  data$temps = factor(data$temps, levels = c("< 1jour",
+                                             "1jour-1semaine",
+                                             "1semaine-1mois",
+                                             "1mois-2 mois",
+                                             "> 2mois"))
+  
   data_ufr = read.csv2("data/donnees_ufr.csv", stringsAsFactors = FALSE) 
   
   
@@ -140,10 +147,10 @@ shinyServer(function(session,input, output) {
   })
   
   
-
   
   
-
+  
+  
   toshow = data_ufr %>% 
     select(Anneeunivconvention,
            Originestage,
@@ -158,9 +165,9 @@ shinyServer(function(session,input, output) {
            Numsiret,
            Libellenaf,
            Typeconvention
-           ) %>% 
+    ) %>% 
     rename(
-     `Type convention` = Typeconvention,
+      `Type convention` = Typeconvention,
       URF= ufr,
       Durée = Dureestageenheures,
       Origine = Originestage,
@@ -175,7 +182,7 @@ shinyServer(function(session,input, output) {
   toshow$Cycle = as.factor(toshow$Cycle)
   toshow$Pays = as.factor(toshow$Pays)
   toshow$`Numéro siret` = as.factor(toshow$`Numéro siret`)
-    
+  
   output$plot <- DT::renderDataTable(
     toshow,
     server = TRUE,
@@ -203,36 +210,36 @@ shinyServer(function(session,input, output) {
   #     Etablissement = Var1 ) %>% 
   #   arrange(desc(`Nombre de stage`))
   
-## Valeur checkbox, 1 : stage obligatoire
-##                  2 = stage facultatif 
-  
-
+  ## Valeur checkbox, 1 : stage obligatoire
+  ##                  2 = stage facultatif 
   
   
- 
+  
+  
+  
   
   output$p1 <- renderPlotly({
     
     if(input$activation){
-    c = composante() %>% 
-      filter(cycle == input$id_cycle,
-             ufr == input$id_ufr)
-    
-    
-    trend_year = c  %>% 
-      group_by(Anneeunivconvention,Typeconvention) %>% 
-      summarise(total = n())
-    
-    if(input$c1 & input$c2){
-      g = trend_year
-    }else if (input$c1){
-      g = trend_year %>% 
-        filter(Typeconvention == "Obligatoire")
+      c = composante() %>% 
+        filter(cycle == input$id_cycle,
+               ufr == input$id_ufr)
       
-    }else if(input$c2){
-      g = trend_year %>% 
-        filter(Typeconvention == "Facultatif")
-    }
+      
+      trend_year = c  %>% 
+        group_by(Anneeunivconvention,Typeconvention) %>% 
+        summarise(total = n())
+      
+      if(input$c1 & input$c2){
+        g = trend_year
+      }else if (input$c1){
+        g = trend_year %>% 
+          filter(Typeconvention == "Obligatoire")
+        
+      }else if(input$c2){
+        g = trend_year %>% 
+          filter(Typeconvention == "Facultatif")
+      }
     } else {
       g= data%>%group_by(Anneeunivconvention,Typeconvention) %>% 
         summarise(total = n())}
@@ -251,15 +258,15 @@ shinyServer(function(session,input, output) {
   output$entre <- renderPlotly({
     
     if(input$activation){
+      
+      y <- composante_convention() %>% 
+        filter(ufr == input$id_ufr,
+               cycle == input$id_cycle,
+               Anneeunivconvention >= input$start_year,
+               Anneeunivconvention <= input$end_year
+        ) } else {y=data}
     
-    y <- composante_convention() %>% 
-      filter(ufr == input$id_ufr,
-             cycle == input$id_cycle,
-             Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year
-      ) } else {y=data}
     
-
     
     naf<- y %>% 
       group_by(Nometablissement) %>%
@@ -269,16 +276,16 @@ shinyServer(function(session,input, output) {
     
     ggplotly(ggplot(data= naf, aes(x=reorder(Nometablissement,total), y= total#,
                                    #fill= Nometablissement
-                                   )) +
-               geom_bar(stat="identity")+ 
-               coord_flip()+
-               ggtitle("") +
-               xlab("") + 
-               geom_text(aes(label = total),size=3.5, color = "Black")+
-               ylab("Nombre de stages") +
-               theme(legend.position="none")#+ 
-               #scale_fill_brewer(palette="Spectral")
-             )
+    )) +
+      geom_bar(stat="identity")+ 
+      coord_flip()+
+      ggtitle("") +
+      xlab("") + 
+      geom_text(aes(label = total),size=3.5, color = "Black")+
+      ylab("Nombre de stages") +
+      theme(legend.position="none")#+ 
+    #scale_fill_brewer(palette="Spectral")
+    )
     
   })
   
@@ -287,12 +294,12 @@ shinyServer(function(session,input, output) {
   output$pays <- renderPlotly({
     
     if(input$activation){
-    y <- composante_convention() %>% 
-      filter(ufr == input$id_ufr,
-             cycle == input$id_cycle,
-             Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year
-      ) } else {y<-data}
+      y <- composante_convention() %>% 
+        filter(ufr == input$id_ufr,
+               cycle == input$id_cycle,
+               Anneeunivconvention >= input$start_year,
+               Anneeunivconvention <= input$end_year
+        ) } else {y<-data}
     
     pays = y %>% 
       filter(Paysetablissement!="FRANCE") %>% 
@@ -301,7 +308,7 @@ shinyServer(function(session,input, output) {
       top_n(10)
     
     
-
+    
     # 
     # pays<-subset(w,Paysetablissement!="FRANCE")
     # 
@@ -330,12 +337,12 @@ shinyServer(function(session,input, output) {
   output$tauxetr <- renderPlotly({
     
     if(input$activation){
-    
-    if(input$compo != "Toutes les composantes"){
-      t<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
-          t<-data
-        }
+      
+      if(input$compo != "Toutes les composantes"){
+        t<-data %>% 
+          filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+            t<-data
+          }
       
     } else{t<-data}
     
@@ -354,7 +361,7 @@ shinyServer(function(session,input, output) {
     p<-ggplot(data=ta2, aes(x=ta2$Anneeunivconvention, y=ta2$total)) + 
       geom_bar(stat="identity",fill = "#f2af1a"#,
                #color = "#C4961A"
-               )+ 
+      )+ 
       ggtitle("") +
       xlab("") + 
       geom_text(aes(label = total),size=3.5, color = "Black")+
@@ -371,11 +378,11 @@ shinyServer(function(session,input, output) {
   output$nbstage <- renderPlotly({
     
     if(input$activation){
-    u = composante_convention() %>% 
-      filter(cycle == input$id_cycle,
-             ufr == input$id_ufr) %>% 
-      group_by(Anneeunivconvention) %>% 
-      summarise(total = n())
+      u = composante_convention() %>% 
+        filter(cycle == input$id_cycle,
+               ufr == input$id_ufr) %>% 
+        group_by(Anneeunivconvention) %>% 
+        summarise(total = n())
     } else {u=data%>% 
       group_by(Anneeunivconvention) %>% 
       summarise(total = n())
@@ -384,7 +391,7 @@ shinyServer(function(session,input, output) {
     p<-ggplot(data= u , aes(x=Anneeunivconvention,y= total)) + 
       geom_bar(stat="identity",fill = "#6d6e72"
                #, color = "#C4961A"
-               )+ 
+      )+ 
       ggtitle("") +
       xlab("") + 
       geom_text(aes(label = total),size=3.5, color = "Black")+
@@ -395,8 +402,8 @@ shinyServer(function(session,input, output) {
     
   })
   
-
-
+  
+  
   
   
   # GRAPHIQUE DIAGRAMME TAUX FACULTATIF
@@ -405,12 +412,12 @@ shinyServer(function(session,input, output) {
   output$taux <- renderPlotly({
     
     if(input$activation){
-    
-    if(input$compo != "Toutes les composantes"){
-      o<-data %>% 
-        filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
-          o<-data
-        }} else {o<-data}
+      
+      if(input$compo != "Toutes les composantes"){
+        o<-data %>% 
+          filter(Libellecomposante == input$compo) } else if (input$compo == "Toutes les composantes"){
+            o<-data
+          }} else {o<-data}
     
     to<- o %>% 
       group_by(Typeconvention) %>% 
@@ -439,15 +446,16 @@ shinyServer(function(session,input, output) {
   output$origine <- renderPlotly({
     
     if(input$activation){
+      
+      oi<- composante_convention() %>% 
+        filter(ufr == input$id_ufr,
+               cycle == input$id_cycle,
+               Anneeunivconvention >= input$start_year,
+               Anneeunivconvention <= input$end_year
+        )} else {
+          oi<-data}
     
-    oi<- composante_convention() %>% 
-      filter(ufr == input$id_ufr,
-             cycle == input$id_cycle,
-             Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year
-             )} else {oi<-data}
-    
-    toi<- data %>% 	
+    toi<- oi %>% 	
       group_by(Originestage) %>% 	
       summarise(total = n())	
     toi<-as.data.frame(toi)	
@@ -470,26 +478,26 @@ shinyServer(function(session,input, output) {
   output$indem <- renderPlotly({
     
     if(input$activation){
-    
-    j <- composante_convention() %>% 
-      filter(ufr == input$id_ufr,
-             cycle == input$id_cycle,
-             Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year
-      )
+      
+      j <- composante_convention() %>% 
+        filter(ufr == input$id_ufr,
+               cycle == input$id_cycle,
+               Anneeunivconvention >= input$start_year,
+               Anneeunivconvention <= input$end_year
+        )
     }else{j<-data}
-  
+    
     tu<- j %>% 
       group_by(Indemnisation) %>% 
       summarise(total = n())
-
+    
     fig <- plot_ly(data, labels = ~tu$Indemnisation, values = ~tu$total, type = 'pie',
                    textinfo = 'label+percent',
                    marker = list(colors =c('rgb(242,175,26)', 'rgb(215,58,39)','rgb(32,155,127)')),
                    showlegend = FALSE)
     fig <- fig %>% layout(
-                          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-                          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+      xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+      yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
     
     fig
   })
@@ -504,10 +512,10 @@ shinyServer(function(session,input, output) {
   output$p2 <- renderPlotly({
     
     if(input$activation){
-    
-    to_use = type_convention() %>% 
-      filter(Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year)
+      
+      to_use = type_convention() %>% 
+        filter(Anneeunivconvention >= input$start_year,
+               Anneeunivconvention <= input$end_year)
     } else {to_use=data}
     
     ggplotly(ggplot(to_use, aes(cycle, color=cycle, fill=cycle)) +
@@ -518,16 +526,16 @@ shinyServer(function(session,input, output) {
   })
   
   
-
+  
   
   ## Distribution des stages en fonction de la composante
-
+  
   
   output$p3 <- renderPlotly({
     to_use = data
     ggplotly(ggplot(to_use, aes(Anneeunivconvention, color=Libellecomposante, fill=Libellecomposante)) +
                geom_bar(position= "identity") +
-              # coord_flip()+ 
+               # coord_flip()+ 
                labs(x = "Année",
                     y = "Nombre de stages",
                     fill = "Composante"))
@@ -540,31 +548,34 @@ shinyServer(function(session,input, output) {
   output$p4 <- renderPlotly({
     
     if(input$activation){
-    to_use = type_convention() %>% 
+      to_use = type_convention() %>% 
         filter(Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year) }else{to_use=data}
-  
+               Anneeunivconvention <= input$end_year) }else{to_use=data}
+    
     ggplotly(ggplot(to_use, aes(ufr, color=ufr, fill=ufr)) +
                geom_bar(position= "identity") +
                labs(x = "UFR",
                     y = "Nombre de stages",
                     fill = "UFR")+
-              theme(legend.position="none"))
-   
+               theme(legend.position="none"))
+    
   })
   
   
   output$p5 <- renderPlotly({
-   
-    if(input$activation){
-    to_use = data %>% 
-      filter(!is.na(temps),
-             ufr == input$id_ufr,
-             cycle == input$id_cycle,
-             Anneeunivconvention >= input$start_year,
-             Anneeunivconvention <= input$end_year)
     
-    }else{to_use=data}
+    if(input$activation){
+      to_use = data %>% 
+        filter(!is.na(temps),
+               ufr == input$id_ufr,
+               cycle == input$id_cycle,
+               Anneeunivconvention >= input$start_year,
+               Anneeunivconvention <= input$end_year)
+      
+    }else{
+      to_use=data %>% 
+        filter(!is.na(temps))
+    }
     
     ggplotly(ggplot(to_use, aes(temps, fill = temps)) +
                geom_bar(position= "identity") +
@@ -573,20 +584,22 @@ shinyServer(function(session,input, output) {
                     fill = "Durée de stage")+
                #order(c("<1jour","1jour-1semaine","1semaine-1mois","1mois-2mois",">2 mois","1mois-2mois")	
                #)+	
-               theme(legend.position="none")	
-             +scale_fill_manual(values=c("#1f73bb","#209b7f","#f2af1a","#7f549c","#6d6e72")))
+               theme(legend.position="none",
+                     axis.text.x = element_text(angle = 45, hjust = 1))	
+             +scale_fill_manual(values=c("#1f73bb","#209b7f","#f2af1a","#7f549c","#6d6e72"))
+    )
   })
-
+  
   ### Cartographie
   
   output$map <- renderLeaflet({
     m
   })
   
-   
+  
   output$map_fr <- renderLeaflet({
-     m_dep 
-   })
+    m_dep 
+  })
   
   # output$t_dep<- renderD3tree2({
   #   d3tree2(dep)
@@ -597,6 +610,7 @@ shinyServer(function(session,input, output) {
   # })
   
   
+  # TABLEAU RECOMMANDATIONS
   # TABLEAU RECOMMANDATIONS
   
   choixcycle <-reactive({
@@ -615,15 +629,15 @@ shinyServer(function(session,input, output) {
   
   
   choixcomposante <-reactive({
-   data %>% filter(cycle == input$niveau )
+    data %>% filter(cycle == input$niveau )
   })
   
   observeEvent(input$niveau, { 
-   a <- choixcomposante()
+    a <- choixcomposante()
     liste=unique(a$Libellecomposante)
-   update_material_dropdown(session,
-                            input_id = "compo2",
-                            choices=liste,value=liste[1])
+    update_material_dropdown(session,
+                             input_id = "compo2",
+                             choices=liste,value=liste[1])
   })
   
   
@@ -673,8 +687,8 @@ shinyServer(function(session,input, output) {
     
     data %>% 
       filter(ufr == input$id_UFR2,
-              cycle == input$niveau,
-              Paysetablissement == input$lieu_stage) %>%
+             cycle == input$niveau,
+             Paysetablissement == input$lieu_stage) %>%
       select(Nometablissement,
              Paysetablissement,
              codeDepartement,
@@ -706,8 +720,6 @@ shinyServer(function(session,input, output) {
     #     `Numéro siret` = Numsiret,
     #     `Secteur d'activité`=Libellenaf)
   )
-  
-  
   
   
   
