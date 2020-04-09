@@ -9,14 +9,16 @@ library(leaflet)
 
 material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
-  #nav_bar_color = "#ffe082 amber lighten-3",
+  nav_bar_color = "#ffe082 amber lighten-1",
   #nav_bar_color = "#bdbdbd grey lighten-1",
-  nav_bar_color = "#eeeeee grey lighten-2",
-  title = HTML('<img src="img/logo-orange-vf2.png" alt="logo" id = "img_logo"><span id ="titre">Paul In </span>'),
-  # tags$div(id = "header", tags$img(id="logo", src="img/logo-orange-vf2.png")), 
-  # je sais que ça va pas mais il m'emmerde ce fucking logo --'
 
-  include_nav_bar = TRUE,
+  title = HTML('<span id ="titre">Paul In </span>'),
+
+
+  #include_nav_bar = TRUE,
+  
+  
+#Menu des filtres #### 
   material_side_nav(
     fixed = FALSE, 
     br(),
@@ -138,30 +140,29 @@ material_page(
         )))
   ),
   
-  
+
+#Menu de navigation ####  
   # Define tabs
   material_tabs(
     #color = "Moccasin",
-    color = "black",
+    #color = "#ffe082",
     tabs = c(
       "Accueil" = "accueil",
       "Stages" = "stage",
       "Profil des stagiaire"= "stagiaire",
       "Cartographie"= "carto",
       "Recherche" = "recherche",
-      "Trouves ton stage" = "test"
-      
-      
+      "Trouve ton stage" = "test",
+      "Contact" = "contact",
+      "FAQ" = "FAQ"
     )
   ),
   
+
   
-  # material_tab_content(
-  #   tab_id = "exemple"),
+
+#Onglet Accueil ####
   
-  
-  
-  # Define side-nav tab content
   material_tab_content(
     tab_id = "accueil",
     
@@ -189,11 +190,11 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond2", checked = NA,
-                   tags$p(class="accueil", "STAGES"),
-                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
-                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$p(class="accueil", class="tete","STAGES"),
+                   tags$p(class="accueil", class="titre2","Envie d'en découvrir davantage?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$div(class="accueil",id="cases", 
-                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
+                            tags$div(class="case",tags$p(class="chiffre","4 408"),tags$p("Stages réalisés"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
                    tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
@@ -206,17 +207,33 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond3", checked = NA,
-                   tags$p(class="accueil", "STAGES"),
-                   tags$p(class="accueil", class="titre","Envie d'en découvrir davantage?"),
-                   tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
+                   tags$p(class="accueil", class="tete","PROFIL DES STAGIAIRES"),
+                   tags$p(class="accueil", class="titre2","Les stagiaires au coeur des statistiques"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$div(class="accueil",id="cases", 
-                            tags$div(class="case",tags$p(class="chiffre","4408"),tags$p("Stages réalisés"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
-                   tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
-                   tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")
+                            tags$div(class="case",tags$p(class="chiffre","20 334"),tags$p("Stages effectués"),tags$p("depuis 2014")),
+                            tags$div(class="case",tags$p(class="chiffre","1.53"),tags$p("Stages en moyenne"),tags$p("par étudiant")),
+                            tags$div(class="case",tags$p(class="chiffre","43%"),tags$p("de candidature spontanée")),
+                            tags$div(class="case",tags$p(class="chiffre","19.4%"),tags$p("de stages facultatifs"))),
+                   tags$p(class="accueil", "Les cycles universitaires, les composantes ainsi que les IFR regorgent d'informations quant à la distribution des stages."),
+                   tags$p(class="accueil", "Cliquez sur l'onglet Profil des stagiaires afin d'en savoir plus.")
                    
-          )))  
+          ))),
+      
+      #Fond4 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond4", checked = NA,
+                   tags$p(class="accueil", class="tete","CARTOGRAPHIE"),
+                   tags$p(class="accueil", class="titre2","Visitez le monde à l'aide de notre cartographie"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
+                   tags$p(class="accueil", tags$img(id="carte",src="img/Carto.png")),
+                   tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France."),
+                   
+          )))
+      
+      
       
     ),
     
@@ -231,14 +248,13 @@ material_page(
              
       ))
     
-  )
- # ))
-,
+  ),
+
+
   
   
   
-  
-  
+#Onglet Stage ####  
   material_tab_content(
     offset = 1,
     tab_id = "stage",
@@ -410,15 +426,20 @@ material_page(
           
         )
       )
-    )
-  )
+    ),
   
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
+  ),
+
   
-  
-  
- ,
-  
-  
+#Onglet Stagiaires ####    
   material_tab_content(
     offset = 1,
     tab_id = "stagiaire",
@@ -483,11 +504,22 @@ material_page(
           )
         )
       )
-    )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
     
     
     
   ),
+
+#Onglet Recherche #### 
   material_tab_content(
     offset = 1,
     tab_id = "recherche",
@@ -498,9 +530,64 @@ material_page(
         dataTableOutput("plot")
         
       )
-    )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
+  ),
+
+#Onglet Contact  #### 
+  material_tab_content(
+    offset = 1,
+    tab_id = "contact",
+    material_row(
+      material_column(
+        width = 10
+        
+        
+      )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
   ),
   
+#Onglet FAQ  #### 
+  material_tab_content(
+    offset = 1,
+    tab_id = "FAQ",
+    material_row(
+      material_column(
+        width = 10,
+  
+        
+      )
+    ),
+    
+    #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
+  ),
+
+
+#Onglet Carto  #### 
   material_tab_content(
     tab_id = "carto",
     material_row(
@@ -509,7 +596,7 @@ material_page(
         width = 10,
         material_card(
           title = "Stages en France",
-          leafletOutput("map_fr")
+          #leafletOutput("map_fr")
     ))),
     material_row(
       material_column(
@@ -517,10 +604,10 @@ material_page(
         width = 10,
         material_card(
           title = "Stages à l'étranger", 
-          leafletOutput("map")
+          #leafletOutput("map")
         )
       )
-    )
+    ),
     # material_row(
     #   material_column(
     #     offset = 1,
@@ -536,6 +623,16 @@ material_page(
     #     
     #   )
     # )
+ 
+  #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
+
   ),
 
 material_tab_content(
@@ -723,7 +820,15 @@ material_tab_content(
         
       )
     )
-  )
+  ),
+      #Footer    
+    material_column(
+      width = 12,
+      tags$a(id = "footer", checked = NA,
+             tags$img(id="logo",src="img/logo-orange-vf2.png"),
+             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+             
+      ))
 )
 )
 

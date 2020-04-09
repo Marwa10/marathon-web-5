@@ -2,6 +2,7 @@
 library(dplyr)
 library(treemap)
 library(stringr)
+library(htmlwidgets)
 #inspiration : 
 # http://www.buildingwidgets.com/blog/2015/7/22/week-29-d3treer-v2
 
@@ -63,9 +64,9 @@ tree_map_filiere_dep <- treemap(data_resume_tree_by_filliere,
 
 # Mise en place de l'interactivité
 titre= "Répartition des stages  par fillière et départment (taille Nbre de stages, couleur :  nbre d'heures) "
-d3tree( tree_map_filiere_dep,rootname = titre)
-d3tree2( tree_map_filiere_dep ,  rootname = titre )
-
+#d3tree( tree_map_filiere_dep,rootname = titre)
+inter_dep<-d3tree2( tree_map_filiere_dep ,  rootname = titre )
+saveWidget(inter, file=paste0( getwd(), "/www/tree_map_filiere_dep.html"))
  #############################
 
 
@@ -103,9 +104,13 @@ tree_map_filiere_etab <- treemap(data_resume_tree_by_filliere_etab,
 
 # Mise en place de l'interactivité
 titre= "Répartition des stages par filière, etablissement (taille Nbre de stages, couleur :  nbre d'heures) "
-d3tree( tree_map_filiere_etab,rootname = titre)
-d3tree2( tree_map_filiere_etab ,  rootname = titre )
+#d3tree( tree_map_filiere_etab,rootname = titre)
 
+inter <-d3tree2( tree_map_filiere_etab ,  rootname = titre )
+
+# save the widget
+# library(htmlwidgets)
+saveWidget(inter, file=paste0( getwd(), "/www/treemap_filiere_etab.html"))
 
 
 ####################### fin du code à  intégrer ############
