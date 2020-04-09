@@ -313,7 +313,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title="Origine du stage",
+                title="Origine des stage",
                 plotlyOutput("origine")
               )
             ),
@@ -342,7 +342,7 @@ material_page(
         ),
         
         material_card(
-          title = "Caractéristiques techniques des stages effetués",
+          title = "Caractéristiques techniques des stages effectués",
           material_row(
             
             # GRAPHIQUE EVO STAGE ETRANGER
@@ -376,7 +376,7 @@ material_page(
             material_column(
               width = 12,
               material_card(
-                title = "Les entreprises ayant recruté des stagiaires",
+                title = "Les entreprises ayant recruté le plus de stagiaires",
                 plotlyOutput("entre")
               )
             )
@@ -392,7 +392,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Top 10 des pays préférés",
+                title = "Top des pays préférés par les étudiants",
                 plotlyOutput("pays")
               )
             ),
@@ -402,7 +402,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Evolution des stages à l'étranger",
+                title = "Evolution du nombre de stages à l'étranger",
                 plotlyOutput("tauxetr")
               )
             )
