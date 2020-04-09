@@ -1,4 +1,25 @@
 /* Pied de page */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.tabs .tab a {
+  color : black;
+}
+
+
+
+.tabs .tab a:hover, .tabs .tab a.active{
+  color: #e2b630;
+}
+
+
+#logo_titre{
+  height:60px;
+  width : 65px;
+  righ-padding : 20px;
+}
+
 #logo {
 	height:4em;
 	width:4em;
@@ -31,9 +52,10 @@
 
 #titre {
   color : black;
-  font-family: arial;
+  font-family: 'Montserrat', sans-serif;
   font-size: 30px;
   margin-left : 14px;
+  padding-bottom: 50px;
 }
 
 
@@ -121,7 +143,7 @@
 	background-image:url("img/fond1.jpg");
 	background-repeat: no-repeat ;
 	padding-bottom:3em;
-	height : 500px;
+	height : 100vh;
 	padding-bottom:3em;
 	background-size: cover;
 }
@@ -129,21 +151,21 @@
 #fond2{
 	background-color:#2ABC9B;
 	padding-top:4em;
-	height : 500px;
+	height : 100vh;
 	padding-bottom:3em;
 }
 
 #fond3{
 	background-color:#99D1CB;
 	padding-top:6em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
 #fond4{
 	background-color:#A486B9;
 	padding-top:3em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
@@ -157,14 +179,14 @@
 #fond5{
 	background-color:#F4BE40;
 	padding-top:3em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
 #fond6{
 	background-color:#DF5E4F;
 	padding-top:3em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
@@ -251,5 +273,10 @@
 }
 
 
-
+p.accueil{
+  font-size : 20px;
+  margin : 2px;
+  /*padding-left: 15px;*/
+  /*padding-right: 15px;*/
+}
 

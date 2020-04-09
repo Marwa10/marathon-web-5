@@ -610,8 +610,25 @@ shinyServer(function(session,input, output) {
                              value=liste[1])
   })
   
+  
+  choixcomposante <-reactive({
+   data %>% filter(cycle == input$niveau )
+  })
+  
+  observeEvent(input$niveau, { 
+   a <- choixcomposante()
+    liste=unique(a$Libellecomposante)
+   update_material_dropdown(session,
+                            input_id = "compo2",
+                            choices=liste,value=liste[1])
+  })
+  
+  
+  
+  
+  
   choixpays <-reactive({
-    data %>% filter(cycle == input$niveau )
+    data %>% filter(Libellecomposante== input$compo2 )
     
   })
   
@@ -625,15 +642,15 @@ shinyServer(function(session,input, output) {
   })
   
   
-  #  tps <-reactive({
-  #   data %>%
-  #    filter(ufr == input$id_UFR2,
-  #          cycle == input$niveau,
-  #         Paysetablissement == input$lieu_stage#,
-  #            #Libellecomposante == input$compo2
-  #     )
-  #   
-  # })
+  #   tps <-reactive({
+  #    data %>%
+  #     filter(ufr == input$id_UFR2,
+  #           cycle == input$niveau,
+  #          Paysetablissement == input$lieu_stage#,
+  #             Libellecomposante == input$compo2
+  #      )
+  # #   
+  # # })
   
   #choixcomposante <-reactive({
   # data %>% filter(cycle == input$niveau )

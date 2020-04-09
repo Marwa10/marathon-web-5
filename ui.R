@@ -9,10 +9,10 @@ library(leaflet)
 
 material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
-  nav_bar_color = "#ffe082 amber lighten-1",
-  #nav_bar_color = "#bdbdbd grey lighten-1",
+  #nav_bar_color = "#ffe082 amber lighten-1",
+  nav_bar_color = 'white', 
   
-  title = HTML('<span id ="titre">Paul In </span>'),
+  title = HTML('<img  id ="logo_titre" src="img/logo-orange-vf2.png"><span id ="titre">Paul In Pro </span>'),
   
   
   #include_nav_bar = TRUE,
@@ -175,8 +175,9 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond1", checked = NA,
+                   tags$br(),
                    tags$p(class="accueil", tags$img(id="logo2",src="img/logo3.png")),
-                   tags$br(""),
+                   #tags$br(""),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
                    tags$p(class="accueil", class="titre", "SCUIO-IP"),
                    tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
@@ -697,19 +698,19 @@ material_tab_content(
       )
       
     ),
-    #  material_column(
-    #  offset = 1,
-    # width = 10,
-    #  material_dropdown(
-    #     input_id = "compo2",
-    #      label = "Ma composante",
-    # choices = NULL,
-    #  #selected = "Toutes les composantes",
     
-    
+      material_column(
+      offset = 1,
+     width = 10,
+      material_dropdown(
+         input_id = "compo2",
+          label = "Ma composante",
+          choices = NULL,
+         selected = "Toutes les composantes"
     #   color = "green"
-    #  )
-    # ),
+      )
+     ),
+    
     material_column(
       offset = 1,
       width = 10,
