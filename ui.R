@@ -177,7 +177,7 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond1", checked = NA,
-                   tags$p(class="accueil", tags$img(id="logo2",src="img/logo2.png")),
+                   tags$p(class="accueil", tags$img(id="logo2",src="img/logo3.png")),
                    tags$br(""),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
                    tags$p(class="accueil", class="titre", "SCUIO-IP"),
@@ -255,9 +255,9 @@ material_page(
                    tags$p(class="accueil", class="tete","TROUVE TON STAGE"),
                    tags$p(class="accueil", class="titre2","Tu cherches un stage ?"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
-                   tags$p(class="accueil", tags$img(id="rech",src="img/Rech.jpg")),
-                   tags$p(class="accueil", "PAS FINI."),
-                   tags$p(class="accueil", "bla")
+                   tags$p(class="accueil", tags$img(id="trouve",src="img/Reco.jpg")),
+                   tags$p(class="accueil", "Pas toujours évident de savoir où candidater."),
+                   tags$p(class="accueil", "Sur l'onglet Trouve ton stage, différents lieux de stage potentiellement adaptés à ton profil te seront proposés.")
                    
           )))
       
