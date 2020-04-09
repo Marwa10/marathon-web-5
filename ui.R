@@ -143,7 +143,7 @@ material_page(
   
   material_tabs(
     #color = "Moccasin",
-    color = "black",
+    color = "#ffe082",
     tabs = c(
       "Accueil" = "accueil",
       "Stage" = "stage",
@@ -194,7 +194,7 @@ material_page(
                    tags$div(class="accueil",id="cases", 
                             tags$div(class="case",tags$p(class="chiffre","4 408"),tags$p("Stages réalisés"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
+                            tags$div(class="case",tags$p(class="chiffre","322"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
                    tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
                    tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")
                    
