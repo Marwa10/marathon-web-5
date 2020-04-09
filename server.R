@@ -11,7 +11,7 @@ library(plotly)
 #source("test_treemap_EmmanuelP.R")
 
 
-shinyServer(function(input, output) {
+shinyServer(function(session,input, output) {
   data = read.csv2("data/donnees_c2.csv", stringsAsFactors = FALSE)
   
   data_ufr = read.csv2("data/donnees_ufr.csv", stringsAsFactors = FALSE) 
@@ -518,53 +518,54 @@ shinyServer(function(input, output) {
   
   # TABLEAU RECOMMANDATIONS
   
-  #pays <- reactive({
-  #  if(input$lieu_stage == "Peu importe !"){
-    #  c = data_ufr
-   # } else{
-  #    c = data_ufr %>%
-     #   filter(Paysetablissement == input$lieu_stage)
-    #}
-   # c
-  #})
+  choixcycle <-reactive({
+    data %>% filter(ufr == input$id_UFR2 )
+    
+  })
   
-  #c <- pays() %>% 
-   # filter(Paysetablissement == input$lieu_stage#,
-           #cycle == input$niveau,
-           #ufr == input$id_UFR2,
-           #Libellecomposante  == input$compo2
-    #       )
-  
-
-  toshow3 = pays() %>% 
-    select(Nometablissement,
-           Paysetablissement,
-           CodeDepartement,
-           Numsiret,
-           Libellenaf,
-           Typeconvention,
-           Indemnisation
-    ) %>% 
-    rename(
-      `Type convention` = Typeconvention,
-      #URF= ufr,
-      #Durée = Dureestageenheures,
-      #Origine = Originestage,
-      #Année = Anneeunivconvention,
-      Etablissement =  Nometablissement,
-      #Composante = Libellecomposante,
-      #Cycle = cycle,
-      Pays = Paysetablissement,
-      Département = CodeDepartement,
-      `Numéro siret` = Numsiret,
-      "Secteur d'activité"=Libellenaf)
+  observeEvent(input$id_UFR2, { 
+    a <- choixcycle()
+    liste=unique(a$cycle)
+    update_material_dropdown(session,input_id = "niveau", choices=liste,value=liste[1])
+  })
   
   #toshow3$Cycle = as.factor(toshow3$Cycle)
   #toshow3$Pays = as.factor(toshow3$Pays)
   #toshow3$`Numéro siret` = as.factor(toshow3$`Numéro siret`)
   
   output$plot2 <- DT::renderDataTable(
-    toshow3,
+    
+    data_ufr %>%
+      filter(ufr == input$id_UFR2,
+             cycle == input$niveau)%>%
+      select(Nometablissement,
+             Paysetablissement,
+             CodeDepartement,
+             Numsiret,
+             Libellenaf,
+             Typeconvention,
+             Indemnisation
+      ) %>% 
+      group_by(Nometablissement,Paysetablissement,CodeDepartement,Numsiret,
+              Libellenaf,
+              Typeconvention,
+              Indemnisation )%>% summarise(`Nombre de stages`=n())%>% 
+      arrange(desc(`Nombre de stages`))%>% 
+      rename(
+        `Type convention` = Typeconvention,
+        #URF= ufr,
+        #Durée = Dureestageenheures,
+        #Origine = Originestage,
+        #Année = Anneeunivconvention,
+        Etablissement =  Nometablissement,
+        #Composante = Libellecomposante,
+        #Cycle = cycle,
+        Pays = Paysetablissement,
+        Département = CodeDepartement,
+        `Numéro siret` = Numsiret,
+        `Secteur d'activité`=Libellenaf)
+    
+ ,
     #server = TRUE,
     rownames = FALSE#,
     #filter = "top",

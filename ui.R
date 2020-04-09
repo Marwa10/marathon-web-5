@@ -676,9 +676,8 @@ material_tab_content(
     material_dropdown(
       input_id = "niveau",
       label = "Mon niveau",
-      choices = c("AUTRE (pluri?)"   , "Doctorat"  ,     "DU"       ,      "DUT"        ,    "Licence"   ,     "LP"            
-                  , "Master"     ,    "Mobilit?"),
-      selected = "Master",
+     choices = NULL ,
+      #selected = "Master",
       
       
       color = "green"
