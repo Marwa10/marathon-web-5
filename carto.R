@@ -1,8 +1,24 @@
+# Changelog
+# emp:  mise en 
+
+# todo :  enlever les données de la france ou les minimiser
+
+# chargement des librairies
 library(dplyr)
 library(leaflet)
 library(rgdal)
+
 library(RColorBrewer)
 
+# inspiration
+#https://www.r-graph-gallery.com/183-choropleth-map-with-leaflet.html
+# Download the shapefile. (note that I store it in a folder called DATA. You have to change that if needed.)
+#download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" , destfile="data/world_shape_file.zip")
+# You now have it in your current working directory, have a look!
+
+# Unzip this file. You can do it with R (as below), or clicking on the object you downloaded.
+#system("unzip data/world_shape_file.zip")
+#  -- >
 
 
 # récupération des données de stage
@@ -14,11 +30,12 @@ pays = read.csv2("data/pays2020.csv",sep = ',')
 result <- merge(data,pays,by.x="Paysetablissement", by.y="libcog", all= TRUE)
 
 # regroupement 
-head(result)
+
 interships_counts_by_country <- result %>%
   group_by(codeiso3) %>%
   summarise(number_internships = n(),
-            nb_heures = sum(as.numeric( Duree_calcul)))
+            nb_heures = sum(as.numeric( Duree_calcul)),
+            nb_etab = n_distinct(Numsiret))
 
 
 #names(interships_counts_by_country)[names(interships_counts_by_country) == 'n'] <- 'number_internships'
@@ -38,21 +55,22 @@ world_spdf <-merge(world_spdf,interships_counts_by_country,by.x="ISO3", by.y = "
 
 
 
-mybins <- c(0,10,20,50,100,10000,Inf)
+mybins <- c(1,10,20,50,100,10000,Inf)
 
 # creation de la palette:
 mypalette <- colorBin( palette="YlOrBr", domain=world_spdf@data$number_internships, na.color="transparent", bins=mybins)
 
 # Tooltips
 mytext <- paste(
-  "Country: ", world_spdf@data$NAME,"<br/>", 
-  "Area: ", world_spdf@data$AREA, "<br/>", 
-  "Number of internships: ", round(world_spdf@data$number_internships, 2), 
+  "Pays: ", world_spdf@data$NAME,"<br/>", 
+  "Nombre de stages: ", round(world_spdf@data$number_internships, 2), "<br/>", 
+  "Cumul des heures: ",round(world_spdf@data$nb_heures, 2), "<br/>", 
+  "Nombre d'établissements d'accueil: ",world_spdf@data$nb_etab,"<br/>", 
   sep="") %>%
   lapply(htmltools::HTML)
 
 # carte Finale
-map = leaflet(world_spdf) %>% 
+m <- leaflet(world_spdf) %>% 
   addTiles()  %>% 
   setView( lat=10, lng=0 , zoom=2) %>%
   addPolygons( 
@@ -68,6 +86,9 @@ map = leaflet(world_spdf) %>%
       direction = "auto"
     )
   ) %>%
-  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Number internships", position = "bottomleft" )
+  addLegend( pal=mypalette, values=~number_internships, opacity=0.9, title = "Nombre de stages", position = "bottomleft" )
 
-map
+m  
+
+###### fin du code à  intégrer ##########
+
