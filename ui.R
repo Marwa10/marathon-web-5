@@ -611,7 +611,7 @@ material_tab_content(
       width = 10,
       material_card(
         title = "Stages en France",
-        leafletOutput("map_fr")
+        #leafletOutput("map_fr")
       ))),
   material_row(
     material_column(
@@ -619,7 +619,7 @@ material_tab_content(
       width = 10,
       material_card(
         title = "Stages à l'étranger",
-        leafletOutput("map")
+        #leafletOutput("map")
       )
     )
   ),
