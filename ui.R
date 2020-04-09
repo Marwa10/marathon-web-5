@@ -580,12 +580,12 @@ material_tab_content(
                ),
                
                tags$div(class="boxfaq",
-                        tags$p(class="headfaq","Je veux contacter un professionnel d'un ?tablissement. Comment faire ?"),
+                        tags$p(class="headfaq","Je veux contacter un professionnel d'un établissement. Comment faire ?"),
                         tags$p(class="parfaq","Vous pouvez vous approcher des personnels du SCUIO-IP qui sauront vous diriger vers l'organisme en question.")
                ),
                
                tags$div(class="boxfaq",
-                        tags$p(class="headfaq","A quoi servent les options de filtrage situ?s ? gauche de mon ?cran ?"),
+                        tags$p(class="headfaq","A quoi servent les options de filtrage situés à gauche de mon écran ?"),
                         tags$p(class="parfaq","Les filtres situés dans le menu, à gauche de votre écran, s'appliquent sur toutes les pages du site web, excepté sur l'onglet Recherche. En sélectionnant les paramètres que vous souhaitez, vous pourriez visualiser les graphiques définis en fonction de vos choix.")
                )
                
@@ -611,7 +611,7 @@ material_tab_content(
       width = 10,
       material_card(
         title = "Stages en France",
-        leafletOutput("map_fr")
+        #leafletOutput("map_fr")
       ))),
   material_row(
     material_column(
@@ -619,7 +619,7 @@ material_tab_content(
       width = 10,
       material_card(
         title = "Stages à l'étranger",
-        leafletOutput("map")
+        #leafletOutput("map")
       )
     )
   ),
