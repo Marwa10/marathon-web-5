@@ -451,14 +451,14 @@ material_page(
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 43% </center></strong>"), 
-                          HTML("<center>de candidature spontanée</center>"),
+                          HTML("<center>De candidatures spontanées</center>"),
                           color = "white",
                           depth = 1)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
-                          HTML("<center> de stages facultatifs </center>"),
+                          HTML("<center> De stages facultatifs </center>"),
                           color = "white",
                           depth = 1)
           )
@@ -552,7 +552,7 @@ material_tab_content(
     width = 12,
     tags$a(id = "footer", checked = NA,
            tags$img(id="logo",src="img/logo-orange-vf2.png"),
-           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Universit? : 04 67 14 20 00")
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
            
     ))
   
@@ -595,7 +595,7 @@ material_tab_content(
     width = 12,
     tags$a(id = "footer", checked = NA,
            tags$img(id="logo",src="img/logo-orange-vf2.png"),
-           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Universit? : 04 67 14 20 00")
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
            
     ))
 ),
