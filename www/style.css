@@ -51,7 +51,7 @@
 
 #fond2{
 	background-color:#2ABC9B;
-	padding-top:3em;
+	padding-top:4em;
 	height : 500px;
 	padding-bottom:3em;
 }
@@ -160,6 +160,19 @@
 	width:50em;	
 	margin-top:1.5em;
 	margin-bottom:1em;
-
 	box-shadow: -1em -1em .3em #DFA00D;
+}
+
+#rec {
+	width:50em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
+	box-shadow: -1em -1em .3em #D73A27;
+}
+
+#trouve {
+	width:40em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
+	box-shadow: -1em -1em .3em #D73A27;
 }
