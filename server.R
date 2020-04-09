@@ -6,8 +6,8 @@ library(plotly)
 library(shinymaterial)
 library(leaflet)
 library(plotly)
-#source("carto.R")
-#source("test_carto_FR_emmanuelP.R")
+source("carto.R")
+source("carto_fr.R")
 #source("test_treemap_EmmanuelP.R")
 
 
@@ -26,21 +26,60 @@ shinyServer(function(session,input, output) {
   
   
   ##test avec data_ufr
+  # 
+  # test  <- reactive({
+  #   if(input$c1 & input$c2){
+  #     g = data
+  #   }else if (input$c1){
+  #     g = data %>% 
+  #       filter(Typeconvention == "Obligatoire")
+  #     
+  #   }else if(input$c2){
+  #     g = data %>% 
+  #       filter(Typeconvention == "Facultatif")
+  #   }
+  #   g
+  #     
+  # })
   
-  test  <- reactive({
-    if(input$c1 & input$c2){
-      g = data
-    }else if (input$c1){
-      g = data %>% 
-        filter(Typeconvention == "Obligatoire")
-      
-    }else if(input$c2){
-      g = data %>% 
-        filter(Typeconvention == "Facultatif")
-    }
-    g
-      
+  
+  
+  ### Update des filtres en fonction des choix précédants
+  
+  choix_ufr <- reactive({
+    data %>%
+      filter(cycle == input$id_cycle)
   })
+  
+  
+  
+  observeEvent(input$id_cycle,{
+    myfilter = choix_ufr()
+    liste = unique(myfilter$ufr)
+    update_material_dropdown(session,
+                             input_id = "id_ufr",
+                             choices = liste,
+                             value = liste[2])}
+  )
+  
+  
+  choix_composante <- reactive({
+    data %>% 
+      filter(ufr == input$id_ufr)
+    
+  })
+  
+  
+  observeEvent(input$id_ufr ,{
+    myfilter = choix_composante()
+    liste = unique(myfilter$Libellecomposante)
+    update_material_dropdown(session,
+                             input_id = "compo",
+                             choices = liste,
+                             value = liste[1])
+    
+  })
+  
   
   
   
@@ -496,16 +535,16 @@ shinyServer(function(session,input, output) {
              theme(legend.position="none"))
   })
 
+  ### Cartographie
   
-  #output$map <- renderLeaflet({
-  #  map
-  #})
-  
+  output$map <- renderLeaflet({
+    map
+  })
   
    
-  #output$map_fr <- renderLeaflet({
-  #   m_dep 
-  # })
+  output$map_fr <- renderLeaflet({
+     m_dep 
+   })
   
   # output$t_dep<- renderD3tree2({
   #   d3tree2(dep)
@@ -526,7 +565,10 @@ shinyServer(function(session,input, output) {
   observeEvent(input$id_UFR2, { 
     a <- choixcycle()
     liste=unique(a$cycle)
-    update_material_dropdown(session,input_id = "niveau", choices=liste,value=liste[1])
+    update_material_dropdown(session,
+                             input_id = "niveau",
+                             choices=liste,
+                             value=liste[1])
   })
   
   choixpays <-reactive({
@@ -537,15 +579,18 @@ shinyServer(function(session,input, output) {
   observeEvent(input$niveau, { 
     a <- choixpays()
     liste=unique(a$Paysetablissement)
-    update_material_dropdown(session,input_id = "lieu_stage", choices=liste,value=liste[1])
+    update_material_dropdown(session,
+                             input_id = "lieu_stage",
+                             choices=liste,
+                             value=liste[1])
   })
   
   
-#  tps <-reactive({
- #   data %>%
+  #  tps <-reactive({
+  #   data %>%
   #    filter(ufr == input$id_UFR2,
-   #          cycle == input$niveau,
-    #         Paysetablissement == input$lieu_stage#,
+  #          cycle == input$niveau,
+  #         Paysetablissement == input$lieu_stage#,
   #            #Libellecomposante == input$compo2
   #     )
   #   
@@ -553,11 +598,11 @@ shinyServer(function(session,input, output) {
   
   #choixcomposante <-reactive({
   # data %>% filter(cycle == input$niveau )
-    
+  
   #})
   
   #observeEvent(input$niveau, { 
-   # a <- choixcomposante()
+  # a <- choixcomposante()
   #  liste=unique(a$Libellecomposante)
   #  update_material_dropdown(session,input_id = "compo2", choices=liste,value=liste[1])
   #})
@@ -567,38 +612,45 @@ shinyServer(function(session,input, output) {
   
   output$plot2 <- DT::renderDataTable(
     
-     data %>% filter(ufr == input$id_UFR2,
-                     cycle == input$niveau,
-                     Paysetablissement == input$lieu_stage#,
-                     #Libellecomposante == input$compo2
-     ) %>%
-       select(Nometablissement,
+    data %>% 
+      filter(ufr == input$id_UFR2,
+                    cycle == input$niveau,
+                    Paysetablissement == input$lieu_stage) %>%
+      select(Nometablissement,
              Paysetablissement,
              codeDepartement,
              Numsiret,
              Libellenaf,
              #Typeconvention,
-             Indemnisation
-      ) %>% 
-      group_by(Nometablissement,Paysetablissement,codeDepartement,Numsiret,
-              Libellenaf,
-              #Typeconvention,
-              Indemnisation )%>% summarise(`Nombre de stages`=n())%>% 
-      arrange(desc(`Nombre de stages`))%>% 
-      rename(
-        #`Type convention` = Typeconvention,
-        #URF= ufr,
-        #Durée = Dureestageenheures,
-        #Origine = Originestage,
-        #Année = Anneeunivconvention,
-        Etablissement =  Nometablissement,
-        #Composante = Libellecomposante,
-        #Cycle = cycle,
-        Pays = Paysetablissement,
-        Département = codeDepartement,
-        `Numéro siret` = Numsiret,
-        `Secteur d'activité`=Libellenaf)
+             Indemnisation) %>% 
+      group_by(Nometablissement,
+               Paysetablissement,
+               codeDepartement,
+               Numsiret,
+               Libellenaf,
+               #Typeconvention,
+               Indemnisation )%>% 
+      summarise(`Nombre de stages`=n())%>% 
+      arrange(desc(`Nombre de stages`))
+    # #%>% 
+    #   rename(
+    #     #`Type convention` = Typeconvention,
+    #     #URF= ufr,
+    #     #Durée = Dureestageenheures,
+    #     #Origine = Originestage,
+    #     #Année = Anneeunivconvention,
+    #     Etablissement =  Nometablissement,
+    #     #Composante = Libellecomposante,
+    #     #Cycle = cycle,
+    #     Pays = Paysetablissement,
+    #     Département = codeDepartement,
+    #     `Numéro siret` = Numsiret,
+    #     `Secteur d'activité`=Libellenaf)
   )
+  
+  
+  
+  
   
   
   
