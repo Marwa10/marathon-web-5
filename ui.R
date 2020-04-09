@@ -12,7 +12,7 @@ material_page(
   #nav_bar_color = "#ffe082 amber lighten-1",
   nav_bar_color = 'white', 
   
-  title = HTML('<img  id ="logo_titre" src="img/logo-orange-vf2.png"><span id ="titre">Paul In Pro </span>'),
+  title = HTML('<img id ="logo_titre" src="img/logo-orange-vf2.png"><span id ="titre">Paul In Pro </span>'),
   
   
   #include_nav_bar = TRUE,
@@ -27,7 +27,7 @@ material_page(
     material_row(
       material_column(
     material_switch(
-      input_id="activation", label="Filtrage des données", off_label = "OFF", on_label = "ON",
+      input_id="activation", label="Filtrage des données", off_label = "Non", on_label = "Oui",
                     initial_value = FALSE, color = NULL
                     )
       )),
@@ -53,14 +53,14 @@ material_page(
       material_column(
         offset = 1,
         material_slider(input_id = "start_year",
-                        label = "Start",
+                        label = "De (année)",
                         min_value = 2014,
                         max_value = 2018,
                         step_size = 1,
                         initial_value = 2016,
                         color = NULL),
         material_slider(input_id = "end_year",
-                        label = "End",
+                        label = "À (année)",
                         min_value = 2014,
                         max_value = 2018,
                         step_size = 1,
@@ -705,8 +705,7 @@ material_tab_content(
       material_dropdown(
          input_id = "compo2",
           label = "Ma composante",
-          choices = NULL,
-         selected = "Toutes les composantes"
+          choices = NULL
     #   color = "green"
       )
      ),
