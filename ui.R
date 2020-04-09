@@ -650,6 +650,8 @@ material_tab_content(
   
 ),
 
+##Trouve mon stage
+
 material_tab_content(
   tab_id = "test",
   material_row(
@@ -691,9 +693,6 @@ material_tab_content(
         input_id = "niveau",
         label = "Mon niveau",
         choices = NULL ,
-        #selected = "Master",
-        
-        
         color = "green"
       )
       
