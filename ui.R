@@ -9,12 +9,11 @@ library(leaflet)
 
 material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
-  #nav_bar_color = "#ffe082 amber lighten-3",
+  nav_bar_color = "#ffe082 amber lighten-1",
   #nav_bar_color = "#bdbdbd grey lighten-1",
-  nav_bar_color = "#eeeeee grey lighten-2",
-  title = HTML('<img src="img/logo-orange-vf2.png" alt="logo" id = "img_logo"><span id ="titre">Paul In </span>'),
-  # tags$div(id = "header", tags$img(id="logo", src="img/logo-orange-vf2.png")), 
-  # je sais que ça va pas mais il m'emmerde ce fucking logo --'
+
+  title = HTML('<span id ="titre">Paul In </span>'),
+
 
   include_nav_bar = TRUE,
   material_side_nav(
@@ -142,7 +141,7 @@ material_page(
   # Define tabs
   material_tabs(
     #color = "Moccasin",
-    color = "black",
+    color = "#ffe082",
     tabs = c(
       "Accueil" = "accueil",
       "Stage" = "stage",
