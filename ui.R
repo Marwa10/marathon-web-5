@@ -241,9 +241,23 @@ material_page(
                    tags$p(class="accueil", class="tete","RECHERCHE"),
                    tags$p(class="accueil", class="titre2","Une idée, une entreprise, une recherche ?"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
-                   tags$p(class="accueil", tags$img(id="carte",src="img/Rech.jpg")),
-                   tags$p(class="accueil", "L'onglet Rec herche vous permet de visualiser le détail des stages réalisés par les étudiants au cours de ces dernières années."),
+                   tags$p(class="accueil", tags$img(id="rech",src="img/Rech.jpg")),
+                   tags$p(class="accueil", "L'onglet Recherche vous permet de visualiser le détail des stages réalisés par les étudiants au cours de ces dernières années."),
                    tags$p(class="accueil", "De quoi ne pas vous laisser sur votre faim.")
+                   
+          ))),
+      
+      #Fond6 
+      material_row(
+        material_column(
+          width = 12,
+          tags$div(id = "fond6", checked = NA,
+                   tags$p(class="accueil", class="tete","TROUVE TON STAGE"),
+                   tags$p(class="accueil", class="titre2","Tu cherches un stage ?"),
+                   tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
+                   tags$p(class="accueil", tags$img(id="rech",src="img/Rech.jpg")),
+                   tags$p(class="accueil", "PAS FINI."),
+                   tags$p(class="accueil", "bla")
                    
           )))
       
