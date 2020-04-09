@@ -139,7 +139,7 @@ material_page(
     tabs = c(
       "Accueil" = "accueil",
       "Stage" = "stage",
-      "Stagiaire"= "stagiaire",
+      "Profil des stagiaires"= "stagiaire",
       "Cartographie"= "carto",
       "Recherche" = "recherche",
       "Trouve ton stage" = "test",
@@ -536,7 +536,7 @@ material_tab_content(
                tags$br(""),
                tags$p(class="conta", class="adr", "Maison des Etudiants - Bât. U"),
                tags$p(class="conta", class="adr","04 67 14 26 11"),
-               tags$p(class="conta", class="adr","scuio@univ-montp3.fr"),
+               tags$p(class="conta", class="adr","scuio@univ-montp3.fr")
       ))),
   
   #Footer    
