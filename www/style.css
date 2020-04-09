@@ -1,4 +1,25 @@
 /* Pied de page */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.tabs .tab a {
+  color : black;
+}
+
+
+
+.tabs .tab a:hover, .tabs .tab a.active{
+  color: #e2b630;
+}
+
+
+#logo_titre{
+  height:60px;
+  width : 65px;
+  righ-padding : 20px;
+}
+
 #logo {
 	height:4em;
 	width:4em;
@@ -31,20 +52,98 @@
 
 #titre {
   color : black;
-  font-family: arial;
+  font-family: 'Montserrat', sans-serif;
   font-size: 30px;
-  margin-left : 4px;
+  margin-left : 14px;
+  padding-bottom: 50px;
+}
+
+
+
+ /*Page contact */	
+
+#fondcontact{
+	/*background-color:#ffe082;*/
+	background-color:#F5F5F5;
+	padding-top:3em;
+	width:50%;	
+    margin-left: auto;
+    margin-right: auto;
+	line-height:1em;
+}
+
+.conta {
+	text-align:center;
+	color:black;
+	font-family:arial;
+	font-size:1em
+}
+
+#scuio {
+	width:10em;	
+	margin-top:1.5em;
+	margin-bottom:1em;
 }
 	
+.titre3 {
+	font-weight: bold;
+	font-size:2.5em;
+}	
+
+.adr {
+	font-weight: bold;
+}
+
+
+ /*Page FAQ */	
+#fondfaq{
+	background-color: #ffe082;
+	padding-top:1em;
+	padding-bottom:1em;
+	width:80%;	
+	margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+	line-height:1em;
+}
+
+.boxfaq{
+	background-color: #FFFFFF;
+	width:90%;	
+    margin-left: auto;
+    margin-right: auto;
+	margin-top:1em;
+	margin-bottom:1em;
+	line-height:1.1em;
+	font-family:arial;
+	border: 0.02em #e7e7e7 solid;
+	border-radius:1.3em;
+	padding-top:0em;
+}
+
+.headfaq{
+	border: 0.1em #F5F5F5 solid;
+	border-radius:5em;
+	padding:0.7em 0 0.7em 2em;
+	margin-top:0em;
+
+}
+
+.parfaq{
+	text-align:justify;
+	padding:0 2em 0 2em;
+	font-size:0.8em;
+}
+
+
 	
 	
 /* Page accueil */
-
 #fond1{
 	background-image:url("img/fond1.jpg");
 	background-repeat: no-repeat ;
 	padding-bottom:3em;
-	height : 500px;
+	height : 100vh;
 	padding-bottom:3em;
 	background-size: cover;
 }
@@ -52,21 +151,21 @@
 #fond2{
 	background-color:#2ABC9B;
 	padding-top:4em;
-	height : 500px;
+	height : 100vh;
 	padding-bottom:3em;
 }
 
 #fond3{
 	background-color:#99D1CB;
 	padding-top:6em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
 #fond4{
 	background-color:#A486B9;
 	padding-top:3em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
@@ -80,21 +179,17 @@
 #fond5{
 	background-color:#F4BE40;
 	padding-top:3em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
 #fond6{
 	background-color:#DF5E4F;
 	padding-top:3em;
-	height : 500px;
+		height : 100vh;
 	padding-bottom:3em;
 }
 
-.acceuil p {
-  font-size: 20px;
-  
-}
 
 
 .accueil {
@@ -176,3 +271,12 @@
 	margin-bottom:1em;
 	box-shadow: -1em -1em .3em #D73A27;
 }
+
+
+p.accueil{
+  font-size : 20px;
+  margin : 2px;
+  /*padding-left: 15px;*/
+  /*padding-right: 15px;*/
+}
+

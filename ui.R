@@ -9,20 +9,28 @@ library(leaflet)
 
 material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
-  nav_bar_color = "#ffe082 amber lighten-1",
-  #nav_bar_color = "#bdbdbd grey lighten-1",
-
-  title = HTML('<span id ="titre">Paul In </span>'),
-
-
+  #nav_bar_color = "#ffe082 amber lighten-1",
+  nav_bar_color = 'white', 
+  
+  title = HTML('<img  id ="logo_titre" src="img/logo-orange-vf2.png"><span id ="titre">Paul In Pro </span>'),
+  
+  
   #include_nav_bar = TRUE,
   
   
-#Menu des filtres #### 
+  #Menu des filtres #### 
   material_side_nav(
     fixed = FALSE, 
     br(),
     br(),
+    
+    material_row(
+      material_column(
+    material_switch(
+      input_id="activation", label="Filtrage des données", off_label = "OFF", on_label = "ON",
+                    initial_value = FALSE, color = NULL
+                    )
+      )),
     material_row(
       material_column(
         offset = 1,
@@ -74,7 +82,8 @@ material_page(
                                           "Master",
                                           "Doctorat"),
                               selected = "Licence",
-                              with_gap = TRUE)
+                              with_gap = TRUE,
+                              color = "green")
       )
       
     ),
@@ -86,18 +95,8 @@ material_page(
         material_dropdown(
           input_id = "id_ufr",
           label = "UFR",
-          choices = c("UFR1",
-                      "UFR2",
-                      "UFR3",
-                      "UFR4",
-                      "UFR5",
-                      "UFR6",
-                      "Ecole doctorale",
-                      "IEF",
-                      "ITIC",
-                      "RI"
-          ),
-          selected = "UFR5"
+          choices = NULL,
+          color = "green"
         )
       )
     ),
@@ -110,58 +109,57 @@ material_page(
         material_dropdown(
           input_id = "compo",
           label = "Composante",
-          choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
-                      , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
-                      , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
-                      , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
-                      , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
-                      , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
-                      , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
-                      , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
-                      , "Histoire MTP  "                ,               "Information et communication BEZ  "          
-                      , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
-                      , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
-                      , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
-                      , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
-                      , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
-                      , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
-                      , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
-                      , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
-                      , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
-                      , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
-                      , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
-                      , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
-                      , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
-                      , "UFR 6"    ,"Toutes les composantes"),
-          selected = "Toutes les composantes",
-          
-          
+          # choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
+          #             , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
+          #             , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
+          #             , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
+          #             , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
+          #             , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
+          #             , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
+          #             , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
+          #             , "Histoire MTP  "                ,               "Information et communication BEZ  "          
+          #             , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
+          #             , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
+          #             , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
+          #             , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
+          #             , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
+          #             , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
+          #             , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
+          #             , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
+          #             , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
+          #             , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
+          #             , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
+          #             , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
+          #             , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
+          #             , "UFR 6"    ,"Toutes les composantes"),
+          #selected = "Toutes les composantes",
+          choices = NULL,
           color = "green"
         )))
   ),
   
-
-#Menu de navigation ####  
-  # Define tabs
+  
+  #Menu de navigation ####  
+  
   material_tabs(
     #color = "Moccasin",
-    #color = "#ffe082",
+    color = "#ffe082",
     tabs = c(
       "Accueil" = "accueil",
-      "Stages" = "stage",
-      "Profil des stagiaire"= "stagiaire",
+      "Stage" = "stage",
+      "Profil des stagiaires"= "stagiaire",
       "Cartographie"= "carto",
       "Recherche" = "recherche",
       "Trouve ton stage" = "test",
       "Contact" = "contact",
       "FAQ" = "FAQ"
+      
+      
     )
   ),
   
-
   
-
-#Onglet Accueil ####
+  #Onglet Accueil ####
   
   material_tab_content(
     tab_id = "accueil",
@@ -170,15 +168,16 @@ material_page(
     #   material_column(
     #     offset = 0.5,
     #     width = 12,
-      
+    
     material_card( 
       #Fond1     
       material_row(
         material_column(
           width = 12,
           tags$div(id = "fond1", checked = NA,
+                   tags$br(),
                    tags$p(class="accueil", tags$img(id="logo2",src="img/logo3.png")),
-                   tags$br(""),
+                   #tags$br(""),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre.jpg")),
                    tags$p(class="accueil", class="titre", "SCUIO-IP"),
                    tags$p(class="accueil", "Vous accompagne dans vos recherches de stage")
@@ -196,7 +195,7 @@ material_page(
                    tags$div(class="accueil",id="cases", 
                             tags$div(class="case",tags$p(class="chiffre","4 408"),tags$p("Stages réalisés"),tags$p("en 2018")),
                             tags$div(class="case",tags$p(class="chiffre","413"),tags$p("Stages réalisés à l'étranger"),tags$p("en 2018")),
-                            tags$div(class="case",tags$p(class="chiffre","332"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
+                            tags$div(class="case",tags$p(class="chiffre","322"),tags$p("Stages réalisés avec l'organisme d'accueil Université Paul Valery Montpellier 3"))),
                    tags$p(class="accueil", "Les stages sont une grande question en début de parcours professionnel."),
                    tags$p(class="accueil", "En cliquant sur l'onglet Stages, constatez les données informatives et les statistiques que nous avons récoltées sur l'ensemble des stages.")
                    
@@ -229,7 +228,7 @@ material_page(
                    tags$p(class="accueil", class="titre2","Visitez le monde à l'aide de notre cartographie"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$p(class="accueil", tags$img(id="carte",src="img/Carto.png")),
-                   tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France."),
+                   tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France.")
                    
           ))),
       
@@ -276,11 +275,9 @@ material_page(
              
       ))
     
-  ),
-
-
-  
-  
+  )
+ # ))
+,
   
 #Onglet Stage ####  
   material_tab_content(
@@ -293,48 +290,8 @@ material_page(
         
         offset = 1,
         material_card(
-          title = "Les stages et leurs caractéristiques",
-          # SELECTION COMPOSANTE
-          
-          material_column(
-            width = 6
-            
-          )
-          
-          # # SELECTION FILIERE
-          # 
-          # material_column(
-          #   width = 6,
-          #   material_dropdown(
-          #     input_id = "filiere",
-          #     label = "Filière", 
-          #     choices = sort(unique(data$Filiere)),
-          #     color = "blue"
-          #   )
-          # ),
-          
-          # SELECTION TYPE CONVENTION
-          
-          
-          
-          # # SELECTION ANNEE
-          # 
-          # material_slider(
-          #   input_id = "from_year",
-          #   label = "From Year",
-          #   min_value = 2014,
-          #   max_value = 2018,
-          #   initial_value = 2016,
-          #   color = "blue"
-          # ),
-          # material_slider(
-          #   input_id = "to_year",
-          #   label = "Through Year",
-          #   min_value = 2014,
-          #   max_value = 2018,
-          #   initial_value = 2016,
-          #   color = "blue"
-          # )
+          title = "Les stages et leurs caractéristiques"
+
         ),
         
         
@@ -386,7 +343,6 @@ material_page(
         
         material_card(
           title = "Caractéristiques techniques des stages effetués",
-          
           material_row(
             
             # GRAPHIQUE EVO STAGE ETRANGER
@@ -455,7 +411,6 @@ material_page(
         )
       )
     ),
-  
     #Footer    
     material_column(
       width = 12,
@@ -467,7 +422,7 @@ material_page(
   ),
 
   
-#Onglet Stagiaires ####    
+#Onglet Stagiaires ####  
   material_tab_content(
     offset = 1,
     tab_id = "stagiaire",
@@ -483,30 +438,30 @@ material_page(
                           #color = "#f5f5f5 grey lighten-4",
                           #depth = 5,
                           color = "white",
-                          depth = 3)
+                          depth = 1)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 1,53 </center></strong>"), 
                           HTML("<center> stages en moyenne par étudiant </center>"),
                           color = "white",
-                          depth = 3)
+                          depth = 1)
             
             
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 43% </center></strong>"), 
-                          HTML("<center>de candidature spontanée</center>"),
+                          HTML("<center>De candidatures spontanées</center>"),
                           color = "white",
-                          depth = 3)
+                          depth = 1)
           ),
           material_column(
             width = 3,
             material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
-                          HTML("<center> de stages facultatifs </center>"),
+                          HTML("<center> De stages facultatifs </center>"),
                           color = "white",
-                          depth = 3)
+                          depth = 1)
           )
         ),
         material_row(
@@ -533,7 +488,6 @@ material_page(
         )
       )
     ),
-    
     #Footer    
     material_column(
       width = 12,
@@ -546,122 +500,155 @@ material_page(
     
     
   ),
+
 
 #Onglet Recherche #### 
-  material_tab_content(
-    offset = 1,
-    tab_id = "recherche",
-    material_row(
-      material_column(
-        width = 10,
-        offset = 1,
-        dataTableOutput("plot")
-        
-      )
-    ),
-    
-    #Footer    
+material_tab_content(
+  offset = 1,
+  tab_id = "recherche",
+  material_row(
     material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
+      width = 10,
+      offset = 1,
+      dataTableOutput("plot")
+      
+    )
   ),
+  
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+),
 
 #Onglet Contact  #### 
-  material_tab_content(
-    offset = 1,
-    tab_id = "contact",
-    material_row(
-      material_column(
-        width = 10
-        
-        
-      )
-    ),
-    
-    #Footer    
+material_tab_content(
+  offset = 1,
+  tab_id = "contact",
+  
+  material_row(
     material_column(
       width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
-  ),
+      tags$div(id = "fondcontact", checked = NA,
+               tags$p(class="conta", class="tete","CONTACT"),
+               tags$p(class="conta", class="titre3","Une question ?"),
+               tags$p(class="conta", tags$img(id="barre",src="img/barre3.jpg")),
+               tags$br(""),
+               tags$p(class="conta", "Contactez votre service SCUIO-IP"),
+               tags$p(class="conta", "du lundi au vendredi"),
+               tags$p(class="conta", "de 9h30 à 12h30 et de 14h à 17h"),
+               tags$p(class="conta", "(sauf le vendredi après-midi)"),
+               tags$br(""),
+               tags$p(class="conta", class="adr", "Maison des Etudiants - Bât. U"),
+               tags$p(class="conta", class="adr","04 67 14 26 11"),
+               tags$p(class="conta", class="adr","scuio@univ-montp3.fr")
+      ))),
   
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+  
+),
+
 #Onglet FAQ  #### 
-  material_tab_content(
-    offset = 1,
-    tab_id = "FAQ",
-    material_row(
-      material_column(
-        width = 10,
+material_tab_content(
+  offset = 1,
+  tab_id = "FAQ",
   
-        
-      )
-    ),
-    
-    #Footer    
+  material_row(
     material_column(
       width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
-  ),
+      tags$div(id = "fondfaq", checked = NA,
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","Qui sommes-nous ?"),
+                        tags$p(class="parfaq","Ce site est dirigé par le Service Commun Universitaire d'Information, d'Orientation et d'Insertion Professionnelle (SCUIO-IP) de l'Université Paul Valéry 3. Nous accompagnons les étudiants tout au long de leur projet d'études et d'insertion professionnelle, au même titre que les enseignants dans le suivi de recherche de stage des étudiants. La conception de ce site web nous permet de remplir notre mission : celle d'accroître pour les enseignants et administratifs la connaissance et l'aide à la décision quant aux stages pour accompagner au mieux ses étudiants.")
+               ),
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","A qui s'adresse ce site web ?"),
+                        tags$p(class="parfaq","Ce site web s'adresse aux enseignants et administratifs. Il permet de visualiser les tendances des stages, réalisés par les étudiants depuis cinq ans, comme outil de connaissance et d'aide à la décision. Chaque enseignant pourra ainsi visualiser les stages des étudiants, et de ceux de sa filière s'il le souhaite.")
+               ),
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","Je veux contacter un professionnel d'un ?tablissement. Comment faire ?"),
+                        tags$p(class="parfaq","Vous pouvez vous approcher des personnels du SCUIO-IP qui sauront vous diriger vers l'organisme en question.")
+               ),
+               
+               tags$div(class="boxfaq",
+                        tags$p(class="headfaq","A quoi servent les options de filtrage situ?s ? gauche de mon ?cran ?"),
+                        tags$p(class="parfaq","Les filtres situés dans le menu, à gauche de votre écran, s'appliquent sur toutes les pages du site web, excepté sur l'onglet Recherche. En sélectionnant les paramètres que vous souhaitez, vous pourriez visualiser les graphiques définis en fonction de vos choix.")
+               )
+               
+      ))),
+  
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+),
 
 
 #Onglet Carto  #### 
-  material_tab_content(
-    tab_id = "carto",
-    material_row(
-      material_column(
-        offset = 1,
-        width = 10,
-        material_card(
-          title = "Stages en France",
-          #leafletOutput("map_fr")
-    ))),
-    material_row(
-      material_column(
-        offset = 1,
-        width = 10,
-        material_card(
-          title = "Stages à l'étranger", 
-          #leafletOutput("map")
-        )
-      )
-    ),
-    # material_row(
-    #   material_column(
-    #     offset = 1,
-    #     width = 10,
-    #     d3tree2Output("t_dep")
-    #   )
-    # ),
-    # material_row(
-    #   material_column(
-    #     offset = 1,
-    #     width = 10,
-    #     d3tree2Output("t_etab")
-    #     
-    #   )
-    # )
- 
-  #Footer    
+material_tab_content(
+  tab_id = "carto",
+  material_row(
     material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
-
+      offset = 1,
+      width = 10,
+      material_card(
+        title = "Stages en France",
+        leafletOutput("map_fr")
+      ))),
+  material_row(
+    material_column(
+      offset = 1,
+      width = 10,
+      material_card(
+        title = "Stages à l'étranger",
+        leafletOutput("map")
+      )
+    )
   ),
+  # material_row(
+  #   material_column(
+  #     offset = 1,
+  #     width = 10,
+  #     d3tree2Output("t_dep")
+  #   )
+  # ),
+  # material_row(
+  #   material_column(
+  #     offset = 1,
+  #     width = 10,
+  #     d3tree2Output("t_etab")
+  #     
+  #   )
+  # )
+  
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+  
+),
 
 material_tab_content(
   tab_id = "test",
@@ -670,8 +657,7 @@ material_tab_content(
       offset = 1,
       width = 10,
       material_card(
-        title = "Je trouve mon stage grâce à Paul In"#,
-        #leafletOutput("map_fr")
+        title = "Je trouve mon stage grâce à Paul In"
       ))),
   material_row(
     material_column(
@@ -690,151 +676,63 @@ material_tab_content(
                     "IEF",
                     "ITIC",
                     "RI"),
-       # selected = "Tous",
+        selected = "UFR5",
         
         
         color = "green"
       )
-    
-  ),
-  
-  material_column(
-    offset = 1,
-    width = 10,
-    material_dropdown(
-      input_id = "niveau",
-      label = "Mon niveau",
-     choices = NULL ,
-      #selected = "Master",
       
-      
-      color = "green"
-    )
+    ),
     
-  ),
     material_column(
       offset = 1,
       width = 10,
       material_dropdown(
-        input_id = "compo2",
-        label = "Ma composante",
-        choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
-                    , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
-                    , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
-                    , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
-                    , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
-                    , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
-                    , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
-                    , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
-                    , "Histoire MTP  "                ,               "Information et communication BEZ  "          
-                    , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
-                    , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
-                    , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
-                    , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
-                    , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
-                    , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
-                    , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
-                    , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
-                    , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
-                    , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
-                    , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
-                    , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
-                    , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
-                    , "UFR 6"    ,"Toutes les composantes"),
-        selected = "Toutes les composantes",
+        input_id = "niveau",
+        label = "Mon niveau",
+        choices = NULL ,
+        #selected = "Master",
         
         
         color = "green"
       )
+      
     ),
-  material_column(
-    offset = 1,
-    width = 10,
-    material_dropdown(
-      input_id = "lieu_stage",
-      label = "Envie d'un stage à l'étranger ?",
-      choices=c(  "ACORES, MADERE"             ,              "AFRIQUE DU SUD"                          
-                  , "ALGERIE"                       ,           "ALLEMAGNE"                               
-                  , "ANDORRE"                       ,           "ANTILLES NEERLANDAISES"                  
-                  , "ARABIE SAOUDITE"         ,                 "ARGENTINE"                               
-                  , "ARMENIE"                       ,           "AUSTRALIE"                               
-                  , "AUTRICHE"                     ,            "AZERBAIDJAN"                             
-                  , "BELGIQUE"                      ,           "BENIN"                                   
-                  , "BOLIVIE, l'ETAT PLURINATIONAL DE"    ,     "BOSNIE-HERZEGOVINE"                      
-                  , "BRESIL"                       ,            "BULGARIE"                                
-                  , "BURKINA FASO"         ,                    "CAMBODGE"                                
-                  , "CAMEROUN"              ,                   "CANADA"                                  
-                  , "CHILI"                        ,            "CHINE"                                   
-                  , "CHYPRE"                   ,                "COLOMBIE"                                
-                  , "COMORES"                ,                  "CONGO"                                   
-                  , "CONGO, LA REPUBLIQUE DEMOCRATIQUE DU"   ,  "COREE, REPUBLIQUE DE"                    
-                  , "COSTA RICA"               ,                "COTE D'IVOIRE"                           
-                  , "CROATIE"                      ,            "CUBA"                                    
-                  , "DANEMARK"                  ,               "DJIBOUTI"                                
-                  , "DOMINICAINE, REPUBLIQUE"      ,            "DOMINIQUE"                               
-                  , "EGYPTE"                   ,                "EMIRATS ARABES UNIS"                     
-                  , "ESPAGNE"                 ,                 "ESTONIE"                                 
-                  , "ETATS-UNIS"              ,                 "ETHIOPIE"                                
-                  , "FINLANDE"                  ,               "FRANCE"                                  
-                  , "GABON"                        ,            "GEORGIE"                                 
-                  , "GHANA"                         ,           "GRECE"                                   
-                  , "GUADELOUPE"              ,                 "GUATEMALA"                               
-                  , "GUINEE"                          ,         "GUYANE FRANCAISE"                        
-                  , "HAITI"                             ,       "HONG-KONG"                               
-                  , "HONGRIE"                     ,             "ILE DE MAN"                              
-                  , "ILES VIERGES BRITANNIQUES"     ,           "INDE"                                    
-                  , "INDONESIE"                    ,            "IRAN, REPUBLIQUE ISLAMIQUE D'"           
-                  , "IRLANDE"                  ,                "ISRAEL"                                  
-                  , "ITALIE"                         ,          "JAPON"                                   
-                  , "JERSEY"                       ,            "JORDANIE"                                
-                  , "KAZAKHSTAN"              ,                 "KENYA"                                   
-                  , "KOWEIT"                       ,            "LAO, REPUBLIQUE DEMOCRATIQUE POPULAIRE"  
-                  , "LESOTHO"                     ,             "LETTONIE"                                
-                  , "LIBAN"                             ,       "LITUANIE"                                
-                  , "LUXEMBOURG"               ,                "MACEDOINE, L'EX-REPUBLIQUE YOUGOSLAVE DE"
-                  , "MADAGASCAR"                ,               "MALI"                                    
-                  , "MALTE"                            ,        "MAROC"                                   
-                  , "MARTINIQUE"                  ,             "MAURICE"                                 
-                  , "MAURITANIE"                   ,            "MAYOTTE"                                 
-                  , "MEXIQUE"                        ,          "MOLDOVA, REPUBLIQUE DE"                  
-                  , "MONACO"                          ,         "MONGOLIE"                                
-                  , "MYANMAR (BIRMANIE)"       ,                "NICARAGUA"                               
-                  , "NORVEGE"                          ,        "NOUVELLE-CALEDONIE"                      
-                  , "NOUVELLE-ZELANDE"          ,               "PANAMA"                                  
-                  , "PARAGUAY"                     ,            "PAYS-BAS"                                
-                  , "PEROU"                         ,           "PHILIPPINES"                             
-                  , "POLOGNE"                     ,             "POLYNESIE FRANCAISE"                     
-                  , "PORTUGAL"                    ,             "QATAR"                                   
-                  , "REUNION"                        ,          "ROUMANIE"                                
-                  , "ROYAUME-UNI"                ,              "RUSSIE, FEDERATION DE"                   
-                  , "SENEGAL"                     ,             "SERBIE"                                  
-                  , "SINGAPOUR"                 ,               "SLOVAQUIE"                               
-                  , "SLOVENIE"                      ,           "SRI LANKA"                               
-                  , "SUEDE"                             ,       "SUISSE"                                  
-                  , "SYRIENNE, REPUBLIQUE ARABE"      ,         "TAIWAN, PROVINCE DE CHINE"               
-                  , "TANZANIE, REPUBLIQUE-UNIE DE"      ,       "TCHEQUE, REPUBLIQUE"                     
-                  , "THAILANDE"                        ,        "TOGO"                                    
-                  , "TRINITE-ET-TOBAGO"         ,               "TUNISIE"                                 
-                  , "TURQUIE"                      ,            "UKRAINE"                                 
-                  , "URUGUAY"                     ,             "VIET NAM"                                
-                  , "ZAMBIE"    , "Peu importe !"  ),
-      selected = "FRANCE",
-      
-      
-      color = "green"
+    
+      material_column(
+      offset = 1,
+     width = 10,
+      material_dropdown(
+         input_id = "compo2",
+          label = "Ma composante",
+          choices = NULL,
+         selected = "Toutes les composantes"
+    #   color = "green"
+      )
+     ),
+    
+    material_column(
+      offset = 1,
+      width = 10,
+      material_dropdown(
+        input_id = "lieu_stage",
+        label = "Envie d'un stage à l'étranger ?",
+        choices=NULL,
+        #selected = "FRANCE",
+        color = "green"
+      )
+    ),
+    material_column(
+      offset = 1,
+      width = 10,
+      material_text_box(
+        input_id = "Motcle",
+        label = "Une piste, une idée, un domaine qui me ferait plaisir...",
+        
+        
+        color = "green"
+      )
     )
-  ),
-  material_column(
-    offset = 1,
-    width = 10,
-    material_text_box(
-      input_id = "Motcle",
-      label = "Une piste, une idée, un domaine qui me ferait plaisir...",
-      
-      
-      color = "green"
-    )
-  )
   ), 
   material_tab_content(
     offset = 1,
@@ -848,14 +746,14 @@ material_tab_content(
       )
     )
   ),
-      #Footer    
-    material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
 )
 )
 
