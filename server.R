@@ -538,7 +538,7 @@ shinyServer(function(session,input, output) {
   ### Cartographie
   
   output$map <- renderLeaflet({
-    map
+    m
   })
   
    
