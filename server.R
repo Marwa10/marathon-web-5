@@ -516,7 +516,69 @@ shinyServer(function(input, output) {
   # })
   
   
+  # TABLEAU RECOMMANDATIONS
   
+  #pays <- reactive({
+  #  if(input$lieu_stage == "Peu importe !"){
+    #  c = data_ufr
+   # } else{
+  #    c = data_ufr %>%
+     #   filter(Paysetablissement == input$lieu_stage)
+    #}
+   # c
+  #})
+  
+  #c <- pays() %>% 
+   # filter(Paysetablissement == input$lieu_stage#,
+           #cycle == input$niveau,
+           #ufr == input$id_UFR2,
+           #Libellecomposante  == input$compo2
+    #       )
+  
+
+  toshow3 = pays() %>% 
+    select(Nometablissement,
+           Paysetablissement,
+           CodeDepartement,
+           Numsiret,
+           Libellenaf,
+           Typeconvention,
+           Indemnisation
+    ) %>% 
+    rename(
+      `Type convention` = Typeconvention,
+      #URF= ufr,
+      #Durée = Dureestageenheures,
+      #Origine = Originestage,
+      #Année = Anneeunivconvention,
+      Etablissement =  Nometablissement,
+      #Composante = Libellecomposante,
+      #Cycle = cycle,
+      Pays = Paysetablissement,
+      Département = CodeDepartement,
+      `Numéro siret` = Numsiret,
+      "Secteur d'activité"=Libellenaf)
+  
+  #toshow3$Cycle = as.factor(toshow3$Cycle)
+  #toshow3$Pays = as.factor(toshow3$Pays)
+  #toshow3$`Numéro siret` = as.factor(toshow3$`Numéro siret`)
+  
+  output$plot2 <- DT::renderDataTable(
+    toshow3,
+    #server = TRUE,
+    rownames = FALSE#,
+    #filter = "top",
+    #options = list(searchHighlight = TRUE,
+     #              scrollX = TRUE,
+      #             class = 'cell-border stripe',
+       #            autoWidth = TRUE ,
+        #           columnDefs = list(list(className = 'dt-center', targets = 4)),
+                   #lengthMenu = c(50, 100, 150, 200),
+         #          pageLength = 10
+                   #initComplete = JS(js)
+                   #search = list(smart = FALSE, caseInsensitive = FALSE, regex = TRUE)
+    #)
+  )
   
   
   
