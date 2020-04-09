@@ -11,14 +11,14 @@ material_page(
   tags$head(tags$link(rel="stylesheet", type="text/css", href="style.css")),
   nav_bar_color = "#ffe082 amber lighten-1",
   #nav_bar_color = "#bdbdbd grey lighten-1",
-
+  
   title = HTML('<span id ="titre">Paul In </span>'),
-
-
+  
+  
   #include_nav_bar = TRUE,
   
   
-#Menu des filtres #### 
+  #Menu des filtres #### 
   material_side_nav(
     fixed = FALSE, 
     br(),
@@ -74,7 +74,8 @@ material_page(
                                           "Master",
                                           "Doctorat"),
                               selected = "Licence",
-                              with_gap = TRUE)
+                              with_gap = TRUE,
+                              color = "green")
       )
       
     ),
@@ -86,18 +87,8 @@ material_page(
         material_dropdown(
           input_id = "id_ufr",
           label = "UFR",
-          choices = c("UFR1",
-                      "UFR2",
-                      "UFR3",
-                      "UFR4",
-                      "UFR5",
-                      "UFR6",
-                      "Ecole doctorale",
-                      "IEF",
-                      "ITIC",
-                      "RI"
-          ),
-          selected = "UFR5"
+          choices = NULL,
+          color = "green"
         )
       )
     ),
@@ -110,58 +101,57 @@ material_page(
         material_dropdown(
           input_id = "compo",
           label = "Composante",
-          choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
-                      , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
-                      , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
-                      , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
-                      , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
-                      , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
-                      , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
-                      , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
-                      , "Histoire MTP  "                ,               "Information et communication BEZ  "          
-                      , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
-                      , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
-                      , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
-                      , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
-                      , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
-                      , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
-                      , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
-                      , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
-                      , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
-                      , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
-                      , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
-                      , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
-                      , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
-                      , "UFR 6"    ,"Toutes les composantes"),
-          selected = "Toutes les composantes",
-          
-          
+          # choices = c("Administration Economique et Social  " , "Aménagement, Géographie MTP  "        ,        "Archéologie et Histoire de l?Art MT  "       
+          #             , "Arts du spectacle MTP"           ,           "Arts plastiques MTP  "                       
+          #             , "Département carrières sociales BEZIERS"    ,   "Département carrières sociales MTP"          
+          #             , "Ethnologie MTP  "             ,                "Etudes anglophones (Montpellier) MT  "       
+          #             , "Etudes chinoises (Chinois) MTP  "       ,      "Etudes germaniques (Allemand) MTP  "         
+          #             , "Etudes ibériques & ibéro américaine  "    ,    "Etudes italiennes et de roumain MTP  "       
+          #             , "Etudes néo-helléniques (Grec-modern  "     ,   "Etudes occitanes MTP  "                      
+          #             , "Etudes Portugaises, brésiliennes MT  "     ,   "Histoire BEZ  "                              
+          #             , "Histoire MTP  "                ,               "Information et communication BEZ  "          
+          #             , "Information et communication MTP  "      ,     "Information et Documentation MTP  "          
+          #             , "Ingénierie sociale Montpellier"       ,        "Institut d'études françaises pour é  "       
+          #             , "Institut des technosciences de l'IC  "    ,    "Langues Anciennes BEZ"                       
+          #             , "Langues Anciennes MTP  "            ,          "Langues et cultures etrangères et régionales"
+          #             , "Langues étrangères appliquées (LEA)  "    ,    "Langues, littératures, culture, civ  "       
+          #             , "Lettres modernes BEZ  "          ,             "Lettres modernes MTP  "                      
+          #             , "Lettres, arts, philosophie, Psychan  "    ,    "Musique MTP  "                               
+          #             , "Philosophie MTP  "            ,                "Psychanalyse 3° cycle MTP  "                 
+          #             , "Psychologie BEZ  "              ,              "Psychologie MTP  "                           
+          #             , "Sciences de l'éducation MTP"          ,        "Sciences du Langage MTP  "                   
+          #             , "Sciences du sujet et de la société"      ,     "Sciences éco , mathématiques et soc  "       
+          #             , "Sciences humaines et de l'environne  "    ,    "Service des relations international  "       
+          #             , "Sociologie MTP  "                ,             "Territoires, temps, sociétés et dvp  "       
+          #             , "UFR 6"    ,"Toutes les composantes"),
+          #selected = "Toutes les composantes",
+          choices = NULL,
           color = "green"
         )))
   ),
   
-
-#Menu de navigation ####  
-  # Define tabs
+  
+  #Menu de navigation ####  
+  
   material_tabs(
     #color = "Moccasin",
-    #color = "#ffe082",
+    color = "black",
     tabs = c(
       "Accueil" = "accueil",
-      "Stages" = "stage",
-      "Profil des stagiaire"= "stagiaire",
+      "Stage" = "stage",
+      "Stagiaire"= "stagiaire",
       "Cartographie"= "carto",
       "Recherche" = "recherche",
       "Trouve ton stage" = "test",
       "Contact" = "contact",
       "FAQ" = "FAQ"
+      
+      
     )
   ),
   
-
   
-
-#Onglet Accueil ####
+  #Onglet Accueil ####
   
   material_tab_content(
     tab_id = "accueil",
@@ -170,7 +160,7 @@ material_page(
     #   material_column(
     #     offset = 0.5,
     #     width = 12,
-      
+    
     material_card( 
       #Fond1     
       material_row(
@@ -229,7 +219,7 @@ material_page(
                    tags$p(class="accueil", class="titre2","Visitez le monde à l'aide de notre cartographie"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$p(class="accueil", tags$img(id="carte",src="img/Carto.png")),
-                   tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France."),
+                   tags$p(class="accueil", "Découvrez avec l'onglet Cartographie où les étudiants de l'université Paul Valery Montpellier 3 ont voyagé grâce à leur stage, que ce soit à l'étranger ou en France.")
                    
           ))),
       
@@ -276,11 +266,9 @@ material_page(
              
       ))
     
-  ),
-
-
-  
-  
+  )
+ # ))
+,
   
 #Onglet Stage ####  
   material_tab_content(
@@ -293,48 +281,8 @@ material_page(
         
         offset = 1,
         material_card(
-          title = "Les stages et leurs caractéristiques",
-          # SELECTION COMPOSANTE
-          
-          material_column(
-            width = 6
-            
-          )
-          
-          # # SELECTION FILIERE
-          # 
-          # material_column(
-          #   width = 6,
-          #   material_dropdown(
-          #     input_id = "filiere",
-          #     label = "Filière", 
-          #     choices = sort(unique(data$Filiere)),
-          #     color = "blue"
-          #   )
-          # ),
-          
-          # SELECTION TYPE CONVENTION
-          
-          
-          
-          # # SELECTION ANNEE
-          # 
-          # material_slider(
-          #   input_id = "from_year",
-          #   label = "From Year",
-          #   min_value = 2014,
-          #   max_value = 2018,
-          #   initial_value = 2016,
-          #   color = "blue"
-          # ),
-          # material_slider(
-          #   input_id = "to_year",
-          #   label = "Through Year",
-          #   min_value = 2014,
-          #   max_value = 2018,
-          #   initial_value = 2016,
-          #   color = "blue"
-          # )
+          title = "Les stages et leurs caractéristiques"
+
         ),
         
         
@@ -386,7 +334,6 @@ material_page(
         
         material_card(
           title = "Caractéristiques techniques des stages effetués",
-          
           material_row(
             
             # GRAPHIQUE EVO STAGE ETRANGER
@@ -455,7 +402,6 @@ material_page(
         )
       )
     ),
-  
     #Footer    
     material_column(
       width = 12,
@@ -467,7 +413,7 @@ material_page(
   ),
 
   
-#Onglet Stagiaires ####    
+#Onglet Stagiaires ####  
   material_tab_content(
     offset = 1,
     tab_id = "stagiaire",
@@ -533,7 +479,6 @@ material_page(
         )
       )
     ),
-    
     #Footer    
     material_column(
       width = 12,
@@ -546,122 +491,121 @@ material_page(
     
     
   ),
+
 
 #Onglet Recherche #### 
-  material_tab_content(
-    offset = 1,
-    tab_id = "recherche",
-    material_row(
-      material_column(
-        width = 10,
-        offset = 1,
-        dataTableOutput("plot")
-        
-      )
-    ),
-    
-    #Footer    
+material_tab_content(
+  offset = 1,
+  tab_id = "recherche",
+  material_row(
     material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
+      width = 10,
+      offset = 1,
+      dataTableOutput("plot")
+      
+    )
   ),
+  
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+),
 
 #Onglet Contact  #### 
-  material_tab_content(
-    offset = 1,
-    tab_id = "contact",
-    material_row(
-      material_column(
-        width = 10
-        
-        
-      )
-    ),
-    
-    #Footer    
+material_tab_content(
+  offset = 1,
+  tab_id = "contact",
+  material_row(
     material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
+      width = 10
+      
+      
+    )
   ),
   
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+),
+
 #Onglet FAQ  #### 
-  material_tab_content(
-    offset = 1,
-    tab_id = "FAQ",
-    material_row(
-      material_column(
-        width = 10,
-  
-        
-      )
-    ),
-    
-    #Footer    
+material_tab_content(
+  offset = 1,
+  tab_id = "FAQ",
+  material_row(
     material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
+      width = 10
+    )
   ),
+  
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+),
 
 
 #Onglet Carto  #### 
-  material_tab_content(
-    tab_id = "carto",
-    material_row(
-      material_column(
-        offset = 1,
-        width = 10,
-        material_card(
-          title = "Stages en France",
-          #leafletOutput("map_fr")
-    ))),
-    material_row(
-      material_column(
-        offset = 1,
-        width = 10,
-        material_card(
-          title = "Stages à l'étranger", 
-          #leafletOutput("map")
-        )
-      )
-    ),
-    # material_row(
-    #   material_column(
-    #     offset = 1,
-    #     width = 10,
-    #     d3tree2Output("t_dep")
-    #   )
-    # ),
-    # material_row(
-    #   material_column(
-    #     offset = 1,
-    #     width = 10,
-    #     d3tree2Output("t_etab")
-    #     
-    #   )
-    # )
- 
-  #Footer    
+material_tab_content(
+  tab_id = "carto",
+  material_row(
     material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
-
+      offset = 1,
+      width = 10,
+      material_card(
+        title = "Stages en France",
+        leafletOutput("map_fr")
+      ))),
+  material_row(
+    material_column(
+      offset = 1,
+      width = 10,
+      material_card(
+        title = "Stages à l'étranger",
+        leafletOutput("map")
+      )
+    )
   ),
+  # material_row(
+  #   material_column(
+  #     offset = 1,
+  #     width = 10,
+  #     d3tree2Output("t_dep")
+  #   )
+  # ),
+  # material_row(
+  #   material_column(
+  #     offset = 1,
+  #     width = 10,
+  #     d3tree2Output("t_etab")
+  #     
+  #   )
+  # )
+  
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
+  
+),
 
 material_tab_content(
   tab_id = "test",
@@ -670,8 +614,7 @@ material_tab_content(
       offset = 1,
       width = 10,
       material_card(
-        title = "Je trouve mon stage grâce à Paul In"#,
-        #leafletOutput("map_fr")
+        title = "Je trouve mon stage grâce à Paul In"
       ))),
   material_row(
     material_column(
@@ -690,65 +633,63 @@ material_tab_content(
                     "IEF",
                     "ITIC",
                     "RI"),
-       selected = "UFR5",
+        selected = "UFR5",
         
         
         color = "green"
       )
-    
-  ),
-  
-  material_column(
-    offset = 1,
-    width = 10,
-    material_dropdown(
-      input_id = "niveau",
-      label = "Mon niveau",
-     choices = NULL ,
-      #selected = "Master",
       
-      
-      color = "green"
-    )
+    ),
     
-  ),
-  #  material_column(
+    material_column(
+      offset = 1,
+      width = 10,
+      material_dropdown(
+        input_id = "niveau",
+        label = "Mon niveau",
+        choices = NULL ,
+        #selected = "Master",
+        
+        
+        color = "green"
+      )
+      
+    ),
+    #  material_column(
     #  offset = 1,
     # width = 10,
     #  material_dropdown(
-   #     input_id = "compo2",
-  #      label = "Ma composante",
-       # choices = NULL,
-      #  #selected = "Toutes les composantes",
-        
-        
-     #   color = "green"
+    #     input_id = "compo2",
+    #      label = "Ma composante",
+    # choices = NULL,
+    #  #selected = "Toutes les composantes",
+    
+    
+    #   color = "green"
     #  )
-   # ),
-  material_column(
-    offset = 1,
-    width = 10,
-    material_dropdown(
-      input_id = "lieu_stage",
-      label = "Envie d'un stage à l'étranger ?",
-      choices=NULL,
-      #selected = "FRANCE",
-      
-      
-      color = "green"
+    # ),
+    material_column(
+      offset = 1,
+      width = 10,
+      material_dropdown(
+        input_id = "lieu_stage",
+        label = "Envie d'un stage à l'étranger ?",
+        choices=NULL,
+        #selected = "FRANCE",
+        color = "green"
+      )
+    ),
+    material_column(
+      offset = 1,
+      width = 10,
+      material_text_box(
+        input_id = "Motcle",
+        label = "Une piste, une idée, un domaine qui me ferait plaisir...",
+        
+        
+        color = "green"
+      )
     )
-  ),
-  material_column(
-    offset = 1,
-    width = 10,
-    material_text_box(
-      input_id = "Motcle",
-      label = "Une piste, une idée, un domaine qui me ferait plaisir...",
-      
-      
-      color = "green"
-    )
-  )
   ), 
   material_tab_content(
     offset = 1,
@@ -762,14 +703,14 @@ material_tab_content(
       )
     )
   ),
-      #Footer    
-    material_column(
-      width = 12,
-      tags$a(id = "footer", checked = NA,
-             tags$img(id="logo",src="img/logo-orange-vf2.png"),
-             tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-             
-      ))
+  #Footer    
+  material_column(
+    width = 12,
+    tags$a(id = "footer", checked = NA,
+           tags$img(id="logo",src="img/logo-orange-vf2.png"),
+           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
+           
+    ))
 )
 )
 
