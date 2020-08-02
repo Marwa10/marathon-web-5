@@ -146,11 +146,10 @@ material_page(
     color = "#ffe082",
     tabs = c(
       "Accueil" = "accueil",
-      "Stage" = "stage",
+      "Caractéristiques des stages" = "stage",
       "Profil des stagiaires"= "stagiaire",
       "Cartographie"= "carto",
       "Recherche" = "recherche",
-      "Trouve ton stage" = "test",
       "Contact" = "contact",
       "FAQ" = "FAQ"
       
@@ -289,14 +288,10 @@ material_page(
         width = 10,
         
         offset = 1,
-        material_card(
-          title = "Les stages et leurs caractéristiques"
-
-        ),
         
         
         material_card(
-          title = "Stages effectués par les étudiants",
+          title = "Caractéristiques générales",
           
           # GRAPHIQUE EVO NB STAGE
           
@@ -313,7 +308,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title="Origine des stage",
+                title="Origine des stages",
                 plotlyOutput("origine")
               )
             ),
@@ -323,7 +318,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Evolution du type de convention",
+                title = "Evolution du type de conventions",
                 plotlyOutput("p1")
               )
             ),
@@ -336,24 +331,16 @@ material_page(
                 title = "Part des stages facultatifs",
                 plotlyOutput("taux")
               )
-            )
-          )
-          
-        ),
-        
-        material_card(
-          title = "Caractéristiques techniques des stages effectués",
-          material_row(
-            
-            # GRAPHIQUE EVO STAGE ETRANGER
+            ),
             
             material_column(
               width = 6,
               material_card(
-                title = "Indemnisation",
+                title = "Gratification",
                 plotlyOutput("indem")
               )
-            ),
+            ),  
+            
             material_column(
               width = 6,
               material_card(
@@ -362,6 +349,8 @@ material_page(
               )
               
             )
+            
+            
           )
           
         ),
@@ -370,13 +359,13 @@ material_page(
         # GRAPHIQUE TOP 10 ENTREPRISES
         
         material_card(
-          title = "Employeurs",
+          title = "Organismes d'accueil",
           
           material_row(
             material_column(
               width = 12,
               material_card(
-                title = "Les entreprises ayant recruté le plus de stagiaires",
+                title = "Organismes ayant accueilli le plus de stagiaires",
                 plotlyOutput("entre")
               )
             )
@@ -392,7 +381,7 @@ material_page(
             material_column(
               width = 6,
               material_card(
-                title = "Top des pays préférés par les étudiants",
+                title = "Top des pays",
                 plotlyOutput("pays")
               )
             ),
@@ -427,46 +416,11 @@ material_page(
     offset = 1,
     tab_id = "stagiaire",
     material_row(
-      material_column(
-        width = 10,
-        offset = 1,
+
         material_row(
           material_column(
-            width = 3,
-            material_card(title = HTML("<strong><center>20 334</center></strong>"),
-                          HTML("</center> stages effectués depuis 2014 </center>") ,
-                          #color = "#f5f5f5 grey lighten-4",
-                          #depth = 5,
-                          color = "white",
-                          depth = 1)
-          ),
-          material_column(
-            width = 3,
-            material_card(title = HTML("<strong><center> 1,53 </center></strong>"), 
-                          HTML("<center> stages en moyenne par étudiant </center>"),
-                          color = "white",
-                          depth = 1)
-            
-            
-          ),
-          material_column(
-            width = 3,
-            material_card(title = HTML("<strong><center> 43% </center></strong>"), 
-                          HTML("<center>De candidatures spontanées</center>"),
-                          color = "white",
-                          depth = 1)
-          ),
-          material_column(
-            width = 3,
-            material_card(title = HTML("<strong><center> 19,4% </center></strong>"), 
-                          HTML("<center> De stages facultatifs </center>"),
-                          color = "white",
-                          depth = 1)
-          )
-        ),
-        material_row(
-          material_column(
-            width = 12,
+            width = 10,
+            offset = 1,
             material_card(
               title = "Distribution des stages en fonction du cycle universitaire",
               divider = TRUE,
@@ -481,9 +435,6 @@ material_page(
               title = "Distribution des stages en fonction de la composante",
               divider = TRUE,
               plotlyOutput("p3")
-            )
-            
-           
           )
         )
       )
@@ -648,110 +599,7 @@ material_tab_content(
            
     ))
   
-),
-
-##Trouve mon stage
-
-material_tab_content(
-  tab_id = "test",
-  material_row(
-    material_column(
-      offset = 1,
-      width = 10,
-      material_card(
-        title = "Je trouve mon stage grâce à Paul In"
-      ))),
-  material_row(
-    material_column(
-      offset = 1,
-      width = 10,
-      material_dropdown(
-        input_id = "id_UFR2",
-        label = "Mon UFR",
-        choices = c("UFR1",
-                    "UFR2",
-                    "UFR3",
-                    "UFR4",
-                    "UFR5",
-                    "UFR6",
-                    "Ecole doctorale",
-                    "IEF",
-                    "ITIC",
-                    "RI"),
-        selected = "UFR5",
-        
-        
-        color = "green"
-      )
-      
-    ),
-    
-    material_column(
-      offset = 1,
-      width = 10,
-      material_dropdown(
-        input_id = "niveau",
-        label = "Mon niveau",
-        choices = NULL ,
-        color = "green"
-      )
-      
-    ),
-    
-      material_column(
-      offset = 1,
-     width = 10,
-      material_dropdown(
-         input_id = "compo2",
-          label = "Ma composante",
-          choices = NULL
-    #   color = "green"
-      )
-     ),
-    
-    material_column(
-      offset = 1,
-      width = 10,
-      material_dropdown(
-        input_id = "lieu_stage",
-        label = "Envie d'un stage à l'étranger ?",
-        choices=NULL,
-        #selected = "FRANCE",
-        color = "green"
-      )
-    ),
-    material_column(
-      offset = 1,
-      width = 10,
-      material_text_box(
-        input_id = "Motcle",
-        label = "Une piste, une idée, un domaine qui me ferait plaisir...",
-        
-        
-        color = "green"
-      )
-    )
-  ), 
-  material_tab_content(
-    offset = 1,
-    tab_id = "test",
-    material_row(
-      material_column(
-        width = 10,
-        offset = 1,
-        dataTableOutput("plot2")
-        
-      )
-    )
-  ),
-  #Footer    
-  material_column(
-    width = 12,
-    tags$a(id = "footer", checked = NA,
-           tags$img(id="logo",src="img/logo-orange-vf2.png"),
-           tags$p(class="footer","Route de Mende 34199 Montpellier Cedex 5 Standard de l'Université : 04 67 14 20 00")
-           
-    ))
 )
+
 )
 
