@@ -12,7 +12,7 @@ material_page(
   #nav_bar_color = "#ffe082 amber lighten-1",
   nav_bar_color = 'white', 
   
-  title = HTML('<img id ="logo_titre" src="img/logo-orange-vf2.png"><span id ="titre">Paul In Pro </span>'),
+  title = HTML('<img id ="logo_titre" src="img/logo-orange-vf2.png"><span id ="titre">Paul In Pro</span>'),
   
   
   #include_nav_bar = TRUE,
@@ -188,7 +188,7 @@ material_page(
         material_column(
           width = 12,
           tags$div(id = "fond2", checked = NA,
-                   tags$p(class="accueil", class="tete","STAGES"),
+                   tags$p(class="accueil", class="tete",  "STAGES"),
                    tags$p(class="accueil", class="titre2","Envie d'en découvrir davantage?"),
                    tags$p(class="accueil", tags$img(id="barre",src="img/barre2.jpg")),
                    tags$div(class="accueil",id="cases", 
@@ -599,6 +599,7 @@ material_tab_content(
            
     ))
   
+
 )
 
 )
